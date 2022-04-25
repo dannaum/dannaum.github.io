@@ -159,7 +159,8 @@ $(document).ready(function () {
         //this get this href attr
         var jobUrl = $(this).attr("href");
         //set this href attr to jobUrl
-        $(this).attr("href", jobUrl + "?gh_job_id=" + jobId);
+        //console log jobId
+        //console log JobUrl
     });
     $(".positions_team-filters").on('click', '.positions_single-tag-loc', function() {
         //this toggle class active
