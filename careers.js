@@ -157,10 +157,7 @@ $(document).ready(function () {
         //this get href
         var jobId = $(this).find(".gh-job-id").html();
         //this get this href attr
-        var jobUrl = $(this).attr("href");
-        //set this href attr to jobUrl
-        //console log jobId
-        //console log JobUrl
+        //
     });
     $(".positions_team-filters").on('click', '.positions_single-tag-loc', function() {
         //this toggle class active
