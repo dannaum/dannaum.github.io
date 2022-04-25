@@ -152,12 +152,11 @@ $(document).ready(function () {
             }
         });
     });
-    //positions_grid-single-job on click
-    $(".positions_grid-single-job").click(function () {
+    $(".positions_grid-right").on('click', '.positions_grid-single-job', function() {
         //this get href
         var jobId = $(this).find(".gh-job-id").html();
-        //this get this href attr
-        //
+        //redirect to "mf-v2.webflow.io/open-position" + ?jobId=jobId
+        window.location.href = "/open-position?jobId=" + jobId;
     });
     $(".positions_team-filters").on('click', '.positions_single-tag-loc', function() {
         //this toggle class active
