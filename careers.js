@@ -67,7 +67,7 @@ $(document).ready(function () {
                 '<a href="#" class="positions_single-tag w-inline-block"><div class="label">' + item.name +'</div></a>'
             );
             $.each(item.jobs, function (i, jobs) {
-                $('<a href="https://mf-v2.webflow.io/open-position" class="positions_grid-single-job"><div class="hidden-tag">' + item.name + '</div><div class="hidden-div gh-job-id">'+ jobs.id +' </div><div><p class="paragraph-medium color-text-white">' + jobs.title + '</p><p class="paragraph-medium color-text-white job-location">' + jobs.location.name + '</p></div><img src="https://uploads-ssl.webflow.com/62552717df37959f6bb9ae63/6256dade3416c8a5d3825a04_job-list_arrow.svg" alt=""></a>').appendTo(teamJobGrid);
+                $('<div class="positions_grid-single-job"><div class="hidden-tag">' + item.name + '</div><div class="hidden-div gh-job-id">'+ jobs.id +' </div><div><p class="paragraph-medium color-text-white">' + jobs.title + '</p><p class="paragraph-medium color-text-white job-location">' + jobs.location.name + '</p></div><img src="https://uploads-ssl.webflow.com/62552717df37959f6bb9ae63/6256dade3416c8a5d3825a04_job-list_arrow.svg" alt=""></div>').appendTo(teamJobGrid);
             });
             departments.append(teamWrap);
             }
