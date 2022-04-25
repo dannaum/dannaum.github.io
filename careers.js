@@ -156,7 +156,7 @@ $(document).ready(function () {
         //this get href
         var jobId = $(this).find(".gh-job-id").html();
         //redirect to "mf-v2.webflow.io/open-position" + ?jobId=jobId
-        window.location.href = "/open-position?jobId=" + jobId;
+        window.location.href = "/open-position?gh_jid=" + jobId;
     });
     $(".positions_team-filters").on('click', '.positions_single-tag-loc', function() {
         //this toggle class active
