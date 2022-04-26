@@ -53,24 +53,38 @@ $(document).ready(function () {
     });
 
     $.getJSON(
-        "https://boards-api.greenhouse.io/v1/boards/moonfare/departments?render_as=list",
+        "https://boards-api.greenhouse.io/v1/boards/moonfare/departments?render_as=tree",
         function (data) {
         var data = data.departments;
         var departments = $('.positions_grid-right');
-
+    
         $.each(data, function (i, item) {
-            if (item.jobs.length > 0) {
-            let teamWrap = $('<div class="positions_grid-team"></div>');
-            $('<h3 class="h4 color-text-white bottom-margin-i-xl team-name">' + item.name + '</h3>').appendTo(teamWrap);
-            let teamJobGrid = $('<div class="positions_grid-job-list"></div>').appendTo(teamWrap);
-            var newDeptTag = $(".positions_filter-tags-departments").append(
-                '<a href="#" class="positions_single-tag w-inline-block"><div class="label">' + item.name +'</div></a>'
-            );
-            $.each(item.jobs, function (i, jobs) {
-                $('<div class="positions_grid-single-job"><div class="hidden-tag">' + item.name + '</div><div class="hidden-div gh-job-id">'+ jobs.id +' </div><div><p class="paragraph-medium color-text-white">' + jobs.title + '</p><p class="paragraph-medium color-text-white job-location">' + jobs.location.name + '</p></div><img src="https://uploads-ssl.webflow.com/62552717df37959f6bb9ae63/6256dade3416c8a5d3825a04_job-list_arrow.svg" alt=""></div>').appendTo(teamJobGrid);
+                //each item.children
+                $.each(item.children, function (i, item) {
+                    //each item.children
+                    $.each(item.children, function (i, item) {
+                        //each item.children
+                        $.each(item.children, function (i, item) {
+                            var newDeptName = item.name;
+                            var newDeptTag = $(".positions_filter-tags-departments").append('<a href="#" class="positions_single-tag w-inline-block" data-depname="'+ newDeptName +'"><div class="label">' + newDeptName +'</div></a>');
+    
+                            $.each(item.children, function (i, item) {
+                                //if item.jobs length > 0
+                                if (item.jobs.length > 0) {
+                                    let teamWrap = $('<div class="positions_grid-team"></div>');
+                                    $('<div class="positions_grid-title-wrapper"><h3 class="h4 color-text-white bottom-margin-i-xl" data-depname="'+ newDeptName +'">' + item.name + '</h3></div>').appendTo(teamWrap);
+                                    let teamJobGrid = $('<div class="positions_grid-job-list"></div>').appendTo(teamWrap);
+                                        $.each(item.jobs, function (i, jobs) {
+                                            if (item.jobs.length > 0) {
+                                                $('<div class="positions_grid-single-job" data-jobid="'+ jobs.id + '" data-jobloc="'+ jobs.location.name + '" data-depname="'+ newDeptName +'"><div><p class="paragraph-medium color-text-white">' + jobs.title + '</p><p class="paragraph-medium color-text-white">' + jobs.location.name + '</p></div><img src="https://uploads-ssl.webflow.com/62552717df37959f6bb9ae63/6256dade3416c8a5d3825a04_job-list_arrow.svg" alt=""></div>').appendTo(teamJobGrid);
+                                            }
+                                });
+                                departments.append(teamWrap);
+                            }
+                        });
+                    });
+                });
             });
-            departments.append(teamWrap);
-            }
         });
         }
     );
@@ -83,22 +97,18 @@ $(document).ready(function () {
         $.each(location, function (i, item) {
             if (item.name.length > 0) {
             var newDeptTag = $(".positions_filter-tags-locations").append(
-                '<a href="#" class="positions_single-tag-loc w-inline-block"><div class="label">' + item.name + '</div></a>'
+                '<a href="#" class="positions_single-tag w-inline-block" data-jobloc="' + item.name + '"><div class="label">' + item.name + '</div></a>'
             );
             }
         });
         }
     );
-
     //positions_single-tag-all on click
     $(".positions_single-tag-all").click(function () {
         //this toggle class active
         $(this).addClass("active");
         $(".positions_single-tag").removeClass("active");
-        //add class "active" to positions_single-tag eq 0
-        $(".team-name").parent().removeClass("hidden");
-        //hidden-tag parent css display flex
-        $(".hidden-tag").parent().css("display", "flex");
+        //hide/show
     });
 
     $(".positions_filter-tags-departments").on('click', '.positions_single-tag', function() {
@@ -108,45 +118,32 @@ $(document).ready(function () {
         //if click on positions_single-tag eq 0
         $(".positions_single-tag").each(function () {
         if (!$(this).hasClass("active")) {
-            //".team-name" parent removeClass "hidden"
-            $(".team-name").parent().removeClass("hidden");
-            //hidden-tag parent css display flex
-            $(".hidden-tag").parent().css("display", "flex");
+            //positions_grid-team css display block
+            $(".positions_grid-single-job").css("display", "flex");
+            //positions_single-job css display block
+            $(".positions_grid-title-wrapper").css("display", "block");
+            //positions_grid-team css display block
+            $(".positions_grid-team").css("display", "block");
+            
             }
     });
         var arrayTags = Array();
-        //this innerHtml save in var tagText to lowercase
-        //for each "positions_single-tag" if class has "active"
         $(".positions_single-tag").each(function () {
             if ($(this).hasClass("active")) {
-            //if arrayTags includes tagtext then splice it, else push
-            var tagText = $(this).find('.label').html().toLowerCase();
-            if (arrayTags.includes(tagText)) {
-                arrayTags.splice(arrayTags.indexOf(tagText), 1);
+            //this data-depname to locale lowercase
+            var tagFilterDep = $(this).data('depname');
+            if (arrayTags.includes(tagFilterDep)) {
+                arrayTags.splice(arrayTags.indexOf(tagFilterDep), 1);
             } else {
-                arrayTags.push(tagText);
+                arrayTags.push(tagFilterDep);
             }
-            //arrayTags.push($(this).find(".label").text().toLowerCase());
-            $(".team-name").each(function () {
-                //this get html to lowercase in var teamText
-                var teamText = $(this).html().toLowerCase();
-                //if teamText is not in arrayTags add class "hidden" to parent "positions_grid-team"
-                if (arrayTags.indexOf(teamText) == -1) {
-                $(this).parent().addClass("hidden");
+            $(".positions_grid-single-job").each(function () {
+                //this data-depname to locale lowercase
+                var jobDep = $(this).data('depname');
+                if (arrayTags.indexOf(jobDep) == -1) {
+                $(this).closest(".positions_grid-team").css("display", "none");
                 } else {
-                $(this).parent().removeClass("hidden");
-                }
-            });
-            $(".hidden-tag").each(function () {
-                //this get html to lowercase in var teamText
-                var teamText = $(this).html().toLowerCase();
-                //if teamText is not in arrayTags add class "hidden" to parent "positions_grid-team"
-                if (arrayTags.indexOf(teamText) == -1) {
-                //this parent css display none
-                $(this).parent().css("display", "none");
-                } else {
-                //this parent css display block
-                $(this).parent().css("display", "flex");
+                $(this).closest(".positions_grid-team").css("display", "block");
                 }
             });
             }
@@ -154,40 +151,10 @@ $(document).ready(function () {
     });
     $(".positions_grid-right").on('click', '.positions_grid-single-job', function() {
         //this get href
-        var jobId = $(this).find(".gh-job-id").html();
+        //this data jobs id
+        var jobId = $(this).data('jobid');
         //redirect to "mf-v2.webflow.io/open-position" + ?jobId=jobId
         window.location.href = "/open-position?gh_jid=" + jobId;
-    });
-    $(".positions_team-filters").on('click', '.positions_single-tag-loc', function() {
-        //this toggle class active
-        $(this).toggleClass("active");
-        //positions_single-tag-loc for each
-        $(".positions_single-tag-loc").each(function () {
-            if (!$(this).hasClass("active")) {
-                //team-loc parent css display flex
-                $(".job-location").closest('.positions_grid-single-job').css("display", "flex");
-                }
-            var arrayTagsLoc = Array();
-            $(".positions_single-tag-loc").each(function () {
-            //if this has class active
-            if ($(this).hasClass("active")) {
-                var tagTextLoc = $(this).find('.label').html().toLowerCase();
-                if (arrayTagsLoc.includes(tagTextLoc)) {
-                arrayTagsLoc.splice(arrayTagsLoc.indexOf(tagTextLoc), 1);
-                } else {
-                arrayTagsLoc.push(tagTextLoc);
-                }
-                $(".job-location").each(function () {
-                var teamTextLoc = $(this).html().toLowerCase();
-                if (arrayTagsLoc.indexOf(teamTextLoc) == -1) {
-                    $(this).closest('.positions_grid-single-job').css("display", "none");
-                } else {
-                    $(this).closest('.positions_grid-single-job').css("display", "flex");
-                }
-                });
-            }
-            });
-        });
     });
     //careers_chart-legend-single-item eq0 on click
     $(".careers_chart-legend-single-item").click(function () {
