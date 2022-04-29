@@ -66,7 +66,7 @@ $(document).ready(function () {
                         //each item.children
                         $.each(item.children, function (i, item) {
                             var newDeptName = item.name;
-                            var newDeptTag = $(".positions_filter-tags-departments").append('<a href="#" class="positions_single-tag w-inline-block" data-depname="'+ newDeptName +'"><div class="label">' + newDeptName +'</div></a>');
+                            var newDeptTag = $(".positions_filter-tags-departments").append('<a href="#" class="positions_single-tag w-inline-block" data-depname="'+ newDeptName +'"><div class="dep-name">' + newDeptName +'</div></a>');
     
                             $.each(item.children, function (i, item) {
                                 //if item.jobs length > 0
@@ -97,7 +97,7 @@ $(document).ready(function () {
         $.each(location, function (i, item) {
             if (item.name.length > 0) {
             var newDeptTag = $(".positions_filter-tags-locations").append(
-                '<a href="#" class="positions_single-tag w-inline-block" data-jobloc="' + item.name + '"><div class="label">' + item.name + '</div></a>'
+                '<a href="#" class="positions_single-tag w-inline-block" data-jobloc="' + item.name + '"><div class="loc-name">' + item.name + '</div></a>'
             );
             }
         });
