@@ -199,7 +199,7 @@ $(document).ready(function () {
         });
 
     });
-    $(".positions_grid-right").on('click', '.positions_grid-single-job-dark', function() {
+    $(".careers-list_positions-grid").on('click', '.positions_grid-single-job-dark', function() {
         //this get href
         //this data jobs id
         var jobId = $(this).data('jobid');
