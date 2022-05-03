@@ -65,7 +65,7 @@ $(document).ready(function () {
                                 //if item.jobs length > 0
                                 if (item.jobs.length > 0) {
                                     let teamWrap = $('<div class="positions_grid-team"></div>');
-                                    $('<div class="positions_grid-title-wrapper"><h3 class="h4 color-text-white bottom-margin-64" data-depname="'+ newDeptName +'">' + item.name + '</h3></div>').appendTo(teamWrap);
+                                    $('<div class="positions_grid-title-wrapper"><h3 class="h4 color-text-white bottom-margin-24" data-depname="'+ newDeptName +'">' + item.name + '</h3></div>').appendTo(teamWrap);
                                     let teamJobGrid = $('<div class="positions_grid-job-list"></div>').appendTo(teamWrap);
                                         $.each(item.jobs, function (i, jobs) {
                                             if (item.jobs.length > 0) {
