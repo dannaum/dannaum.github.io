@@ -32,13 +32,6 @@ $(document).ready(function () {
         //this find "tool-tip_single" and set css to display block
         $(this).find('.tool-tip_single_wrapper').css('display', 'none');
     });
-    //on click of ".hiring-steps_single-step-wrap" get index
-    $('.hiring-steps_single-step-wrap').click(function () {
-        var index = $(this).index();
-        //hiring-steps_bottom-slider find "w-slide-dot" click eq index
-        $('.hiring-steps_bottom-slider').find('.w-slider-dot').eq(index).click();
-    });
-    //element class 'tool-tips".remove()
     $('.tool-tips').remove();
     $(".single-career-grid-wrap").click(function () {
         //if this has class "active"
@@ -72,11 +65,11 @@ $(document).ready(function () {
                                 //if item.jobs length > 0
                                 if (item.jobs.length > 0) {
                                     let teamWrap = $('<div class="positions_grid-team"></div>');
-                                    $('<div class="positions_grid-title-wrapper"><h3 class="h4 color-text-white bottom-margin-i-xl" data-depname="'+ newDeptName +'">' + item.name + '</h3></div>').appendTo(teamWrap);
+                                    $('<div class="positions_grid-title-wrapper"><h3 class="h4 color-text-white bottom-margin-64" data-depname="'+ newDeptName +'">' + item.name + '</h3></div>').appendTo(teamWrap);
                                     let teamJobGrid = $('<div class="positions_grid-job-list"></div>').appendTo(teamWrap);
                                         $.each(item.jobs, function (i, jobs) {
                                             if (item.jobs.length > 0) {
-                                                $('<div class="positions_grid-single-job" data-jobid="'+ jobs.id + '" data-jobloc="'+ jobs.location.name + '" data-depname="'+ newDeptName +'"><div><p class="paragraph-medium color-text-white">' + jobs.title + '</p><p class="paragraph-medium color-text-white">' + jobs.location.name + '</p></div><img src="https://uploads-ssl.webflow.com/62552717df37959f6bb9ae63/6256dade3416c8a5d3825a04_job-list_arrow.svg" alt=""></div>').appendTo(teamJobGrid);
+                                                $('<div class="positions_grid-single-job" data-jobid="'+ jobs.id + '" data-jobloc="'+ jobs.location.name + '" data-depname="'+ newDeptName +'"><div><p class="paragraph-medium paragraph-bold color-text-white">' + jobs.title + '</p><p class="paragraph-medium color-text-white">' + jobs.location.name + '</p></div><img src="https://uploads-ssl.webflow.com/62552717df37959f6bb9ae63/6256dade3416c8a5d3825a04_job-list_arrow.svg" alt=""></div>').appendTo(teamJobGrid);
                                             }
                                 });
                                 departments.append(teamWrap);
