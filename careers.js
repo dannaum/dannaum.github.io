@@ -234,4 +234,17 @@ $(document).ready(function () {
         //this find "chart-hover-child" and set css display none
         $(this).find(".chart-hover-child").css("display", "none");
     });
+
+    var availWidth = $('.our-teams_slider').outerWidth() -
+                     $('.our-teams_slider-wrap').outerWidth();
+    new Dragdealer('content-scroller', {
+    horizontal: true,
+    vertical: false,
+    xPrecision: availWidth,
+    animationCallback: function(x, y) {
+        $('.our-teams_drag-line-active').css('width', Math.round(x * 100) + '%');
+        $('.our-teams_slider').css('margin-left', -x * availWidth);
+    }
+    });
+
 });
