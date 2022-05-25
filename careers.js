@@ -41,6 +41,10 @@ $(document).ready(function () {
         } else {
         //'single-career-value_wrap' removeClass 'active'
         $(".single-career-grid-wrap").removeClass("active");
+        //single-career-value-p-wrap height 0 rem
+        $(".single-career-value-p-wrap").css("height", "0rem");
+        //this find single-career-value-p-wrap height auto
+        $(this).find(".single-career-value-p-wrap").css("height", "auto");
         $(this).addClass("active");
         }
     });
