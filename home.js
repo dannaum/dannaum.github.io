@@ -22,4 +22,16 @@ $(document).ready(function(){
         $(this).closest(pastFutureSlider).find('.past-future_count').text(pastFutureActiveDot + 1);
     });
 
+    var availWidth = $('.past-future_slider').outerWidth() -
+                    $('.past-future_slider-wrap').outerWidth();
+    new Dragdealer('content-scroller', {
+    horizontal: true,
+    vertical: false,
+    xPrecision: availWidth,
+    animationCallback: function(x, y) {
+        $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
+        $('.past-future_slider').css('margin-left', -x * availWidth);
+    }
+    });
+
 });
