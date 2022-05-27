@@ -89,13 +89,11 @@ $(document).ready(function () {
     );
     //on click of positions_single-tag-all
     $('.positions_single-tag-all-dark').click(function () {
-        //this toggle class "active"
-        $(this).addClass("active");
-        //click on this siblings positions_single-tag active
         //this siblings 'positions_single-tag active' trigger click
         $(this).siblings('.positions_single-tag-dark.active').trigger('click');
         //this siblings ".positions_single-tag" remove class "active"
         $(this).siblings(".positions_single-tag-dark").removeClass("active");
+        $(this).addClass("active");
     });
 
     $(".positions_team-filters").on('click', '.positions_single-tag-dark', function() {
@@ -105,16 +103,16 @@ $(document).ready(function () {
         //if click on positions_single-tag eq 0
         $(".positions_single-tag-dark").each(function () {
                             
-        if (!$(this).hasClass("active")) {
-            //positions_grid-team css display block
-            $(".positions_grid-single-job-dark").css("display", "flex");
-            //positions_single-job css display block
-            $(".positions_grid-title-wrapper").css("display", "block");
-            //positions_grid-team css display block
-            $(".positions_grid-team").css("display", "block");
-            
+            if (!$(this).hasClass("active")) {
+                //positions_grid-team css display block
+                $(".positions_grid-single-job-dark").css("display", "flex");
+                //positions_single-job css display block
+                $(".positions_grid-title-wrapper").css("display", "block");
+                //positions_grid-team css display block
+                $(".positions_grid-team").css("display", "block");    
             }
         });
+
         var arrayTags = Array();
         var arrayLocs = Array();
         
@@ -200,8 +198,6 @@ $(document).ready(function () {
 
     });
     $(".careers-list_positions-grid").on('click', '.positions_grid-single-job-dark', function() {
-        //this get href
-        //this data jobs id
         var jobId = $(this).data('jobid');
         //redirect to "mf-v2.webflow.io/open-position" + ?jobId=jobId
         window.location.href = "/open-position?gh_jid=" + jobId;
