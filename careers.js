@@ -248,4 +248,18 @@ $(document).ready(function () {
     }
     });
 
+    //on click of hiring-steps_dt
+    $(".hiring-steps_dt").click(function () {
+        //if this has class w--open
+        if ($(this).hasClass("w--open")) {
+        //hiring-step_icon removeClass opened-hiring-step-bg
+        $(".hiring-step_icon").removeClass("opened-hiring-step-bg");
+        //hiring-step_icon-img removeClass opened-hiring-step_icon-img
+        $(".hiring-step_icon-img").removeClass("opened-hiring-step_icon-img")
+        }
+        else {
+            $(this).closest(".hiring-steps_single").find(".hiring-step_icon").addClass("opened-hiring-step-bg");
+            $(this).closest(".hiring-steps_single").find(".hiring-step_icon-img").addClass("opened-hiring-step_icon-img");
+        }
+    });
 });
