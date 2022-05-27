@@ -1,0 +1,29 @@
+//on page load
+$(document).ready(function(){
+        var slider = $('.slider');
+        var slideChild = $(slider).find('.single-slide').outerWidth();
+        //var slider children single-slide length
+        var slideNumber = $(slider).find('.single-slide').length;
+        //on click of this child slider-arrow-left
+        var clickCountLeft = 0;
+        $('.slider-arrow-left').on('click', function(){
+            clickCountLeft ++
+            //if clickCountLeft > slideNumber - 1
+            if(clickCountLeft > slideNumber - 1){
+                //this hide
+                $(this).hide();
+                //move slider to sliderPosition
+                $(slider).css('margin-left', sliderPosition.left);
+            }
+            $(slider).animate({
+                'margin-left': '-=' + slideChild
+            }, 1000);
+        });
+
+        $('.slider-arrow-right').on('click', function(){
+            //this  parent slider
+            $(slider).animate({
+                'margin-left': '+=' + slideChild
+            }, 1000);
+        });
+});

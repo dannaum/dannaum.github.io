@@ -39,20 +39,37 @@ $(document).ready(function(){
         }
     });
 
-    $('.past-future_slider').on('click', '.past-future-arrows', function(e) {
-        //var a = past-future_slider find w-slider-dot w-active index + 1
-        var a = $(this).closest('.past-future_slider').find('.w-slider-nav').children('.w-slider-dot.w-active').index() + 1;
-        dd.setStep(a, 1, snap=false)
+    $('.past-future_slider-wrap').on('click', '.past-future_right-arrow', function(e) {
+        var steps = dd.getStep() + '';
+        var stepsArray = steps.split(',');
+        console.log(stepsArray)
+        var a = stepsArray[0];
+        var b = stepsArray[1];
+        //dd.setStep( a parseInt+1, b );
+        dd.setStep(parseInt(a)+1, b);
+
     });
-    var availWidth = $('.past-future_slider').outerWidth() -
-                  $('.past-future_slider-wrap').outerWidth();
+
+    $('.past-future_slider-wrap').on('click', '.past-future_left-arrow', function(e) {
+        var steps = dd.getStep() + '';
+        var stepsArray = steps.split(',');
+        console.log(stepsArray)
+        var a = stepsArray[0];
+        var b = stepsArray[1];
+        //dd.setStep( a parseInt+1, b );
+        dd.setStep(parseInt(a)-1, b);
+
+    });
+
+    var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
+    var closedFundSlideW = $('.past-future_slider-slide').outerWidth();
+    var availWidth = $('.past-future_slider').outerWidth() - $('.past-future_slider-wrap').outerWidth();
     var dd = new Dragdealer('content-scroller', {
         steps: 4,
         speed: 0.1,
         requestAnimationFrame: true,
         horizontal: true,
         vertical: false,
-        snap: true,
         xPrecision: availWidth,
         reflow: true,
         callback: function(x, y) {
@@ -75,7 +92,7 @@ $(document).ready(function(){
         },
         animationCallback: function(x, y) {
             $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
-            $('.past-future_slider').css('margin-left', -x * availWidth);
+            $('.past-future_slider').css('margin-left', -x * (closedFundSlideW * (closedFundSlidesN - 1) / 16 + 6) + 'REM');
         }
     });
 
