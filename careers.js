@@ -33,11 +33,12 @@ $(document).ready(function () {
         $(this).find('.tool-tip_single_wrapper').css('display', 'none');
     });
     $('.tool-tips').remove();
+
     $(".single-career-grid-wrap").click(function () {
         //if this has class "active"
         if ($(this).hasClass("active")) {
-        //remove class "active"
-        $(this).removeClass("active");
+            $(".single-career-grid-wrap").removeClass("active");
+            $(".single-career-value-p-wrap").css("height", "0rem");
         } else {
         //'single-career-value_wrap' removeClass 'active'
         $(".single-career-grid-wrap").removeClass("active");
