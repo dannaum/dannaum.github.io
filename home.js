@@ -39,28 +39,7 @@ $(document).ready(function(){
         }
     });
 
-    $('.past-future_slider-wrap').on('click', '.past-future_right-arrow', function(e) {
-        var steps = dd.getStep() + '';
-        var stepsArray = steps.split(',');
-        console.log(stepsArray)
-        var a = stepsArray[0];
-        var b = stepsArray[1];
-        //dd.setStep( a parseInt+1, b );
-        dd.setStep(parseInt(a)+1, b);
-
-    });
-
-    $('.past-future_slider-wrap').on('click', '.past-future_left-arrow', function(e) {
-        var steps = dd.getStep() + '';
-        var stepsArray = steps.split(',');
-        console.log(stepsArray)
-        var a = stepsArray[0];
-        var b = stepsArray[1];
-        //dd.setStep( a parseInt+1, b );
-        dd.setStep(parseInt(a)-1, b);
-
-    });
-
+    /* CLOSED FUNDS SLIDER DRAGDEALER */
     var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
     var closedFundSlideW = $('.past-future_slider-slide').outerWidth();
     var availWidth = $('.past-future_slider').outerWidth() - $('.past-future_slider-wrap').outerWidth();
@@ -95,5 +74,42 @@ $(document).ready(function(){
             $('.past-future_slider').css('margin-left', -x * (closedFundSlideW * (closedFundSlidesN - 1) / 16 + 6) + 'REM');
         }
     });
+
+    $('.past-future_slider-wrap').on('click', '.past-future_right-arrow', function(e) {
+        var steps = dd.getStep() + '';
+        var stepsArray = steps.split(',');
+        console.log(stepsArray)
+        var a = stepsArray[0];
+        var b = stepsArray[1];
+        //dd.setStep( a parseInt+1, b );
+        dd.setStep(parseInt(a)+1, b);
+
+    });
+
+    $('.past-future_slider-wrap').on('click', '.past-future_left-arrow', function(e) {
+        var steps = dd.getStep() + '';
+        var stepsArray = steps.split(',');
+        console.log(stepsArray)
+        var a = stepsArray[0];
+        var b = stepsArray[1];
+        //dd.setStep( a parseInt+1, b );
+        dd.setStep(parseInt(a)-1, b);
+    });
+
+    /* SP500 SLIDER */
+    var sp500Width = $('.home-benefits_image').outerWidth();
+    var sp500slider = new Dragdealer('home-benefits-drag-tool', {
+        speed: 0.1,
+        requestAnimationFrame: true,
+        horizontal: true,
+        vertical: false,
+        xPrecision: sp500Width,
+        reflow: true,
+        animationCallback: function(x, y) {
+            $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
+            $('.home-benefits_image').css('margin-left', -x * sp500Width / 16 + 'REM');
+        }
+    });
+
 
 });
