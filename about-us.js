@@ -51,7 +51,7 @@ $(document).ready(function () {
 
     var chartSlider = $('#myChart').outerWidth();
     var timelineSlide = $('.chart-timeline').outerWidth();
-    var ourTeamsDrag = new Dragdealer('careers-drag', {
+    var myChartDrag = new Dragdealer('careers-drag', {
     horizontal: true,
     vertical: false,
     xPrecision: chartSlider,
