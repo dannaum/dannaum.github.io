@@ -102,6 +102,7 @@ $(document).ready(function () {
         });
         }
     );
+    /* JOB FILTERS
     //on click of positions_single-tag-all
     $('.positions_single-tag-all').click(function () {
         //this toggle class "active"
@@ -214,6 +215,7 @@ $(document).ready(function () {
         });
 
     });
+    */
     $(".positions_grid-right").on('click', '.positions_grid-single-job', function() {
         //this get href
         //this data jobs id
@@ -238,7 +240,8 @@ $(document).ready(function () {
     });
 
     /* OURTEAMS DRAG */
-    $('.our-teams_slider-wrap').on('click', '.our-teams_slider-right-arrow', function(e) {
+    //on click of our-teams_slider-right-arrow
+    $(".our-teams_slider-right-arrow").click(function () {
         var barValue = ourTeamsDrag.getValue() + '';
         var barValueArray = barValue.split(',');
         var a = barValueArray[0];
@@ -246,8 +249,7 @@ $(document).ready(function () {
         ourTeamsDrag.setValue(parseFloat(a)+0.1, b);
 
     });
-
-    $('.our-teams_slider-wrap').on('click', '.our-teams_slider-left-arrow', function(e) {
+    $(".our-teams_slider-left-arrow").click(function () {
         var barValue = ourTeamsDrag.getValue() + '';
         var barValueArray = barValue.split(',');
         var a = barValueArray[0];
