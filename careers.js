@@ -245,7 +245,7 @@ $(document).ready(function () {
         ourTeamsDrag.setValue(parseFloat(a)+0.1, b);
 
     });
-    /* OURTEAMS DRAG */
+    
     $('.our-teams_slider-wrap').on('click', '.our-teams_slider-left-arrow', function(e) {
         var barValue = ourTeamsDrag.getValue() + '';
         var barValueArray = barValue.split(',');
