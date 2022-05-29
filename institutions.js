@@ -24,7 +24,6 @@ $(document).ready(function(){
     });
     */
 
-    /* INSTITUTIONAL SOLUTIONS DRAG */
     var instSolutions = $('.institutional-solutions_grid').outerWidth();
     var instSolutionsDragDealer = new Dragdealer('inst-solutions-drag', {
         speed: 0.1,

@@ -217,30 +217,20 @@ $(document).ready(function () {
     });
     */
     $(".positions_grid-right").on('click', '.positions_grid-single-job', function() {
-        //this get href
-        //this data jobs id
         var jobId = $(this).data('jobid');
-        //redirect to "mf-v2.webflow.io/open-position" + ?jobId=jobId
         window.location.href = "/open-position?gh_jid=" + jobId;
     });
-    //careers_chart-legend-single-item eq0 on click
     $(".careers_chart-legend-single-item").click(function () {
         $('.careers_chart-legend-single-item').removeClass('active');
         $(this).toggleClass('active');
     });
-    //on hover element 'chart-single-icon-wrap'
     $('.chart-single-icon-wrap').mouseenter(function () { 
-        //this find "chart-hover-child" and set css display block
         $(this).find(".chart-hover-child").css("display", "block");
     });
-    //chart-single-icon-wrap hover out
     $(".chart-single-icon-wrap").mouseleave(function () {
-        //this find "chart-hover-child" and set css display none
         $(this).find(".chart-hover-child").css("display", "none");
     });
 
-    /* OURTEAMS DRAG */
-    //on click of our-teams_slider-right-arrow
     $(".our-teams_slider-right-arrow").click(function () {
         var barValue = ourTeamsDrag.getValue() + '';
         var barValueArray = barValue.split(',');
@@ -269,7 +259,6 @@ $(document).ready(function () {
     }
     });
 
-    /* CHART DRAG */
     var chartSlider = $('#myChart').outerWidth();
     var timelineSlide = $('.chart-timeline').outerWidth();
     var ourTeamsDrag = new Dragdealer('careers-drag', {
@@ -283,13 +272,9 @@ $(document).ready(function () {
     }
     });
 
-    //on click of hiring-steps_dt
     $(".hiring-steps_dt").click(function () {
-        //if this has class w--open
         if ($(this).hasClass("w--open")) {
-        //hiring-step_icon removeClass opened-hiring-step-bg
         $(".hiring-step_icon").removeClass("opened-hiring-step-bg");
-        //hiring-step_icon-img removeClass opened-hiring-step_icon-img
         $(".hiring-step_icon-img").removeClass("opened-hiring-step_icon-img")
         }
         else {

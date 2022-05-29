@@ -205,7 +205,6 @@ $(document).ready(function () {
         window.location.href = "/open-position?gh_jid=" + jobId;
     });
 
-    /* OURTEAMS DRAG */
     $('.our-teams_slider-wrap').on('click', '.our-teams_slider-right-arrow', function(e) {
         var barValue = ourTeamsDrag.getValue() + '';
         var barValueArray = barValue.split(',');

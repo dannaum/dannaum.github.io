@@ -1,7 +1,6 @@
 //on page load
 $(document).ready(function(){
     
-    /* 25% DOWN SLIDER */
     var sp500Width = $('.direct-invest_graph').outerWidth();
     var sp500slider = new Dragdealer('home-benefits-drag-tool', {
         speed: 0.1,

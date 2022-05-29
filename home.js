@@ -39,7 +39,6 @@ $(document).ready(function(){
         }
     });
 
-    /* CLOSED FUNDS SLIDER DRAGDEALER */
     var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
     var closedFundSlideW = $('.past-future_slider-slide').outerWidth();
     var availWidth = $('.past-future_slider').outerWidth() - $('.past-future_slider-wrap').outerWidth();
@@ -92,7 +91,6 @@ $(document).ready(function(){
         dd.setStep(parseInt(a)-1, b);
     });
 
-    /* SP500 SLIDER */
     var sp500Width = $('.home-benefits_image').outerWidth();
     var sp500slider = new Dragdealer('home-benefits-drag-tool', {
         speed: 0.1,

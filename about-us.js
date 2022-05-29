@@ -49,7 +49,6 @@ $(document).ready(function () {
         $(this).find(".chart-hover-child").css("display", "none");
     });
 
-    /* CHART DRAG */
     var chartSlider = $('#myChart').outerWidth();
     var timelineSlide = $('.chart-timeline').outerWidth();
     var ourTeamsDrag = new Dragdealer('careers-drag', {
