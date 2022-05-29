@@ -48,4 +48,18 @@ $(document).ready(function () {
         //this find "chart-hover-child" and set css display none
         $(this).find(".chart-hover-child").css("display", "none");
     });
+
+    /* CHART DRAG */
+    var chartSlider = $('#myChart').outerWidth();
+    var timelineSlide = $('.chart-timeline').outerWidth();
+    var ourTeamsDrag = new Dragdealer('careers-drag', {
+    horizontal: true,
+    vertical: false,
+    xPrecision: chartSlider,
+    animationCallback: function(x, y) {
+        $('.careers-chart_drag-line-active').css('width', Math.round(x * 100) + '%');
+        $('#myChart').css('margin-left', -x * (chartSlider/2) /16 + 'REM');
+        $('.chart-timeline').css('margin-left', -x * (timelineSlide/2) /16 + 'REM');
+    }
+    });
 });
