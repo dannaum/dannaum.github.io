@@ -245,7 +245,7 @@ $(document).ready(function () {
         ourTeamsDrag.setValue(parseFloat(a)+0.1, b);
 
     });
-    
+
     $('.our-teams_slider-wrap').on('click', '.our-teams_slider-left-arrow', function(e) {
         var barValue = ourTeamsDrag.getValue() + '';
         var barValueArray = barValue.split(',');
@@ -263,6 +263,20 @@ $(document).ready(function () {
     animationCallback: function(x, y) {
         $('.our-teams_drag-line-active').css('width', Math.round(x * 100) + '%');
         $('.our-teams_slider').css('margin-left', -x * ourTeamsSlider);
+    }
+    });
+
+    /* CHART DRAG */
+    var chartSlider = $('#myChart').outerWidth();
+    var timelineSlide = $('.chart-timeline').outerWidth();
+    var ourTeamsDrag = new Dragdealer('careers-drag', {
+    horizontal: true,
+    vertical: false,
+    xPrecision: chartSlider,
+    animationCallback: function(x, y) {
+        $('.careers-chart_drag-line-active').css('width', Math.round(x * 100) + '%');
+        $('#myChart').css('margin-left', -x * (chartSlider/2) /16 + 'REM');
+        $('.chart-timeline').css('margin-left', -x * (timelineSlide/2) /16 + 'REM');
     }
     });
 
