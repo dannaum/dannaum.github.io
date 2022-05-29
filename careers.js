@@ -256,14 +256,14 @@ $(document).ready(function () {
 
     });
 
-    var ourTeamsSlider = $('.our-teams_slider').outerWidth();
+    var ourTeamsSlider = $('.single-our-team_wrap').outerWidth();
     var ourTeamsDrag = new Dragdealer('our-team-drag', {
     horizontal: true,
     vertical: false,
     xPrecision: ourTeamsSlider,
     animationCallback: function(x, y) {
         $('.our-teams_drag-line-active').css('width', Math.round(x * 100) + '%');
-        $('.our-teams_slider').css('margin-left', -x * ourTeamsSlider);
+        $('.our-teams_slider').css('margin-left', -x * (ourTeamsSlider*9/16) + 'REM');
     }
     });
 
