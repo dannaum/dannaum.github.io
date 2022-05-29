@@ -9,6 +9,7 @@ $(document).ready(function () {
     $('.blue-highlight').each(function(index, el) {
         highlight.push($(this).text().toLocaleLowerCase().trim());
     });
+    //
     $(".tool-tip_single_wrapper").each(function(index, el) {
         tip_single.push($(this).find('.tool-tip_title').text().toLocaleLowerCase().trim());
         tip_single_elems.push($(this))
