@@ -88,7 +88,7 @@ $(document).ready(function(){
         reflow: true,
         animationCallback: function(x, y) {
             $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.direct-invest_graph').css('margin-left', -x * sp500Width / 16 + 'REM');
+            $('.direct-invest_graph').css('margin-left', -x * sp500Width/2 / 16 + 'REM');
         }
     });
 
