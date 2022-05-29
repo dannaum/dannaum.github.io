@@ -78,10 +78,8 @@ $(document).ready(function(){
     $('.past-future_slider-wrap').on('click', '.past-future_right-arrow', function(e) {
         var steps = dd.getStep() + '';
         var stepsArray = steps.split(',');
-        console.log(stepsArray)
         var a = stepsArray[0];
         var b = stepsArray[1];
-        //dd.setStep( a parseInt+1, b );
         dd.setStep(parseInt(a)+1, b);
 
     });
@@ -89,10 +87,8 @@ $(document).ready(function(){
     $('.past-future_slider-wrap').on('click', '.past-future_left-arrow', function(e) {
         var steps = dd.getStep() + '';
         var stepsArray = steps.split(',');
-        console.log(stepsArray)
         var a = stepsArray[0];
         var b = stepsArray[1];
-        //dd.setStep( a parseInt+1, b );
         dd.setStep(parseInt(a)-1, b);
     });
 

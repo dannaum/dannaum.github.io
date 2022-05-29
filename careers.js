@@ -236,15 +236,33 @@ $(document).ready(function () {
         $(this).find(".chart-hover-child").css("display", "none");
     });
 
-    var availWidth = $('.our-teams_slider').outerWidth() -
-                     $('.our-teams_slider-wrap').outerWidth();
-    new Dragdealer('content-scroller', {
+    /* OURTEAMS DRAG */
+    $('.our-teams_slider-wrap').on('click', '.our-teams_slider-right-arrow', function(e) {
+        var barValue = ourTeamsDrag.getValue() + '';
+        var barValueArray = barValue.split(',');
+        var a = barValueArray[0];
+        var b = barValueArray[1];
+        ourTeamsDrag.setValue(parseFloat(a)+0.1, b);
+
+    });
+    /* OURTEAMS DRAG */
+    $('.our-teams_slider-wrap').on('click', '.our-teams_slider-left-arrow', function(e) {
+        var barValue = ourTeamsDrag.getValue() + '';
+        var barValueArray = barValue.split(',');
+        var a = barValueArray[0];
+        var b = barValueArray[1];
+        ourTeamsDrag.setValue(parseFloat(a)-0.1, b);
+
+    });
+
+    var ourTeamsSlider = $('.our-teams_slider').outerWidth();
+    var ourTeamsDrag = new Dragdealer('our-team-drag', {
     horizontal: true,
     vertical: false,
-    xPrecision: availWidth,
+    xPrecision: ourTeamsSlider,
     animationCallback: function(x, y) {
         $('.our-teams_drag-line-active').css('width', Math.round(x * 100) + '%');
-        $('.our-teams_slider').css('margin-left', -x * availWidth);
+        $('.our-teams_slider').css('margin-left', -x * ourTeamsSlider);
     }
     });
 
