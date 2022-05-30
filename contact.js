@@ -42,7 +42,7 @@ $(document).ready(function() {
 
    $('#hubspot-form').submit(function() {
       $('html,body').animate({
-        scrollTop: $("#snd-msg-form").offset().top - $(window).height()/2
+        scrollTop: $(".contact-form-block").offset().top - $(window).height()/2
         }, 1000);
         setTimeout(function() {
         $('#firstname, #lastname, #phone, #email-4, #please_select_what_best_describes_your_situation, #country, #message').delay(2000).val('');
