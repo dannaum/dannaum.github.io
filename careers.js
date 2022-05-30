@@ -123,7 +123,7 @@
     xPrecision: ourTeamsSlider,
     animationCallback: function(x, y) {
         $('.our-teams_drag-line-active').css('width', Math.round(x * 100) + '%');
-        $('.our-teams_slider').css('margin-left', -x * (ourTeamsSlider*9/16) + 'REM');
+        $('.our-teams_slider').css('margin-left', -x * (ourTeamsSlider*10/16) + 'REM');
     }
     });
 
