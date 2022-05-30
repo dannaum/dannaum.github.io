@@ -75,7 +75,7 @@ div.field label{
     margin-bottom: 0rem;
     font-size: 1rem;
     line-height: 150%;
-    bottom-margin: 0.5rem;
+    margin-bottom: 0,5rem;
     color: #6f6c67;
 }
 #main .filter-label {
@@ -311,12 +311,6 @@ div#application div.field textarea {
     width: 455px;
 }
 
-@media (max-width: 640px) {
-    div#application div.field textarea {
-        width: 100%;
-    }
-}
-
 div#application div.field div.select2-container {
     width: 455px !important;
 }
@@ -324,6 +318,9 @@ div#application div.field div.select2-container {
 @media (max-width: 640px) {
     div#application div.field div.select2-container {
         width: 100% !important;
+    }
+    div#application div.field textarea {
+        width: 100%;
     }
 }
 
@@ -462,6 +459,47 @@ strong {
       .company-name {
         font-size: 1.13rem;
         line-height: 1.5rem;
+      }
+}
+@media screen and (max-width: 480px) {
+    select{
+        width:100% !important;
+    }
+    div.field label {
+        width: 100%;
+    }
+    input{
+        width: 100%;
+    }
+    #header{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    div#application{
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+    }
+    #content{
+        padding-left: 1rem;
+        padding-right: 1rem;
+
+    }
+    .attach-or-paste {
+        width: 100%;
+    }
+    .link-container {
+        width: 100%;
+        margin-bottom: 1rem;
+        display: -ms-grid;
+        display: grid;
+        grid-auto-columns: 1fr;
+        grid-column-gap: 0.5rem;
+        grid-row-gap: 0.5rem;
+        -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+        -ms-grid-rows: auto;
+        grid-template-rows: auto;
       }
 }
 
