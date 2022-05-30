@@ -297,7 +297,6 @@ div#application a#add_education {
 div.field div.msg-container {
     padding-top: 5px;
 }
-
 #application .field .select2-container {
     margin-top: 0;
 }
@@ -375,7 +374,7 @@ div.field input[type=text]:focus {
     border-radius: 0.25rem;
     background-color: #fff;
   }
-.required-fields {
+.required-form-field-fields {
     margin-top: 0rem;
     margin-bottom: 1rem;
     font-family: 'Waldenburg halbfett', sans-serif;
@@ -462,8 +461,9 @@ strong {
       }
 }
 @media screen and (max-width: 480px) {
-    select{
+    select {
         width:100% !important;
+        display: block;
     }
     div.field label {
         width: 100%;
