@@ -3,7 +3,7 @@ $(document).ready(function() {
         
     $('input[type=submit]').click(function() {
         var req = $('.required-form-field');
-        $('.text-field').removeClass('invalid-form-field');
+        $('.form-field').removeClass('invalid-form-field');
         $.each(req, function(e){
             var curr_val = $(this).val();
 
