@@ -1,43 +1,43 @@
 
 $(document).ready(function() {
-
-        var phoneAlert = ('Phone must contain at least 7 numbers');
         
-        $('input[type=submit]').click(function() {
-            var req = $('.required-form-field');
-              $('.text-field').removeClass('invalid-form-field');
-      $.each(req, function(e){
-          var curr_val = $(this).val();
-  
-          if(! curr_val)
-          {
-            $(this).addClass('invalid-form-field');
-            $('html, body').animate({            // added for scrolling purposes
-              scrollTop: $(this).offset().top -100
-            }, -200);
-              return false;
-          }
+    $('input[type=submit]').click(function() {
+        var req = $('.required-form-field');
+        $('.text-field').removeClass('invalid-form-field');
+        $.each(req, function(e){
+            var curr_val = $(this).val();
+
+            if(! curr_val)
+                {
+                    $(this).addClass('invalid-form-field');
+                    $('html, body').animate({            // added for scrolling purposes
+                        scrollTop: $(this).offset().top -100
+                    }, -200);
+                        return false;
+                }
      });
 
-        $("#phone").each(function() {
-            var phonenumber = $(this).val();
-            if (phonenumber.length >= 7) {
-                (this).setCustomValidity('');
-            } else {
-                
-                (this).setCustomValidity(phoneAlert);
-                //$('html,body').animate({
-                    //scrollTop: $(this).offset().top - $(window).height()/2
-                    //}, 1000);
-            }
-    
-        });
+    var phoneAlert = ('Phone must contain at least 7 numbers');
+
+    $("#phone").each(function() {
+        var phonenumber = $(this).val();
+        if (phonenumber.length >= 7) {
+            (this).setCustomValidity('');
+        } else {
+            
+            (this).setCustomValidity(phoneAlert);
+            //$('html,body').animate({
+                //scrollTop: $(this).offset().top - $(window).height()/2
+                //}, 1000);
+        }
+
+    });
         
     });
 
     $('#phone').on('input', function() {
-    $(this).val($(this).val().replace(/[^0-9+()]/gi, ''));
-    (this).setCustomValidity('');
+        $(this).val($(this).val().replace(/[^0-9+()]/gi, ''));
+        (this).setCustomValidity('');
     });
 
    $('#hubspot-form').submit(function() {
