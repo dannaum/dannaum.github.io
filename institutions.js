@@ -23,6 +23,22 @@ $(document).ready(function(){
         $(this).closest(pastFutureSlider).find('.past-future_count').text(pastFutureActiveDot + 1);
     });
     */
+   //on click of .book-demo
+    $('.book-demo').on('click', function(){
+        //popup_main animate opacity from 0 to 100
+        $('.popup_main').animate({opacity: 1}, 500).toggle();
+        $('body').css('overflow', 'hidden');
+    });
+    //on click of popup_close-button
+    $('.popup_close-button').on('click', function(){
+        //popup_main animate opacity from 100 to 0
+        $('.popup_main').animate({opacity: 0}, 500);
+        //after 500ms toggle popup_main
+        setTimeout(function(){
+            $('.popup_main').toggle();
+        }, 500);
+        $('body').css('overflow', 'auto');
+    });
 
     var instSolutions = $('.institutional-solutions_grid').outerWidth();
     var instSolutionsDragDealer = new Dragdealer('inst-solutions-drag', {
