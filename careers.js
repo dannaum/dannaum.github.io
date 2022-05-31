@@ -33,19 +33,38 @@
     });
     $('.tool-tips').remove();
 
-    $(".single-career-grid-wrap").click(function () {
+    $(".single-career-grid-wrap-left").click(function () {
         //if this has class "active"
-        if ($(this).hasClass("active")) {
-            $(".single-career-grid-wrap").removeClass("active");
+        if ($(this).hasClass("active-left")) {
+            $(".single-career-grid-wrap-left").removeClass("active-left");
+            $(".single-career-grid-wrap-right").removeClass("active-right");
             $(".single-career-value-p-wrap").css("height", "0rem");
         } else {
         //'single-career-value_wrap' removeClass 'active'
-        $(".single-career-grid-wrap").removeClass("active");
+        $(".single-career-grid-wrap-left").removeClass("active-left");
+        $(".single-career-grid-wrap-right").removeClass("active-right");
         //single-career-value-p-wrap height 0 rem
         $(".single-career-value-p-wrap").css("height", "0rem");
         //this find single-career-value-p-wrap height auto
         $(this).find(".single-career-value-p-wrap").css("height", "auto");
-        $(this).addClass("active");
+        $(this).addClass("active-left");
+        }
+    });
+    $(".single-career-grid-wrap-right").click(function () {
+        //if this has class "active"
+        if ($(this).hasClass("active-right")) {
+            $(".single-career-grid-wrap-left").removeClass("active-left");
+            $(".single-career-grid-wrap-right").removeClass("active-right");
+            $(".single-career-value-p-wrap").css("height", "0rem");
+        } else {
+        //'single-career-value_wrap' removeClass 'active'
+        $(".single-career-grid-wrap-left").removeClass("active-left");
+        $(".single-career-grid-wrap-right").removeClass("active-right");
+        //single-career-value-p-wrap height 0 rem
+        $(".single-career-value-p-wrap").css("height", "0rem");
+        //this find single-career-value-p-wrap height auto
+        $(this).find(".single-career-value-p-wrap").css("height", "auto");
+        $(this).addClass("active-right");
         }
     });
 
