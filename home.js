@@ -43,7 +43,7 @@ $(document).ready(function(){
     var closedFundSlideW = $('.past-future_slider-slide').outerWidth();
     var availWidth = $('.past-future_slider').outerWidth() - $('.past-future_slider-wrap').outerWidth();
     var dd = new Dragdealer('content-scroller', {
-        steps: closedFundSlideN,
+        steps: closedFundSlidesN,
         speed: 0.1,
         requestAnimationFrame: true,
         horizontal: true,
