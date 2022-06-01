@@ -41,7 +41,8 @@ $(document).ready(function(){
 
     var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
     var closedFundSlideW = $('.past-future_slider-slide').outerWidth();
-    var availWidth = $('.past-future_slider').outerWidth() - $('.past-future_slider-wrap').outerWidth();
+    var availWidth = $('.past-future_slider-mask').outerWidth() - $('.past-future_slider').outerWidth();
+    console.log(availWidth);
     var dd = new Dragdealer('content-scroller', {
         steps: closedFundSlidesN,
         speed: 0.1,
@@ -50,27 +51,9 @@ $(document).ready(function(){
         vertical: false,
         xPrecision: availWidth,
         reflow: true,
-        callback: function(x, y) {
-            dd.reflow(x, y);
-            if (x == 0) {
-                //past-future_slider find w-slider-dot eq 
-                $('.past-future_slider').find('.w-slider-dot').eq(0).click();
-            } else if (x == 0.3333333333333333) {
-                //past-future_slider find w-slider-dot eq 1 and click
-                $('.past-future_slider').find('.w-slider-dot').eq(1).click();
-                //else if x == 2
-            } else if (x == 0.6666666666666666) {
-                //past-future_slider find w-slider-dot eq 2 and click
-                $('.past-future_slider').find('.w-slider-dot').eq(2).click();
-                //else if x == 3
-            } else if (x == 1) {
-                //past-future_slider find w-slider-dot eq 3 and click
-                $('.past-future_slider').find('.w-slider-dot').eq(3).click();
-            }
-        },
         animationCallback: function(x, y) {
             $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
-            $('.past-future_slider').css('margin-left', -x * (closedFundSlideW * (closedFundSlidesN -1 ) / 16) + 'REM');
+            $('.past-future_slider').css('margin-left', -x *((closedFundSlidesN -1) * closedFundSlideW));
         }
     });
 
@@ -101,7 +84,7 @@ $(document).ready(function(){
         reflow: true,
         animationCallback: function(x, y) {
             $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.home-benefits_image').css('margin-left', -x * 100 + '%');
+            $('.home-benefits_image').css('margin-left', -x * sp500Width);
         }
     });
 
