@@ -53,7 +53,7 @@ $(document).ready(function(){
         reflow: true,
         animationCallback: function(x, y) {
             $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
-            $('.past-future_slider').css('margin-left', -x *((closedFundSlidesN -1) * closedFundSlideW));
+            $('.past-future_slider').css('margin-left', -x * availWidth );
         }
     });
 
@@ -86,6 +86,22 @@ $(document).ready(function(){
             $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
             $('.home-benefits_image').css('margin-left', -x * sp500Width);
         }
+    });
+
+    $('.book-demo').on('click', function(){
+        //popup_main animate opacity from 0 to 100
+        $('.popup_main').animate({opacity: 1}, 500).toggle();
+        $('body').css('overflow', 'hidden');
+    });
+    //on click of popup_close-button
+    $('.popup_close-button').on('click', function(){
+        //popup_main animate opacity from 100 to 0
+        $('.popup_main').animate({opacity: 0}, 500);
+        //after 500ms toggle popup_main
+        setTimeout(function(){
+            $('.popup_main').toggle();
+        }, 500);
+        $('body').css('overflow', 'auto');
     });
 
 
