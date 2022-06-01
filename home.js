@@ -70,7 +70,7 @@ $(document).ready(function(){
         },
         animationCallback: function(x, y) {
             $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
-            $('.past-future_slider').css('margin-left', -x * (closedFundSlideW * (closedFundSlidesN - 1) / 16 + 6) + 'REM');
+            $('.past-future_slider').css('margin-left', -x * (closedFundSlideW * (closedFundSlidesN -1 ) / 16) + 'REM');
         }
     });
 
