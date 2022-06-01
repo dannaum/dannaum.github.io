@@ -101,7 +101,7 @@ $(document).ready(function(){
         reflow: true,
         animationCallback: function(x, y) {
             $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.home-benefits_image').css('margin-left', -x * sp500Width / 16 + 'REM');
+            $('.home-benefits_image').css('margin-left', -x * 100 + '%');
         }
     });
 
