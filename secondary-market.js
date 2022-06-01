@@ -2,7 +2,6 @@
 $(document).ready(function() {
 
     var auctionSlide = $('.secondary-auction-timeline_divider').find('.secondary-auction_hover').outerWidth();
-    console.log(auctionSlide);
     var auctionTimelineSlide = $('.auction-timeline').outerWidth();
     var chartPrecision = $('.auction-timeline_drag-element').outerWidth();
     var auctionDrag = new Dragdealer('auction-timeline', {
@@ -45,7 +44,7 @@ $(document).ready(function() {
         $('.auction-chart-timeline-line-active').css('width', Math.round(x * 100) + '%');
         $('.auction-timeline_drag-line-active').css('width', Math.round(x * 100) + '%');
         $('.secondary-auction-timeline_divider').css('margin-left', -x * 400 + '%');
-        $('.auction-timeline').css('margin-left', -x * 100 + '%');
+        $('.auction-timeline').css('margin-left', -x * (auctionTimelineSlide/5*4/16) + 'REM');
     }
     });
 
