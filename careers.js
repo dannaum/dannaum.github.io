@@ -178,6 +178,8 @@
     });
 
     $(".hiring-steps_dt").click(function () {
+        $(".hiring-step_icon").removeClass("opened-hiring-step-bg");
+        $(".hiring-step_icon-img").removeClass("opened-hiring-step_icon-img")
         if ($(this).hasClass("w--open")) {
         $(".hiring-step_icon").removeClass("opened-hiring-step-bg");
         $(".hiring-step_icon-img").removeClass("opened-hiring-step_icon-img")
@@ -186,4 +188,16 @@
             $(this).closest(".hiring-steps_single").find(".hiring-step_icon").addClass("opened-hiring-step-bg");
             $(this).closest(".hiring-steps_single").find(".hiring-step_icon-img").addClass("opened-hiring-step_icon-img");
         }
+    });
+
+    //on click of hiring-steps_single
+    $(".hiring-steps_single").click(function () {
+        //this find hiring-steps_dt and trigger click
+        $(this).find(".hiring-steps_dt").trigger("click");
+    });
+
+    //hiring-steps_dl on click
+    $(".hiring-steps_dl").click(function () {
+        //this parent hiring-steps_dt trigger click
+        $(this).closest(".hiring-steps_dt").trigger("click");
     });
