@@ -50,7 +50,7 @@ $(document).ready(function(){
         reflow: true,
         animationCallback: function(x, y) {
             $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
-            $('.past-future_slider-mask').css('margin-left', -x * (closedFundSlideO * (closedFundSlidesN-1) ));
+            $('.past-future_slider-mask').css('margin-left', -x * (closedFundSlidesN * closedFundSlideO - screenWidth));
         }
     });
 
