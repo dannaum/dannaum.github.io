@@ -24,17 +24,11 @@ $(document).ready(function(){
     });
     */
 
-    //if w-nav-button has class w--open
-    //w-nav-button click function
     $('.w-nav-button').on('click', function(){
-        //if this has class w--open
         if($(this).hasClass('w--open')){
-            //body css overflow auto
             $('body').css('overflow', 'auto');
         }
-        //else
         else {
-            //body css overflow hidden
             $('body').css('overflow', 'hidden');
         }
     });
