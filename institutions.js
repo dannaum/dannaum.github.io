@@ -51,7 +51,6 @@ $(document).ready(function(){
         reflow: true,
         callback: function (x,y ) {
             var thisss = instSolutionsDragDealer.getValue();
-            console.log(thisss);
         },
         animationCallback: function(x, y) {
             $('.institutional_solutions_drag-line-active').css('width', Math.round(x * 100) + '%');
