@@ -126,15 +126,19 @@
     $(".chart-single-icon-wrap").mouseleave(function () {
         $(this).find(".chart-hover-child").css("display", "none");
     });
-
-    var ourTeamsSlider = $('.single-our-team_wrap').outerWidth();
+    var totalTeams = $('.our-teams_slider').find('.our-teams_slider-single').length;
+    var screenWidth = $(window).width();
+    var ourTeamsSlider = $('.our-teams_slider-single').outerWidth();
+    console.log(totalTeams);
+    console.log(screenWidth);
+    console.log(ourTeamsSlider);
     var ourTeamsDrag = new Dragdealer('our-team-drag', {
     horizontal: true,
     vertical: false,
     xPrecision: ourTeamsSlider,
     animationCallback: function(x, y) {
         $('.our-teams_drag-line-active').css('width', Math.round(x * 100) + '%');
-        $('.our-teams_slider').css('margin-left', -x * (ourTeamsSlider*10/16) + 'REM');
+        $('.our-teams_slider').css('margin-left', -x * ((ourTeamsSlider * totalTeams) - screenWidth));
     }
     });
 
