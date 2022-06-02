@@ -41,6 +41,7 @@ $(document).ready(function(){
     });
 
     var instSolutions = $('.institutional-solutions_grid').outerWidth();
+    var screenWidth = $(window).width();
     var instSolutionsDragDealer = new Dragdealer('inst-solutions-drag', {
         speed: 0.1,
         requestAnimationFrame: true,
@@ -54,7 +55,7 @@ $(document).ready(function(){
         },
         animationCallback: function(x, y) {
             $('.institutional_solutions_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.institutional-solutions_grid').css('margin-left', -x * (instSolutions /4 * 3) / 16 + 'REM');
+            $('.institutional-solutions_grid').css('margin-left', -x * (instSolutions - screenWidth + 32));
         }
     });
 
