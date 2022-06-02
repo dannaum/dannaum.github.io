@@ -129,9 +129,6 @@
     var totalTeams = $('.our-teams_slider').find('.our-teams_slider-single').length;
     var screenWidth = $(window).width();
     var ourTeamsSlider = $('.our-teams_slider-single').outerWidth();
-    console.log(totalTeams);
-    console.log(screenWidth);
-    console.log(ourTeamsSlider);
     var ourTeamsDrag = new Dragdealer('our-team-drag', {
     horizontal: true,
     vertical: false,
