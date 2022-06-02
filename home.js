@@ -41,6 +41,10 @@ $(document).ready(function(){
     var screenWidth = $(window).width();
     var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
     var closedFundSlideO = $('.past-future_slider-slide').outerWidth();
+    var totalSlide = (closedFundSlidesN * closedFundSlideO);
+    if(screenWidth < totalSlide){
+        $('.past-future-drag-component').css('display', 'block');
+    }
     var dd = new Dragdealer('content-scroller', {
         steps: closedFundSlidesN,
         speed: 0.1,
