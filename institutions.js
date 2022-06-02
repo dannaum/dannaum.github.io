@@ -48,6 +48,10 @@ $(document).ready(function(){
         vertical: false,
         xPrecision: instSolutions,
         reflow: true,
+        callback: function (x,y ) {
+            var thisss = instSolutionsDragDealer.getValue();
+            console.log(thisss);
+        },
         animationCallback: function(x, y) {
             $('.institutional_solutions_drag-line-active').css('width', Math.round(x * 100) + '%');
             $('.institutional-solutions_grid').css('margin-left', -x * (instSolutions /4 * 3) / 16 + 'REM');

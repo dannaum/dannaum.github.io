@@ -38,15 +38,10 @@
         if ($(this).hasClass("active-left")) {
             $(".single-career-grid-wrap-left").removeClass("active-left");
             $(".single-career-grid-wrap-right").removeClass("active-right");
-            $(".single-career-value-p-wrap").css("height", "0rem");
         } else {
         //'single-career-value_wrap' removeClass 'active'
         $(".single-career-grid-wrap-left").removeClass("active-left");
         $(".single-career-grid-wrap-right").removeClass("active-right");
-        //single-career-value-p-wrap height 0 rem
-        $(".single-career-value-p-wrap").css("height", "0rem");
-        //this find single-career-value-p-wrap height auto
-        $(this).find(".single-career-value-p-wrap").css("height", "auto");
         $(this).addClass("active-left");
         }
     });

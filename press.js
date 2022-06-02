@@ -5,18 +5,20 @@ $(document).ready(function(){
         $('.knowledge-center_category-tag').removeClass('active');
         $(this).addClass('active');
         var tagName = $(this).text().toLowerCase();
-        //for each single-press_item in coverage-grid
-        $('.coverage-grid').find('.single-press_item').each(function(){
-            //this find language-media-tag
+        $('.press-search-grid').css('display', 'block');
+        $('.press-static-grid').css('display', 'none');
+        $('.press-search-grid').find('.single-press_item').each(function(){
             var languageTag = $(this).find('.language-media-tag');
-            //if languageTag text is tagName
             if($(languageTag).text().toLowerCase() == tagName){
-                //this css display block
                 $(this).css('display', 'block');
             }
-            //else
+            //else if tagName == 'all'
+            else if(tagName == 'all'){
+                $(this).css('display', 'block');
+                $('.press-search-grid').css('display', 'none');
+                $('.press-static-grid').css('display', 'block');
+            }
             else {
-                //this css display none
                 $(this).css('display', 'none');
             }
         });
