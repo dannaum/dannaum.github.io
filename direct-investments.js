@@ -56,8 +56,8 @@ $(document).ready(function(){
         var b = stepsArray[1];
         dd.setStep(parseInt(a)-1, b);
     });
-
-    var sp500Width = $('.home-benefits_image').outerWidth();
+    
+    var sp500Width = $('.direct-invest_graph').outerWidth();
     var sp500slider = new Dragdealer('home-benefits-drag-tool', {
         speed: 0.1,
         requestAnimationFrame: true,
@@ -67,7 +67,7 @@ $(document).ready(function(){
         reflow: true,
         animationCallback: function(x, y) {
             $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.home-benefits_image-wrap').css('margin-left', -x * (sp500Width - screenWidth +64));
+            $('.direct-invest_graph-wrap').css('margin-left', -x * (sp500Width - screenWidth +64));
         }
     });
 
