@@ -1,11 +1,11 @@
 //on page load
 $(document).ready(function(){
-    //on click of blog-category-tag html to lowercase in var
-    $('.blog-category-tag').on('click', function(){
+    //on click of knowledge-center_category-tag html to lowercase in var
+    $('.knowledge-center_category-tag').on('click', function(){
         var tag = $(this).text().toLowerCase();
         //this add class active
-        //this siblings blog-category-tag remove class active
-        $(this).siblings('.blog-category-tag').removeClass('active');
+        //this siblings knowledge-center_category-tag remove class active
+        $(this).siblings('.knowledge-center_category-tag').removeClass('active');
         $(this).addClass('active');
         //if this has class active
         if($(this).hasClass('active')){
