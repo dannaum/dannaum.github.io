@@ -76,4 +76,9 @@ $(document).ready(function() {
         $(this).children('.auction-chart-hover-child').css('display', 'none');
     });
     
+    //on click of auction-single-icon-wrap
+    $('.auction-single-icon-wrap').click(function() {
+        var index = $(this).index();
+        auctionDrag.setStep(index);
+    });
 });
