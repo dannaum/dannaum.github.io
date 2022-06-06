@@ -91,3 +91,24 @@ if (keyCode === 13) {
   return false;
 }
 });
+
+$('.who-we-are_members-single').on('click', function() {
+  $('body').css('overflow', 'hidden');
+  $(this).find('.who-we-are_members-single_bio').addClass('active');
+
+});
+
+$('.popup_close-button-bio').on('click', function() {
+  $(this).closest('.who-we-are_members-single_bio').removeClass('active');
+  $('body').css('overflow', 'visible');
+}
+);
+
+
+$('.who-we-are_members-single_bio').on('click', function() {
+  if (event.target == this) {
+    e.preventDefault(); 
+    $(this).removeClass('active');
+    $('body').css('overflow', 'visible');
+  }
+});
