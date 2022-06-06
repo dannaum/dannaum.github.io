@@ -96,7 +96,7 @@
         });
         }
     );
-//
+
     $.getJSON(
         "https://boards-api.greenhouse.io/v1/boards/moonfare/offices?render_as=list",
         function (data) {
