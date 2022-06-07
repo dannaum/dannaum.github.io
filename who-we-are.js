@@ -62,6 +62,25 @@ if (keyCode === 13) {
   return false;
 }
 });
+
+$('.who-we-are_members-single').on('click', function() {
+  $(this).children('.who-we-are_members-single_bio').toggleClass('active');
+    $('body').css('overflow', 'hidden');
+});
+
+
+$(".read_bio_modal").click(function(e) {
+if (event.target == this) {
+    $(this).toggleClass('active');
+$('.bodyv2').css('overflow', 'auto');
+}
+});
+
+
+$('.close-read_bio_modal').on('click', function() {
+    $(this).closest('.read_bio_modal').toggleClass('active');
+     $('.bodyv2').css('overflow', 'auto');
+});
 /*
 $('.who-we-are_members-single').on('click', function() {
   $('body').css('overflow', 'hidden');
