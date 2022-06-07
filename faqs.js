@@ -15,6 +15,9 @@ $(document).ready(function(){
                 if(tag2 == tag){
                     $(this).css('display', 'block');
                 }
+                else if(tag == 'all'){
+                    $(this).css('display', 'block');
+                }
                 else{
                     $(this).css('display', 'none');
                 }
