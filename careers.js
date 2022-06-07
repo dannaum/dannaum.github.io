@@ -33,31 +33,45 @@
     });
     $('.tool-tips').remove();
 
+    //on click of single-career-grid-wrap-left after 1 second do something
+    $('.single-career-value').click(function () {
+        var self = $(this);
+        setTimeout(function () {
+            $(self).css('display', 'none');
+        }, 1000);
+    });
+
     $(".single-career-grid-wrap-left").click(function () {
-        if ($(this).hasClass("active-left")) {
+        var selfl = $(this);
+        setTimeout(function () {
+            if ($(this).hasClass("active-left")) {
+                $(".single-career-grid-wrap-left").removeClass("active-left");
+                $(".single-career-grid-wrap-right").removeClass("active-right");
+                $(".single-career-value-p-wrap").css("height", "0");
+            } else {
             $(".single-career-grid-wrap-left").removeClass("active-left");
             $(".single-career-grid-wrap-right").removeClass("active-right");
-            $(".single-career-value-p-wrap").css("height", "0rem");
-        } else {
-        $(".single-career-grid-wrap-left").removeClass("active-left");
-        $(".single-career-grid-wrap-right").removeClass("active-right");
-        $(".single-career-value-p-wrap").css("height", "0rem");
-        $(this).find(".single-career-value-p-wrap").css("height", "auto");
-        $(this).addClass("active-left");
-        }
+            $(".single-career-value-p-wrap").css("height", "0");
+            $(selfl).find(".single-career-value-p-wrap").css("height", "auto");
+            $(selfl).addClass("active-left");
+            }
+        }, 500);
     });
     $(".single-career-grid-wrap-right").click(function () {
-        if ($(this).hasClass("active-right")) {
+        var selfr = $(this);
+        setTimeout(function () {
+            if ($(selfr).hasClass("active-right")) {
+                $(".single-career-grid-wrap-left").removeClass("active-left");
+                $(".single-career-grid-wrap-right").removeClass("active-right");
+                $(".single-career-value-p-wrap").css("height", "0");
+            } else {
             $(".single-career-grid-wrap-left").removeClass("active-left");
             $(".single-career-grid-wrap-right").removeClass("active-right");
             $(".single-career-value-p-wrap").css("height", "0rem");
-        } else {
-        $(".single-career-grid-wrap-left").removeClass("active-left");
-        $(".single-career-grid-wrap-right").removeClass("active-right");
-        $(".single-career-value-p-wrap").css("height", "0rem");
-        $(this).find(".single-career-value-p-wrap").css("height", "auto");
-        $(this).addClass("active-right");
-        }
+            $(selfr).find(".single-career-value-p-wrap").css("height", "auto");
+            $(selfr).addClass("active-right");
+            }
+        }, 500);
     });
 
     $.getJSON(
