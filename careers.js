@@ -75,38 +75,22 @@
     });
 
     $.getJSON(
-        "https://boards-api.greenhouse.io/v1/boards/moonfare/departments?render_as=tree",
+        "https://boards-api.greenhouse.io/v1/boards/moonfare/departments?render_as=list",
         function (data) {
         var data = data.departments;
         var departments = $('.positions_grid-right');
-    
         $.each(data, function (i, item) {
-                //each item.children
-                $.each(item.children, function (i, item) {
-                    //each item.children
-                    $.each(item.children, function (i, item) {
-                        //each item.children
-                        $.each(item.children, function (i, item) {
-                            var newDeptName = item.name;
-                            var newDeptTag = $(".positions_filter-tags-departments").append('<a href="#" class="positions_single-tag w-inline-block" data-depname="'+ newDeptName +'"><div class="dep-name">' + newDeptName +'</div></a>');
-    
-                            $.each(item.children, function (i, item) {
-                                //if item.jobs length > 0
-                                if (item.jobs.length > 0) {
-                                    let teamWrap = $('<div class="positions_grid-team"></div>');
-                                    $('<div class="positions_grid-title-wrapper"><h3 class="h4 color-text-white bottom-margin-24" data-depname="'+ newDeptName +'">' + item.name + '</h3></div>').appendTo(teamWrap);
-                                    let teamJobGrid = $('<div class="positions_grid-job-list"></div>').appendTo(teamWrap);
-                                        $.each(item.jobs, function (i, jobs) {
-                                            if (item.jobs.length > 0) {
-                                                $('<div class="positions_grid-single-job" data-jobid="'+ jobs.id + '" data-jobloc="'+ jobs.location.name + '" data-depname="'+ newDeptName +'"><div><p class="paragraph-medium paragraph-bold color-text-white">' + jobs.title + '</p><p class="paragraph-medium color-text-white">' + jobs.location.name + '</p></div><img class="careers-arrow-icon" src="https://uploads-ssl.webflow.com/62552717df37959f6bb9ae63/6256dade3416c8a5d3825a04_job-list_arrow.svg" alt=""></div>').appendTo(teamJobGrid);
-                                            }
-                                });
-                                departments.append(teamWrap);
-                            }
-                        });
-                    });
+            if (item.jobs.length > 0) {
+                var newDeptName = item.name;
+                var newDeptTag = $(".positions_filter-tags-departments").append('<a href="#" class="positions_single-tag w-inline-block" data-depname="'+ newDeptName +'"><div class="dept-name">' + newDeptName +'</div></a>');
+                let teamWrap = $('<div class="positions_grid-team"></div>');
+                $('<div class="positions_grid-title-wrapper"><h3 class="h4 color-text-white bottom-margin-i-xl" data-depname="'+ newDeptName +'">' + item.name + '</h3></div>').appendTo(teamWrap);
+                $.each(item.jobs, function (i, jobs) {
+                    let teamJobGrid = $('<div class="positions_grid-job-list"></div>').appendTo(teamWrap);
+                    $('<div class="positions_grid-single-job" data-jobid="'+ jobs.id + '" data-jobloc="'+ jobs.location.name + '" data-depname="'+ newDeptName +'"><div><p class="paragraph-medium color-text-white">' + jobs.title + '</p><p class="paragraph-medium color-text-white">' + jobs.location.name + '</p></div><img class="careers-arrow-icon" src="https://uploads-ssl.webflow.com/62552717df37959f6bb9ae63/627147c90e683729d9417309_careers-list-icon.svg" alt=""></div>').appendTo(teamJobGrid);
+                    departments.append(teamWrap);
                 });
-            });
+            }
         });
         }
     );
