@@ -1,42 +1,13 @@
 $('.inv-mg-paste').keyup(function() {
   
-  // If value is not empty
   if ($(this).val().length == 0) {
-    // Hide the element
     $('.ism-static-results').show();
     $('.ism-dynamic-results').hide();
   } else {
-    // Otherwise show it
     $('.ism-dynamic-results').show();
     $('.ism-static-results').hide();
   }
 }).keyup();
-
-/*
-
-(function() {
-// create a new Library instance and store it in a variable called "projectsGrid"
-var projectsGrid = new FsLibrary('.investment-managers-search-list')
-
-// define our filter group(s)
-var myFilters = [
-{
-  filterWrapper: ".ism-form-field",
-  filterType: "exclusive",
-  filterByClass: ".inv-mg-name-search",
-  emptyMessage: '.ism-empty-message',
-  animation: {
-      enable: false,
-      }
-}
-]
-// run filter on our instance
-projectsGrid.filter({
-  filterArray: myFilters,
-  emptyMessage: '.ism-empty-message',
-})
-  })();
-  */
 
 
 $('.ism-button').find('.ism-popup').on('click', function() {
@@ -91,7 +62,7 @@ if (keyCode === 13) {
   return false;
 }
 });
-
+/*
 $('.who-we-are_members-single').on('click', function() {
   $('body').css('overflow', 'hidden');
   $(this).find('.who-we-are_members-single_bio').addClass('active');
@@ -112,3 +83,4 @@ $('.who-we-are_members-single_bio').on('click', function() {
     $('body').css('overflow', 'visible');
   }
 });
+*/
