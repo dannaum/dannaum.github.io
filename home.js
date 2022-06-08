@@ -99,5 +99,10 @@ $(document).ready(function(){
         $('body').css('overflow', 'auto');
     });
 
+    if(sp500Width > screenWidth){
+        $('.past-future-drag-component').css('display', 'block');
+        $('.home-benefits_drag-element').css('display', 'block');
+    }
+
 
 });
