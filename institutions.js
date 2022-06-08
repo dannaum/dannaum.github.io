@@ -58,6 +58,10 @@ $(document).ready(function(){
         }
     });
 
+    if(instSolutions > screenWidth){
+        $('.institutional_solutions_drag-element').css('display', 'block');
+    }
+
     $('input[type=submit]').click(function() {
         var req = $('.required-form-field');
         $('.form-field').removeClass('invalid-form-field');
