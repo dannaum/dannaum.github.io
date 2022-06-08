@@ -14,4 +14,8 @@ $(document).ready(function(){
             $('.direct-invest_graph-wrap').css('margin-left', -x * (sp500Width - screenWidth +64));
         }
     });
+
+    if(sp500Width > screenWidth){
+        $('.home-benefits_drag-element').css('display', 'block');
+    }
 });
