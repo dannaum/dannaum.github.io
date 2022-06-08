@@ -192,3 +192,7 @@
         //this parent hiring-steps_dt trigger click
         $(this).closest(".hiring-steps_dt").trigger("click");
     });
+
+    if(timelineSlide > screenWidth){
+        $('.careers_chart-drag-element').css('display', 'block');
+    }
