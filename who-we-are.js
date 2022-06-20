@@ -63,43 +63,26 @@ if (keyCode === 13) {
 }
 });
 
-$('.who-we-are_members-single').on('click', function() {
-  $(this).children('.who-we-are_members-single_bio').toggleClass('active');
+//on click of who-we-are_single-member
+$('.who-we-are_single-member').click(function() {
+    //this sibling who-we-are_members-single_bio add class active
+    $(this).siblings('.who-we-are_members-single_bio').addClass('active');
+    //body css overflow hidden
     $('body').css('overflow', 'hidden');
 });
 
 
-$(".read_bio_modal").click(function(e) {
-if (event.target == this) {
-    $(this).toggleClass('active');
-$('.bodyv2').css('overflow', 'auto');
-}
+//popup_close-button-bio on click
+$('.popup_close-button-bio').click(function() {
+    //this parent who-we-are_members-single_bio remove class active
+    $(this).closest('.who-we-are_members-single_bio').removeClass('active');
+    //body css overflow visible
+    $('body').css('overflow', 'visible');
 });
-
-
-$('.close-read_bio_modal').on('click', function() {
-    $(this).closest('.read_bio_modal').toggleClass('active');
-     $('.bodyv2').css('overflow', 'auto');
-});
-/*
-$('.who-we-are_members-single').on('click', function() {
-  $('body').css('overflow', 'hidden');
-  $(this).find('.who-we-are_members-single_bio').addClass('active');
-
-});
-
-$('.popup_close-button-bio').on('click', function() {
-  $(this).closest('.who-we-are_members-single_bio').removeClass('active');
-  $('body').css('overflow', 'visible');
-}
-);
-
 
 $('.who-we-are_members-single_bio').on('click', function() {
-  if (event.target == this) {
-    e.preventDefault(); 
-    $(this).removeClass('active');
-    $('body').css('overflow', 'visible');
-  }
-});
-*/
+    if (event.target == this) {
+      $(this).removeClass('active');
+      $('body').css('overflow', 'visible');
+    }
+  });

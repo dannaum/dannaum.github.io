@@ -1,6 +1,5 @@
 //on page load
 $(document).ready(function(){
-
     $('.knowledge-center_category-tag').on('click', function(){
         $(this).siblings('.knowledge-center_category-tag').removeClass('active');
         var tagName = $(this).text().toLowerCase();

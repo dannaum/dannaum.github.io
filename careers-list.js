@@ -50,24 +50,14 @@ $(document).ready(function () {
                 let teamJobGrid = $('<div class="positions_grid-job-list"></div>').appendTo(teamWrap);
                 $.each(item.jobs, function (i, jobs) {
                     $('<div class="positions_grid-single-job-dark" data-jobid="'+ jobs.id + '" data-jobloc="'+ jobs.location.name + '" data-depname="'+ newDeptName +'"><div><p class="paragraph-medium">' + jobs.title + '</p><p class="paragraph-medium">' + jobs.location.name + '</p></div><img class="careers-arrow-icon" src="https://uploads-ssl.webflow.com/62552717df37959f6bb9ae63/627147c90e683729d9417309_careers-list-icon.svg" alt=""></div>').appendTo(teamJobGrid);
-    
+                    //jobs.location.name to var myloc
+                    var myloc = jobs.location.name;
+                    //if positions_filter-tags-locations children text dont have myloc append myloc to positions_filter-tags-locations
+                    if ($(".positions_filter-tags-locations").children().text().indexOf(myloc) == -1) {
+                        $(".positions_filter-tags-locations").append('<a href="#" class="positions_single-tag-dark w-inline-block" data-jobloc="' + myloc + '"><div class="loc-name">' + myloc + '</div></a>');
+                    }
                     departments.append(teamWrap);
                 });
-            }
-        });
-        }
-    );
-
-    $.getJSON(
-        "https://boards-api.greenhouse.io/v1/boards/moonfare/offices?render_as=list",
-        function (data) {
-        var location = data.offices;
-
-        $.each(location, function (i, item) {
-            if (item.name.length > 0) {
-            var newDeptTag = $(".positions_filter-tags-locations").append(
-                '<a href="#" class="positions_single-tag-dark w-inline-block" data-jobloc="' + item.name + '"><div class="loc-name">' + item.name + '</div></a>'
-            );
             }
         });
         }
@@ -186,5 +176,12 @@ $(document).ready(function () {
         var jobId = $(this).data('jobid');
         //redirect to "mf-v2.webflow.io/open-position" + ?jobId=jobId
         window.location.href = "/open-position?gh_jid=" + jobId;
+    });
+    
+    var navBarHeight = $('.navbar_section').outerHeight();
+    $('#send-resume').click(function(){
+        $('html, body').animate({
+            scrollTop: $("#careers-list").offset().top - navBarHeight
+        }, 1000);
     });
 });

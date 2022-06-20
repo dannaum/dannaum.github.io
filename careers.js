@@ -1,3 +1,4 @@
+
     //blue-highlight wrap in span "tool-tip_wrapper"
     $('.blue-highlight').wrap('<span class="tool-tip_wrapper"></span>');
     //get text of highlight class  and save it in array 
@@ -33,25 +34,17 @@
     });
     $('.tool-tips').remove();
 
-    //on click of single-career-grid-wrap-left after 1 second do something
-    $('.single-career-value').click(function () {
-        var self = $(this);
-        setTimeout(function () {
-            $(self).css('display', 'none');
-        }, 1000);
-    });
-
     $(".single-career-grid-wrap-left").click(function () {
         var selfl = $(this);
         setTimeout(function () {
-            if ($(this).hasClass("active-left")) {
+            if ($(selfl).hasClass("active-left")) {
                 $(".single-career-grid-wrap-left").removeClass("active-left");
                 $(".single-career-grid-wrap-right").removeClass("active-right");
-                $(".single-career-value-p-wrap").css("height", "0");
+                $(".single-career-value-p-wrap").css("height", "0rem");
             } else {
             $(".single-career-grid-wrap-left").removeClass("active-left");
             $(".single-career-grid-wrap-right").removeClass("active-right");
-            $(".single-career-value-p-wrap").css("height", "0");
+            $(".single-career-value-p-wrap").css("height", "0rem");
             $(selfl).find(".single-career-value-p-wrap").css("height", "auto");
             $(selfl).addClass("active-left");
             }
@@ -63,7 +56,7 @@
             if ($(selfr).hasClass("active-right")) {
                 $(".single-career-grid-wrap-left").removeClass("active-left");
                 $(".single-career-grid-wrap-right").removeClass("active-right");
-                $(".single-career-value-p-wrap").css("height", "0");
+                $(".single-career-value-p-wrap").css("height", "0rem");
             } else {
             $(".single-career-grid-wrap-left").removeClass("active-left");
             $(".single-career-grid-wrap-right").removeClass("active-right");
@@ -87,7 +80,7 @@
                 $('<div class="positions_grid-title-wrapper"><h3 class="h4 color-text-white bottom-margin-i-xl" data-depname="'+ newDeptName +'">' + item.name + '</h3></div>').appendTo(teamWrap);
                 $.each(item.jobs, function (i, jobs) {
                     let teamJobGrid = $('<div class="positions_grid-job-list"></div>').appendTo(teamWrap);
-                    $('<div class="positions_grid-single-job" data-jobid="'+ jobs.id + '" data-jobloc="'+ jobs.location.name + '" data-depname="'+ newDeptName +'"><div><p class="paragraph-medium color-text-white">' + jobs.title + '</p><p class="paragraph-medium color-text-white">' + jobs.location.name + '</p></div><img class="careers-arrow-icon" src="https://uploads-ssl.webflow.com/62552717df37959f6bb9ae63/627147c90e683729d9417309_careers-list-icon.svg" alt=""></div>').appendTo(teamJobGrid);
+                    $('<div class="positions_grid-single-job" data-jobid="'+ jobs.id + '" data-jobloc="'+ jobs.location.name + '" data-depname="'+ newDeptName +'"><div><p class="paragraph-medium color-text-white">' + jobs.title + '</p><p class="paragraph-medium color-text-white">' + jobs.location.name + '</p></div><img class="careers-arrow-icon" src="https://uploads-ssl.webflow.com/5fd0f5501ea5ad3d2b7f9c33/62ab54d1a565a57a507df176_pale-arrow.svg" alt=""></div>').appendTo(teamJobGrid);
                     departments.append(teamWrap);
                 });
             }
@@ -192,7 +185,3 @@
         //this parent hiring-steps_dt trigger click
         $(this).closest(".hiring-steps_dt").trigger("click");
     });
-
-    if(timelineSlide > screenWidth){
-        $('.careers_chart-drag-element').css('display', 'block');
-    }
