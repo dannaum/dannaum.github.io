@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap');
 @font-face {
     font-family: 'Waldenburg halbfett';
     src: url('https://assets.website-files.com/62552717df37959f6bb9ae63/6256e95b4cbbfa6ced1c9a7c_Waldenburg-Halbfett.ttf') format('truetype');
@@ -71,6 +70,7 @@ body {
     padding-right: 4px;
 }
 div.field label{
+    text-align: left !important;
     margin-top: 0rem;
     margin-bottom: 0rem;
     font-size: 1rem;

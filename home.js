@@ -1,13 +1,5 @@
 //on page load
 $(document).ready(function(){
-    $('.w-nav-button').on('click', function(){
-        if($(this).hasClass('w--open')){
-            $('body').css('overflow', 'auto');
-        }
-        else {
-            $('body').css('overflow', 'hidden');
-        }
-    });
     var screenWidth = $(window).width();
     var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
     var closedFundSlideO = $('.past-future_slider-slide').outerWidth();
