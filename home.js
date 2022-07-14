@@ -149,7 +149,7 @@ $(document).ready(function(){
             opacity: [0, 1],
             easing: "easeOutQuint",
             duration: 800,
-            delay: (b, a) => 300 + 30 * a,
+            delay: (b, a) => 30 * a,
             begin() {
                 $(".fadeup0").css("opacity", "1");
             },
