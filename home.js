@@ -1,4 +1,3 @@
-//on page load
 $(document).ready(function(){
     ($.fn.isInViewport = function () {
         var a = $(this).offset().top,
