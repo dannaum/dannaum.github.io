@@ -7,10 +7,21 @@ $(document).ready(function(){
         return c > b && a < d;
     });
     var screenWidth = $(window).width();
+    var closedFundsWrapper = $(".past-future_slider-wrap").outerWidth();
+    var closedFundsMask = $('.past-future_slider-mask').outerWidth();
     var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
     var closedFundSlideO = $('.past-future_slider-slide').outerWidth();
-    var totalSlide = (closedFundSlidesN * closedFundSlideO);
-    if(screenWidth < totalSlide){
+    $(window).on('orientationchange', function(event) {
+        if(closedFundsWrapper < closedFundsMask){
+            $('.past-future-drag-component').css('display', 'block');
+        }
+    });
+    $(window).resize(function(){
+        if(closedFundsWrapper < closedFundsMask){
+            $('.past-future-drag-component').css('display', 'block');
+        }
+    });
+    if(closedFundsWrapper < closedFundsMask){
         $('.past-future-drag-component').css('display', 'block');
     }
     var dd = new Dragdealer('content-scroller', {
@@ -22,7 +33,7 @@ $(document).ready(function(){
         reflow: true,
         animationCallback: function(x, y) {
             $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
-            $('.past-future_slider-mask').css('margin-left', -x * (closedFundSlidesN * closedFundSlideO - screenWidth));
+            $('.past-future_slider-mask').css('margin-left', -x * (closedFundsMask - closedFundsWrapper));
         }
     });
 
@@ -42,7 +53,7 @@ $(document).ready(function(){
         var b = stepsArray[1];
         dd.setStep(parseInt(a)-1, b);
     });
-
+    var homeBenefitsImageWrap = $('.home-benefits_image-wrap').outerWidth();
     var sp500Width = $('.home-benefits_image').outerWidth();
     var sp500slider = new Dragdealer('home-benefits-drag-tool', {
         speed: 0.1,
@@ -56,7 +67,19 @@ $(document).ready(function(){
             $('.home-benefits_image-wrap').css('margin-left', -x * (sp500Width - screenWidth +64));
         }
     });
-
+    $(window).on('orientationchange', function(event) {
+        if(homeBenefitsImageWrap < sp500Width){
+            $('.past-future-drag-component').css('display', 'block');
+        }
+    });
+    $(window).resize(function(){
+        if(homeBenefitsImageWrap < sp500Width){
+            $('.past-future-drag-component').css('display', 'block');
+        }
+    });
+    if(homeBenefitsImageWrap < sp500Width){
+        $('.past-future-drag-component').css('display', 'block');
+    }
 
     $('.book-demo').on('click', function(){
         //popup_main animate opacity from 0 to 100
@@ -73,12 +96,8 @@ $(document).ready(function(){
         }, 500);
         $('body').css('overflow', 'auto');
     });
-    /*
-    if(sp500Width > screenWidth){
-        $('.past-future-drag-component').css('display', 'block');
-        $('.home-benefits_drag-element').css('display', 'block');
-    }
-    */
+
+
     $('.alt-single-press_wrap').each(function() {
         var parent_index = $(this).parent().index();
         $(this).attr('data-testid', 'alt-single-press-wrap-' + parent_index);
