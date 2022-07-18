@@ -6,6 +6,7 @@ $(document).ready(function(){
             d = b + $(window).height();
         return c > b && a < d;
     });
+    
     var screenWidth = $(window).width();
     var closedFundsWrapper = $(".past-future_top-content").outerWidth();
     var closedFundsMask = $('.past-future_slider-mask').outerWidth();
