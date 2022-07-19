@@ -1,15 +1,11 @@
+//on page load
+$(document).ready(function() {
     var peBContent = $('.pe-101-content-basics').outerWidth();
     var peCard = $('.pe-101_grid-single').outerWidth();
     var peBCardLength = $('.pe-101_grid-4-basics').find('.pe-101_grid-single').length;
     var peBCardsGrid = $('.pe-101_grid-4-basics').outerWidth();
     var peSCardsGrid = $('.pe-101_grid-4-strategies').outerWidth();
     var peSCardLength = $('.pe-101_grid-4-strategies').children().length;
-    if (peBContent < peBCardsGrid) {
-        $('.pe-101-b_drag-component').css('display', 'block');
-    }
-    if (peBContent < peSCardsGrid) {
-        $('.pe-101-s_drag-component').css('display', 'block');
-    }
     var peBSlider = new Dragdealer('pe-101b-drag-tool', {
         speed: 0.1,
         requestAnimationFrame: true,
@@ -35,3 +31,4 @@
             $('.pe-101_grid-4-strategies').css('margin-left', +x * (peBContent - peSCardsGrid));
         }
     });
+});

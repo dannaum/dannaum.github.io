@@ -1,14 +1,16 @@
-$('p:contains("start-sidebar")').each(function() {
-    $(this).nextUntil('p:contains("end-sidebar")').wrapAll('<div class="glossary-article-siderbar" />');
-});
+//on page load
+$(document).ready(function() {
+    $('p:contains("start-sidebar")').each(function() {
+        $(this).nextUntil('p:contains("end-sidebar")').wrapAll('<div class="glossary-article-siderbar" />');
+    });
 
-$('p:contains("start-sidebar")').remove();
-$('p:contains("end-sidebar")').remove();
-$(".blog-rich-text").find("h2").each(function() {
-    var text = $(this).text();
-    $('.glossary-article_navigation').append("<a class='glossary-article_navigation-link'><h3 class='hs7 bottom-margin-0'>" + text + "</h3></a>");
-});
-$(".glossary-article_navigation-link").first().addClass("active");
+    $('p:contains("start-sidebar")').remove();
+    $('p:contains("end-sidebar")').remove();
+    $(".blog-rich-text").find("h2").each(function() {
+        var text = $(this).text();
+        $('.glossary-article_navigation').append("<a class='glossary-article_navigation-link'><h3 class='hs7 bottom-margin-0'>" + text + "</h3></a>");
+    });
+    $(".glossary-article_navigation-link").first().addClass("active");
 
     $.fn.isInViewport = function() {
         var elementTop = $(this).offset().top;
@@ -17,27 +19,26 @@ $(".glossary-article_navigation-link").first().addClass("active");
         var viewportBottom = viewportTop + $(window).height();
         return elementBottom > viewportTop && elementTop < viewportBottom;
     };
-    
-    if ($(window).width() > 991) {
-        $(window).on('resize scroll', function() {
-            $(".blog-rich-text").find("h2").each(function() {
-                if ($(this).isInViewport()) {
-                    var whichSection = $(this).index("h2");
-                    $('.glossary-article_navigation-link').removeClass('active');
-                    $('.glossary-article_navigation-link').eq(whichSection).addClass('active');
-                }
-            });
+    //window on scroll
+    $(window).on('scroll', function() {
+        $(".blog-rich-text").find("h2").each(function() {
+            if ($(this).isInViewport()) {
+                var whichSection = $(this).index("h2");
+                $('.glossary-article_navigation-link').removeClass('active');
+                $('.glossary-article_navigation-link').eq(whichSection).addClass('active');
+            }
         });
+    });
     
-        $('.glossary-article_navigation-link').on('click', function() {
-            var tabText = $(this).text();
-            var navbarHeight = $('.navbar_section').outerHeight();
-            var whichSection = $(this).index(".glossary-article_navigation-link");
-            $('html, body').animate({
-                scrollTop: $('.blog-rich-text').find("h2").eq(whichSection).offset().top - (navbarHeight * 2)
-            }, 1000);
-        });
-    }
+    $('.glossary-article_navigation-link').on('click', function() {
+        var tabText = $(this).text();
+        var navbarHeight = $('.navbar_section').outerHeight();
+        var whichSection = $(this).index(".glossary-article_navigation-link");
+        $('html, body').animate({
+            scrollTop: $('.blog-rich-text').find("h2").eq(whichSection).offset().top - (navbarHeight * 2)
+        }, 1000);
+    });
+
     if ($(".glossary-article_navigation").children(".glossary-article_navigation-link").length < 1) {
         $(".glossary-article_navigation").css("display", "none");
     }
@@ -76,3 +77,4 @@ $(".glossary-article_navigation-link").first().addClass("active");
         });
     }
     */
+});
