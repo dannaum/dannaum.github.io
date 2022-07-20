@@ -38,10 +38,20 @@ $(document).ready(function() {
             scrollTop: $('.blog-rich-text').find("h2").eq(whichSection).offset().top - (navbarHeight * 2)
         }, 1000);
     });
-
-    if ($(".glossary-article_navigation").children(".glossary-article_navigation-link").length < 1) {
-        $(".glossary-article_navigation").css("display", "none");
+    if ($(window).width() > 991) {
+        if ($(".glossary-article_navigation").children(".glossary-article_navigation-link").length > 0) {
+            $(".glossary-article_navigation").css("display", "block");
+        }
     }
+
+    $(window).on('resize orientationchange', function() {
+        if ($(window).width() < 991) {
+            $(".glossary-article_navigation").css("display", "none");
+        }
+        else if ($(window).width() > 991 && $(".glossary-article_navigation").children(".glossary-article_navigation-link").length > 0) {
+            $(".glossary-article_navigation").css("display", "block");
+        }
+    });
     /*
     else {
         $('.investing-moonfare_tab-link').on('click', function() {

@@ -1,4 +1,5 @@
-
+//on page load
+$(document).ready(function () {
     $('.product-features_slide-nav-number').click(function() {  
         var index = $(this).index();
         $(this).siblings().removeClass('active');
@@ -18,3 +19,28 @@
             }
         });
     });
+
+
+    function observeTransform(el, callback) {
+        var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+        var observer = new MutationObserver(function (mutations, observer) {
+            callback();
+        });
+        observer.observe(el, {
+            attributes: true,
+            attributeFilter: ['style']
+        });
+    }
+    observeTransform(document.querySelector('.product-features_hero-slider-slide'), function () {
+        //for each ".w-slider-dot"
+        $('.w-slider-dot').each(function () {
+            //if this has class w-active
+            if ($(this).hasClass('w-active')) {
+                //get this index 
+                var index = $(this).index('.w-slider-dot');
+                //click on ".product-features_slide-nav-number" at index
+                $('.product-features_slide-nav-number').eq(index).click();
+            }
+        });
+    });
+});
