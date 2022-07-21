@@ -14,13 +14,6 @@ $(document).ready(function() {
         });
     });
 
-    $.fn.isInViewport = function() {
-        var elementTop = $(this).offset().top;
-        var elementBottom = elementTop + $(this).outerHeight();
-        var viewportTop = $(window).scrollTop();
-        var viewportBottom = viewportTop + $(window).height();
-        return elementBottom > viewportTop && elementTop < viewportBottom;
-    };
     function copyToClipboard(text) {
         var dummy = document.createElement("textarea");
         // to avoid breaking orgain page when copying more words
@@ -96,56 +89,62 @@ $(document).ready(function() {
         var navbarHeight = $(".navbar_section").outerHeight();
         var glossaryNavbarHeight = $(".glossary-navigation").outerHeight();
 
-        function debounce_event(func,wait,immediate) {
-            var timeout;
-            return function() {
-                var context = this, args = arguments;
-                var later = function() {
-                    timeout = null;
-                    if(!immediate) func.apply(context, args);
-                };
-                var callNow = immediate && !timeout;
-                clearTimeout(timeout);
-                timeout = setTimeout(later, wait);
-                if(callNow) func.apply(context, args);
-            };
+        
+        var results = {};
+    
+        function calculateVisibilityForDiv(div$) {
+            var windowHeight = $(window).height(),
+                docScroll = $(document).scrollTop(),
+                divPosition = div$.offset().top,
+                divHeight = div$.height(),
+                hiddenBefore = docScroll - divPosition,
+                hiddenAfter = (divPosition + divHeight) - (docScroll + windowHeight);
+    
+            if ((docScroll > divPosition + divHeight) || (divPosition > docScroll + windowHeight)) {
+                return 0;
+            } else {
+                var result = 100;
+    
+                if (hiddenBefore > 0) {
+                    result -= (hiddenBefore * 100) / divHeight;
+                }
+    
+                if (hiddenAfter > 0) {
+                    result -= (hiddenAfter * 100) / divHeight;
+                }
+    
+                return result;
+            }
         }
-
-        //if window less than 991
-        if ($(window).width() < 991) {
-            $(window).scroll(debounce_event(function(event) {
-                $(".glossary-letter-content").each(function() {
-                    if ($(this).isInViewport()) {
-                        var index = $(this).index('.glossary-letter-content');
-                        $(".countable").removeClass("active");
-                        $(".countable").find(".glossary-letter-active").removeClass('active');
-                        $(".countable").eq(index).addClass("active");
-                        $(".countable").eq(index).find(".glossary-letter-active").addClass('active');
-                        var left = $(".countable").eq(index).position().left;
-                        $(".glossary-letters").animate({
-                            scrollLeft: left
-                        }, 250);
+        var glossaryLettersWidth = $('.glossary-letters').outerWidth();
+        var countableLetter = $('.glossary-letter').outerWidth();
+        $(window).scroll(function() {
+            $('div.glossary-letter-content').each(function () {
+                var div$ = $(this);
+                results[div$.find('.count-letter').text()] = calculateVisibilityForDiv(div$);
+                var highest = 0;
+                var highestIndex = 0;
+                for (var i in results) {
+                    if (results[i] > highest) {
+                        highest = results[i];
+                        highestIndex = i;
                     }
-                });
-            }, 100));
-        }
-        else {
-            $(window).on('scroll', function() {
-                $(".glossary-letter-content").each(function() {
-                    if ($(this).isInViewport()) {
-                        var index = $(this).index('.glossary-letter-content');
+                }
+                $('.count-letter').each(function () {
+                    if ($(this).text() == highestIndex) {
+                        var index = $(this).closest('.glossary-letter-content').index('.glossary-letter-content');
                         $(".countable").removeClass("active");
                         $(".countable").find(".glossary-letter-active").removeClass('active');
                         $(".countable").eq(index).addClass("active");
                         $(".countable").eq(index).find(".glossary-letter-active").addClass('active');
-                        var left = $(".countable").eq(index).position().left;
+                        var moveLeft = index * countableLetter;
                         $(".glossary-letters").animate({
-                            scrollLeft: left
-                        }, 250);
+                            scrollLeft: moveLeft
+                        }, 0);
                     }
                 });
             });
-        }
+        });
 
         $('.glossary-search-result').on('click', function() {
             //get the text of this ".glossary-search-result"
