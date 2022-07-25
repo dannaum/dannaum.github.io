@@ -19,6 +19,12 @@ $(document).ready(function () {
             }
         });
     });
+    //on click of ".product-features_hero-slider-slide"
+    $('.product-features_hero-slider-slide').click(function() {
+        //find the index of this
+        var index = $(this).index();
+        $('.product-features_slide-nav-number').eq(index).click();
+    });
 
 
     function observeTransform(el, callback) {
