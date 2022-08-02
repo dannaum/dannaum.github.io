@@ -70,7 +70,7 @@ $(document).ready(function(){
             var $item = $(this).find("._9_tag_animation");
             setTimeout(function() { 
                 $item.click();
-            }, 100*i);
+            }, 50*i);
         });
     }
 

@@ -103,6 +103,19 @@ $(document).ready(function () {
                 $(".fadeup1").css("opacity", "1");
             },
         });
+        var c = anime.timeline({ loop: !1, autoplay: !1 });
+        c.add({
+            targets: ".fadeup2 .letter",
+            translateY: [100, 0],
+            translateZ: 0,
+            opacity: [0, 1],
+            easing: "easeOutQuint",
+            duration: 800,
+            delay: (b, a) => 30 * a,
+            begin() {
+                $(".fadeup2").css("opacity", "1");
+            },
+        });
 
         //on window scroll
         $(window).scroll(function(){
@@ -111,9 +124,24 @@ $(document).ready(function () {
                 b.play();
             }
             //else if fadeup2 is in viewport
-            else if($('.fadeup2').isInViewport()){
+            else if ($(".fadeup2").isInViewport()) {
                 c.play();
-            };
+                $('.careers_chart_legend_item').each(function (i) {
+                    var $item = $(this).find("._8_fundcards");
+                    setTimeout(function(e) { 
+                      $item.click();
+                    }, 100*i);
+                });
+            }
+            else if ($(".chart-timeline").isInViewport()) {
+                $('.chart-timeline-line').click();
+                $('.chart-single-item_animation').each(function (i) {
+                    var $item = $(this);
+                    setTimeout(function() { 
+                      $item.click();
+                    }, 50*i);
+                });
+            }
         });
 
         var g,

@@ -1,12 +1,11 @@
-$(document).ready(function(){
-    ($.fn.isInViewport = function () {
-        var a = $(this).offset().top,
-            c = a + $(this).outerHeight(),
-            b = $(window).scrollTop(),
-            d = b + $(window).height();
-        return c > b && a < d;
-    });
-    
+($.fn.isInViewport = function () {
+    var a = $(this).offset().top,
+        c = a + $(this).outerHeight(),
+        b = $(window).scrollTop(),
+        d = b + $(window).height();
+    return c > b && a < d;
+});
+
     var screenWidth = $(window).width();
     var closedFundsWrapper = $(".past-future_top-content").outerWidth();
     var closedFundsMask = $('.past-future_slider-mask').outerWidth();
@@ -199,20 +198,6 @@ $(document).ready(function(){
             },
         });
 
-        var c = anime.timeline({ loop: !1, autoplay: !1 });
-        c.add({
-            targets: ".fadeup2 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 300 + 30 * a,
-            begin() {
-                $(".fadeup2").css("opacity", "1");
-            },
-        });
-
         var d = anime.timeline({ loop: !1, autoplay: !1 });
         d.add({
             targets: ".fadeup3 .letter",
@@ -254,23 +239,39 @@ $(document).ready(function(){
                 $(".fadeup5").css("opacity", "1");
             },
         });
+        var petitle = anime.timeline({ loop: !1, autoplay: !1 });
+        petitle.add({
+            targets: ".fadeuppe .letter",
+            translateY: [100, 0],
+            translateZ: 0,
+            opacity: [0, 1],
+            easing: "easeOutQuint",
+            duration: 800,
+            delay: (b, a) => 300 + 30 * a,
+            begin() {
+                $(".fadeuppe").css("opacity", "1");
+            },
+        });
           
 
         $(window).scroll(function() {
             if ($(".fadeup1").isInViewport()) {
                 b.play();
             }
-            else if ($(".fadeup2").isInViewport(100)) {
-                c.play();
-            }
-            else if ($(".fadeup3").isInViewport()) {
-                d.play();
-            }
             else if ($(".fadeup4").isInViewport()) {
                 e.play();
+                $('.invest-your-way_single-item').each(function (i) {
+                    var $item = $(this).find("._8_fundcards");
+                    setTimeout(function() { 
+                      $item.click();
+                    }, 100*i);
+                });
             }
             else if ($(".fadeup5").isInViewport()) {
                 fd5.play();
+            }
+            else if ($(".fadeuppe").isInViewport()) {
+                petitle.play();
             }
             else if ($(".partners-logos_img").isInViewport()) {
                 $('.partners-logos_img').each(function (i) {
@@ -280,15 +281,7 @@ $(document).ready(function(){
                     }, 100*i);
                 });
             }
-            else if ($(".invest-your-way_single-item").isInViewport()) {
-                $('.invest-your-way_single-item').each(function (i) {
-                    var $item = $(this).find("._8_fundcards");
-                    setTimeout(function() { 
-                      $item.click();
-                    }, 100*i);
-                });
-            }
-            else if ($(".past-future_slider").isInViewport()) {
+            else if ($(".past-future_slider-part").isInViewport()) {
                 $('.past-future_slider-slide').each(function (i) {
                     var $item = $(this).find("._8_fundcards");
                     setTimeout(function() { 
@@ -296,7 +289,7 @@ $(document).ready(function(){
                     }, 100*i);
                 });
             }
-            else if ($(".alt-single-press_wrap_item").isInViewport()) {
+            else if ($(".media-content").isInViewport()) {
                 $('.alt-single-press_wrap_item').each(function (i) {
                     var $item = $(this).find("._8_fundcards");
                     setTimeout(function() { 
@@ -323,5 +316,3 @@ $(document).ready(function(){
         });
     }
     
-
-});
