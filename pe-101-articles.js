@@ -6,6 +6,7 @@ $(document).ready(function() {
 
     $('p:contains("start-sidebar")').remove();
     $('p:contains("end-sidebar")').remove();
+    
     $(".blog-rich-text").find("h2").each(function() {
         var text = $(this).text();
         $('.glossary-article_navigation').append("<a class='glossary-article_navigation-link'><h3 class='hs7 bottom-margin-0'>" + text + "</h3></a>");

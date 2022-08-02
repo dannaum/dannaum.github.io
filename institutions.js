@@ -1,5 +1,13 @@
 //on page load
 $(document).ready(function(){
+    ($.fn.isInViewport = function () {
+        var a = $(this).offset().top,
+            c = a + $(this).outerHeight(),
+            b = $(window).scrollTop(),
+            d = b + $(window).height();
+        return c > b && a < d;
+    });
+
     /*
     //pastFutureSlider
     var pastFutureSlider = $('.past-future_slider');
@@ -87,5 +95,108 @@ $(document).ready(function(){
         },1000)
        
     });
+
+    if ($(window).width() > 991) {
+
+        for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
+            var c = b.item(a);
+            c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
+        }
+
+        var a = anime.timeline({ loop: !1, autoplay: !1 });
+        a.add({
+            targets: ".fadeup0 .letter",
+            translateY: [100, 0],
+            translateZ: 0,
+            opacity: [0, 1],
+            easing: "easeOutQuint",
+            duration: 800,
+            delay: (b, a) => 30 * a,
+            begin() {
+                $(".fadeup0").css("opacity", "1");
+            },
+        });
+
+        a.play();
+
+        var b = anime.timeline({ loop: !1, autoplay: !1 });
+        b.add({
+            targets: ".fadeup1 .letter",
+            translateY: [100, 0],
+            translateZ: 0,
+            opacity: [0, 1],
+            easing: "easeOutQuint",
+            duration: 800,
+            delay: (b, a) => 300 + 30 * a,
+            begin() {
+                $(".fadeup1").css("opacity", "1");
+            },
+        });
+
+        var c = anime.timeline({ loop: !1, autoplay: !1 });
+        c.add({
+            targets: ".fadeup2 .letter",
+            translateY: [100, 0],
+            translateZ: 0,
+            opacity: [0, 1],
+            easing: "easeOutQuint",
+            duration: 800,
+            delay: (b, a) => 300 + 30 * a,
+            begin() {
+                $(".fadeup2").css("opacity", "1");
+            },
+        });
+
+        var d = anime.timeline({ loop: !1, autoplay: !1 });
+        d.add({
+            targets: ".fadeup3 .letter",
+            translateY: [100, 0],
+            translateZ: 0,
+            opacity: [0, 1],
+            easing: "easeOutQuint",
+            duration: 800,
+            delay: (b, a) => 300 + 30 * a,
+            begin() {
+                $(".fadeup3").css("opacity", "1");
+            },
+        });
+          
+
+        $(window).scroll(function() {
+            if ($(".fadeup1").isInViewport()) {
+                b.play();
+            }
+            else if ($(".fadeup2").isInViewport(100)) {
+                c.play();
+            }
+            else if ($(".fadeup3").isInViewport()) {
+                d.play();
+            }
+            else if ($(".institutional-solutions_grid").isInViewport()) {
+                $('.institutional-solutions_single-card').each(function (i) {
+                    var $item = $(this).find("._8_fundcards");
+                    setTimeout(function() { 
+                      $item.click();
+                    }, 100*i);
+                });
+            }
+            else if ($(".partners-logos_img").isInViewport()) {
+                $('.partners-logos_img').each(function (i) {
+                    var $item = $(this); 
+                    setTimeout(function() { 
+                      $item.click();
+                    }, 100*i);
+                });
+            }
+        });
+
+        var g,
+            f = $(".home-page_hero-visual"),
+            h = f.width(),
+            i = $(window).scrollTop() + $(window).height();
+        $(window).scroll(function () {
+            (g = $(this).scrollTop()), f.width(h + g);
+        });
+    }
 
 });

@@ -1,25 +1,12 @@
 //on page load
 $(document).ready(function(){
+
     ($.fn.isInViewport = function () {
         var a = $(this).offset().top,
             c = a + $(this).outerHeight(),
             b = $(window).scrollTop(),
             d = b + $(window).height();
         return c > b && a < d;
-    });
-    var screenWidth = $(window).width();
-    var sp500Width = $('.direct-invest_graph').outerWidth();
-    var sp500slider = new Dragdealer('home-benefits-drag-tool', {
-        speed: 0.1,
-        requestAnimationFrame: true,
-        horizontal: true,
-        vertical: false,
-        xPrecision: sp500Width,
-        reflow: true,
-        animationCallback: function(x, y) {
-            $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.direct-invest_graph-wrap').css('margin-left', -x * (sp500Width - screenWidth +64));
-        }
     });
 
     if ($(window).width() > 991) {
@@ -42,8 +29,27 @@ $(document).ready(function(){
                 $(".fadeup0").css("opacity", "1");
             },
         });
-
         a.play();
+        var b = anime.timeline({ loop: !1, autoplay: !1 });
+        b.add({
+            targets: ".fadeup1 .letter",
+            translateY: [100, 0],
+            translateZ: 0,
+            opacity: [0, 1],
+            easing: "easeOutQuint",
+            duration: 800,
+            delay: (b, a) => 30 * a,
+            begin() {
+                $(".fadeup1").css("opacity", "1");
+            },
+        });
+        
 
+        $(window).scroll(function() {
+            if ($(".fadeup1").isInViewport()) {
+                b.play();
+            }
+        });
     }
+
 });

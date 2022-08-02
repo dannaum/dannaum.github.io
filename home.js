@@ -110,6 +110,13 @@ $(document).ready(function(){
         $(this).attr('data-testid', 'closed-funds-card-' + parent_index);
     });
 
+    $(".testimonials_slider-slide").eq(0).find(".hs5").addClass("current-testimonial-quote"),
+        $(".testimonials_click").click(function () {
+            $(".hs5").removeClass("current-testimonial-quote");
+            var a = $(".testimonials_slider-nav").find(".w-slider-dot.w-active").index();
+            $(".testimonials_slider-slide").eq(a).find(".hs5").addClass("current-testimonial-quote");
+        });
+
     if ($(window).width() > 991) {
         $(".home-pe-101_cards").eq(1).css("display", "none");
         $(".home-pe-101_cards").eq(2).css("display", "none");
@@ -247,19 +254,6 @@ $(document).ready(function(){
                 $(".fadeup5").css("opacity", "1");
             },
         });
-
-        const isElementXPercentInViewport = function(el, percentVisible) {
-            let
-              rect = el.getBoundingClientRect(),
-              windowHeight = (window.innerHeight || document.documentElement.clientHeight);
-          
-            return !(
-              Math.floor(100 - (((rect.top >= 0 ? 0 : rect.top) / +-rect.height) * 100)) < percentVisible ||
-              Math.floor(100 - ((rect.bottom - windowHeight) / rect.height) * 100) < percentVisible
-            )
-          };
-
-          
           
 
         $(window).scroll(function() {
