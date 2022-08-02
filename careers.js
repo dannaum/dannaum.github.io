@@ -1,20 +1,12 @@
 //on page load
 $(document).ready(function() {
-    $.fn.isInViewport = function() {
-        /*
-        var elementTop = $(this).offset().top;
-        var elementBottom = elementTop + $(this).outerHeight();
-        var viewportTop = $(window).scrollTop();
-        var viewportBottom = viewportTop + $(window).height();
-        return ( elementBottom > viewportTop ) && ( elementTop < viewportBottom - $( this ).height() );
-        */
-
-        var top_of_element = $(this).offset().top;
-        var bottom_of_element = $(this).offset().top + $(this).outerHeight();
-        var bottom_of_screen = $(window).scrollTop() + $(window).innerHeight();
-        var top_of_screen = $(window).scrollTop();
-        return (bottom_of_screen > top_of_element) && (top_of_screen < bottom_of_element)
-    };
+    ($.fn.isInViewport = function () {
+        var a = $(this).offset().top,
+            c = a + $(this).outerHeight(),
+            b = $(window).scrollTop(),
+            d = b + $(window).height();
+        return c > b && a < d;
+    });
     //blue-highlight wrap in span "tool-tip_wrapper"
     $('.blue-highlight').wrap('<span class="tool-tip_wrapper"></span>');
     //get text of highlight class  and save it in array 

@@ -13,13 +13,13 @@ $(document).ready(function() {
     });
     $(".glossary-article_navigation-link").first().addClass("active");
 
-    $.fn.isInViewport = function() {
-        var elementTop = $(this).offset().top;
-        var elementBottom = elementTop + $(this).outerHeight();
-        var viewportTop = $(window).scrollTop();
-        var viewportBottom = viewportTop + $(window).height();
-        return elementBottom > viewportTop && elementTop < viewportBottom;
-    };
+    ($.fn.isInViewport = function () {
+        var a = $(this).offset().top,
+            c = a + $(this).outerHeight(),
+            b = $(window).scrollTop(),
+            d = b + $(window).height();
+        return c > b && a < d;
+    });
     //window on scroll
     $(window).on('scroll', function() {
         $(".blog-rich-text").find("h2").each(function() {
