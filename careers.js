@@ -1,5 +1,4 @@
-//on page load
-$(document).ready(function() {
+
     ($.fn.isInViewport = function () {
         var a = $(this).offset().top,
             c = a + $(this).outerHeight(),
@@ -41,6 +40,7 @@ $(document).ready(function() {
         $(this).find('.tool-tip_single_wrapper').css('display', 'none');
     });
     $('.tool-tips').remove();
+
 
     $(".single-career-grid-wrap-left").click(function () {
         var selfl = $(this);
@@ -198,8 +198,6 @@ $(document).ready(function() {
 
     if ($(window).width() > 991) {
 
-        
-
         for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
             var c = b.item(a);
             c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
@@ -285,18 +283,27 @@ $(document).ready(function() {
                 $(".fadeup5").css("opacity", "1");
             },
         });
+
+        var viewedCareersGraph = false;
         $(window).scroll(function() {
             if ($(".fadeup1").isInViewport()) {
                 b.play();
             }
             else if ($(".fadeup2").isInViewport()) {
                 c.play();
-                $('.careers_chart_legend_item').each(function (i) {
-                    var $item = $(this).find("._8_fundcards");
+                var legendItems = $(".careers_chart-legend").find("._8_fundcards_parent").find("._8_fundcards");
+                $(legendItems).each(function (i) {
+                    var $item = $(this);
                     setTimeout(function(e) { 
                       $item.click();
                     }, 100*i);
                 });
+                if (!viewedCareersGraph) {
+                    const chart = new Chart(ctx, config);
+                    viewedCareersGraph = true;
+                }
+                else{
+                }
             }
             else if ($(".chart-timeline").isInViewport()) {
                 $('.chart-timeline-line').click();
@@ -304,12 +311,29 @@ $(document).ready(function() {
                     var $item = $(this);
                     setTimeout(function() { 
                       $item.click();
-                    }, 50*i);
+                    }, 150*i);
                 });
             }
             else if ($(".careers_values-title").isInViewport()) {
-                d.play();
-                $('.careers_values-content').click();
+                d.play();                
+                $('.single-career-grid-wrap-single').each(function (i) {
+                    var $item = $(this);
+                    var title = $(this).find('.h6');
+                    var par = $(this).find('.paragraph-medium');
+                    setTimeout(function() { 
+                        //title animate opacity 0 to 1 with 500 ms delay
+                        title.delay(500).animate({
+                            opacity: 1
+                        }, 500);
+                        //paragraph animate opacity 0 to 1 with 500 ms delay
+                        par.delay(500).animate({
+                            opacity: 1
+                        }, 500);
+                        $item.animate({
+                            width: '100%'
+                        }, 500);
+                    }, i * 100);
+                });
             }
             else if ($(".fadeup4").isInViewport()) {
                 e.play();
@@ -334,4 +358,3 @@ $(document).ready(function() {
             (g = $(this).scrollTop()), f.width(h + g);
         });
     }
-});

@@ -252,11 +252,59 @@
                 $(".fadeuppe").css("opacity", "1");
             },
         });
+        var petitle = anime.timeline({ loop: !1, autoplay: !1 });
+        petitle.add({
+            targets: ".fadeuppe .letter",
+            translateY: [100, 0],
+            translateZ: 0,
+            opacity: [0, 1],
+            easing: "easeOutQuint",
+            duration: 800,
+            delay: (b, a) => 300 + 30 * a,
+            begin() {
+                $(".fadeuppe").css("opacity", "1");
+            },
+        });
+        var institutionsSectoinTitle = anime.timeline({ loop: !1, autoplay: !1 });
+        institutionsSectoinTitle.add({
+            targets: ".fadeup-institutions-section .letter",
+            translateY: [100, 0],
+            translateZ: 0,
+            opacity: [0, 1],
+            easing: "easeOutQuint",
+            duration: 800,
+            delay: (b, a) => 300 + 30 * a,
+            begin() {
+                $(".fadeup-institutions-section").css("opacity", "1");
+            },
+        });
+        var joinCommunityTitle = anime.timeline({ loop: !1, autoplay: !1 });
+        joinCommunityTitle.add({
+            targets: ".fadeup-join-community-title .letter",
+            translateY: [100, 0],
+            translateZ: 0,
+            opacity: [0, 1],
+            easing: "easeOutQuint",
+            duration: 800,
+            delay: (b, a) => 300 + 30 * a,
+            begin() {
+                $(".fadeup-join-community-title").css("opacity", "1");
+            },
+        });
           
-
+        var viewedSPGraph = false;
         $(window).scroll(function() {
+            
             if ($(".fadeup1").isInViewport()) {
                 b.play();
+            }
+            else if ($('.home-benefits_image-title').isInViewport()) {
+                if (!viewedSPGraph) {
+                    const chart = new Chart(ctx, config);
+                    viewedSPGraph = true;
+                }
+                else if  (viewedSPGraph) {
+                }
             }
             else if ($(".fadeup4").isInViewport()) {
                 e.play();
@@ -273,6 +321,12 @@
             else if ($(".fadeuppe").isInViewport()) {
                 petitle.play();
             }
+            else if ($(".fadeup-institutions-section").isInViewport()) {
+                institutionsSectoinTitle.play();
+            }
+            else if ($(".fadeup-join-community-title").isInViewport()) {
+                joinCommunityTitle.play();
+            }
             else if ($(".partners-logos_img").isInViewport()) {
                 $('.partners-logos_img').each(function (i) {
                     var $item = $(this); 
@@ -281,16 +335,16 @@
                     }, 100*i);
                 });
             }
-            else if ($(".past-future_slider-part").isInViewport()) {
-                $('.past-future_slider-slide').each(function (i) {
+            else if ($(".media-animation_trigger").isInViewport()) {
+                $('.alt-single-press_wrap_item').each(function (i) {
                     var $item = $(this).find("._8_fundcards");
                     setTimeout(function() { 
                       $item.click();
                     }, 100*i);
                 });
             }
-            else if ($(".media-content").isInViewport()) {
-                $('.alt-single-press_wrap_item').each(function (i) {
+            else if ($(".closed-funds_animation-trigger").isInViewport()) {
+                $('.past-future_slider-slide').each(function (i) {
                     var $item = $(this).find("._8_fundcards");
                     setTimeout(function() { 
                       $item.click();
