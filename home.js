@@ -167,7 +167,6 @@
             var c = b.item(a);
             c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
         }
-
         var a = anime.timeline({ loop: !1, autoplay: !1 });
         a.add({
             targets: ".fadeup0 .letter",
@@ -293,8 +292,13 @@
         });
           
         var viewedSPGraph = false;
+        var heroVisualScrollAdd
+        var heroVisual = $(".home-page_hero-visual");
+        var heroVisualWidth = (heroVisual).width();
+        var currentScroll = $(window).scrollTop() + $(window).height();
         $(window).scroll(function() {
-            
+            heroVisualScrollAdd = $(this).scrollTop();
+            heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
             if ($(".fadeup1").isInViewport()) {
                 b.play();
             }
@@ -359,14 +363,6 @@
                     }, 100*i);
                 });
             }
-        });
-
-        var g,
-            f = $(".home-page_hero-visual"),
-            h = f.width(),
-            i = $(window).scrollTop() + $(window).height();
-        $(window).scroll(function () {
-            (g = $(this).scrollTop()), f.width(h + g);
         });
     }
     

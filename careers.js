@@ -285,7 +285,13 @@
         });
 
         var viewedCareersGraph = false;
+        var heroVisualScrollAdd
+        var heroVisual = $(".home-page_hero-visual");
+        var heroVisualWidth = (heroVisual).width();
+        var currentScroll = $(window).scrollTop() + $(window).height();
         $(window).scroll(function() {
+            heroVisualScrollAdd = $(this).scrollTop();
+            heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
             if ($(".fadeup1").isInViewport()) {
                 b.play();
             }
@@ -348,13 +354,5 @@
                     $(this).find("._8_fundcards").trigger("click");
                 });
             }
-        });
-
-        var g,
-            f = $(".home-page_hero-visual"),
-            h = f.width(),
-            i = $(window).scrollTop() + $(window).height();
-        $(window).scroll(function () {
-            (g = $(this).scrollTop()), f.width(h + g);
         });
     }

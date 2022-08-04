@@ -1,5 +1,3 @@
-//on page load
-$(document).ready(function () {
     ($.fn.isInViewport = function () {
         var a = $(this).offset().top,
             c = a + $(this).outerHeight(),
@@ -7,9 +5,8 @@ $(document).ready(function () {
             d = b + $(window).height();
         return c > b && a < d;
     });
-    //blue-highlight wrap in span "tool-tip_wrapper"
+
     $('.blue-highlight').wrap('<span class="tool-tip_wrapper"></span>');
-    //get text of highlight class  and save it in array 
     var highlight = [];
     var tip_single = [];
     var tip_single_elems = []
@@ -20,7 +17,7 @@ $(document).ready(function () {
         tip_single.push($(this).find('.tool-tip_title').text().toLocaleLowerCase().trim());
         tip_single_elems.push($(this))
     });
-    //match highlight and tip_single if matched append tip_single to highlight
+
     for (var i = 0; i < highlight.length; i++) {
         for (var j = 0; j < tip_single.length; j++) {
             if (highlight[i] == tip_single[j]) {
@@ -30,29 +27,21 @@ $(document).ready(function () {
             }
         }
     }
-    //tool-tip_wrapper mouse enter
     $('.tool-tip_wrapper').mouseenter(function () {
-        //this find "tool-tip_single" and set css to display block
         $(this).find('.tool-tip_single_wrapper').css('display', 'block');
     });
     $('.tool-tip_wrapper').mouseleave(function () {
-        //this find "tool-tip_single" and set css to display block
         $(this).find('.tool-tip_single_wrapper').css('display', 'none');
     });
     $('.tool-tips').remove();
-    //careers_chart-legend-single-item eq0 on click
     $(".careers_chart-legend-single-item").click(function () {
         $('.careers_chart-legend-single-item').removeClass('active');
         $(this).toggleClass('active');
     });
-    //on hover element 'chart-single-icon-wrap'
     $('.chart-single-icon-wrap').mouseenter(function () { 
-        //this find "chart-hover-child" and set css display block
         $(this).find(".chart-hover-child").css("display", "block");
     });
-    //chart-single-icon-wrap hover out
     $(".chart-single-icon-wrap").mouseleave(function () {
-        //this find "chart-hover-child" and set css display none
         $(this).find(".chart-hover-child").css("display", "none");
     });
 
@@ -117,13 +106,17 @@ $(document).ready(function () {
             },
         });
 
-        //on window scroll
-        $(window).scroll(function(){
-            //if fadeup1 is in viewport
+        var heroVisualScrollAdd
+        var heroVisual = $(".home-page_hero-visual");
+        var heroVisualWidth = (heroVisual).width();
+        var currentScroll = $(window).scrollTop() + $(window).height();
+        $(window).scroll(function() {
+            heroVisualScrollAdd = $(this).scrollTop();
+            heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
             if($('.fadeup1').isInViewport()){
                 b.play();
             }
-            //else if fadeup2 is in viewport
+
             else if ($(".fadeup2").isInViewport()) {
                 c.play();
                 $('.careers_chart_legend_item').each(function (i) {
@@ -143,13 +136,4 @@ $(document).ready(function () {
                 });
             }
         });
-
-        var g,
-            f = $(".careers_hero-visual"),
-            h = f.width(),
-            i = $(window).scrollTop() + $(window).height();
-        $(window).scroll(function () {
-            (g = $(this).scrollTop()), f.width(h + g);
-        });
     }
-});

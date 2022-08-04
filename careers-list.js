@@ -1,5 +1,3 @@
-//on page load
-$(document).ready(function () {
     //blue-highlight wrap in span "tool-tip_wrapper"
     $('.blue-highlight').wrap('<span class="tool-tip_wrapper"></span>');
     //get text of highlight class  and save it in array 
@@ -209,4 +207,3 @@ $(document).ready(function () {
         });
         a.play();
     }
-});

@@ -1,5 +1,3 @@
-//on page load
-$(document).ready(function(){
     ($.fn.isInViewport = function () {
         var a = $(this).offset().top,
             c = a + $(this).outerHeight(),
@@ -162,7 +160,13 @@ $(document).ready(function(){
         });
           
 
+        var heroVisualScrollAdd
+        var heroVisual = $(".home-page_hero-visual");
+        var heroVisualWidth = (heroVisual).width();
+        var currentScroll = $(window).scrollTop() + $(window).height();
         $(window).scroll(function() {
+            heroVisualScrollAdd = $(this).scrollTop();
+            heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
             if ($(".fadeup1").isInViewport()) {
                 b.play();
             }
@@ -189,14 +193,4 @@ $(document).ready(function(){
                 });
             }
         });
-
-        var g,
-            f = $(".home-page_hero-visual"),
-            h = f.width(),
-            i = $(window).scrollTop() + $(window).height();
-        $(window).scroll(function () {
-            (g = $(this).scrollTop()), f.width(h + g);
-        });
     }
-
-});
