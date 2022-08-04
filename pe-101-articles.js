@@ -1,4 +1,3 @@
-//on page load
 $(document).ready(function() {
     $('p:contains("start-sidebar")').each(function() {
         $(this).nextUntil('p:contains("end-sidebar")').wrapAll('<div class="glossary-article-siderbar" />');
@@ -53,39 +52,17 @@ $(document).ready(function() {
             $(".glossary-article_navigation").css("display", "block");
         }
     });
-    /*
-    else {
-        $('.investing-moonfare_tab-link').on('click', function() {
-            var navbarHeight = $('.navbar_section').outerHeight();
-            var whichSection = $(this).index();
-            //scroll to ".investing-moonfare_tab-content" eq to whichSection - navbarHeight
-            $('html, body').animate({
-                scrollTop: $('.investing-moonfare_tab-content').eq(whichSection).offset().top - (navbarHeight * 2)
-            }, 1000);
-            $('.investing-moonfare_tabs-right').css('display', 'block');
-            $('.investing-moonfare_tab-link-responsive-defalt').css('display', 'flex');
-            $('.investing-moofare_tabs-right-wrapper').css('display', 'block');
-            var tabText = $(this).text();
-            $('.investing-moonfare_tab-link-responsive-defalt-text').text(tabText);
-            //'.investing-moonfare_tab-content' each
-            $('.investing-moonfare_tab-content').each(function() {
-                //if this index == whichSection
-                if ($(this).index() == whichSection) {
-                    //show
-                    $(this).css('display', 'block');
-                }
-                else {
-                    //hide
-                    $(this).css('display', 'none');
-                }
-    
-            });
-        });
-        
-        $('.investing-moonfare_tab-link-responsive-defalt').on('click', function() {
-            $(this).css('display', 'none');
-            $('.investing-moonfare_tab-content').css('display', 'none');
-        });
-    }
-    */
+
+    var schemastring = ['CITATIONS'];
+    schemastring = schemastring.toString();
+    var schemas = schemastring.split(",");
+    schemas = schemas.map(function(schema) {
+        return '"' + schema + '"';
+    });
+    var script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.innerHTML = '{"@context":"http://schema.org","@type":["Article"],"headline":"TITLE","datePublished":"PUBLISHED","dateModified":"MODIFIED","image":"IMAGE ICON","description":"META DESCR","author":[{"@type":"Corporation","name":"Moonfare","@id":"https://corporation.moonfare.com","legalName":"Moonfare GmbH","description":"Moonfare is a technology platform that enables individuals and their advisors to invest in top-tier private equity funds, with minimum investments starting at €50,000.","url":"https://www.moonfare.com","logo":"https://assets-global.website-files.com/5fd0f5501ea5ad3d2b7f9c33/62348259e296cf998613d7c1_darkLogo1643704627890.png","foundingDate":"2016"}],"publisher":{"@type":"Corporation","name":"Moonfare","@id":"https://corporation.moonfare.com","legalName":"Moonfare GmbH","description":"Moonfare is a technology platform that enables individuals and their advisors to invest in top-tier private equity funds, with minimum investments starting at €50,000.","url":"https://www.moonfare.com","logo":"https://assets-global.website-files.com/5fd0f5501ea5ad3d2b7f9c33/62348259e296cf998613d7c1_darkLogo1643704627890.png","foundingDate":"2016"},"citation":["CITATIONS"],"mainEntityOfPage":{"@type":["WebPage"],"@id":"https://www.moonfare.com/pe-101/slug","breadcrumb":{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://www.moonfare.com/pe-101","name":"PE101"}},{"@type":"ListItem","position":2,"item":{"@id":"https://www.moonfare.com/pe-101/slug","name":"TITLE"}}]}}}';
+    document.body.appendChild(script);
+
+
 });
