@@ -41,156 +41,6 @@
     });
     $('.tool-tips').remove();
 
-
-    $(".single-career-grid-wrap-left").click(function () {
-        var careeValueWrap = $(".single-career-grid-wrap-single");
-        var selfl = $(this);
-        var selfanimate = $(this).find('.single-career-expansion-animate');
-            if ($(selfl).hasClass("active-left")) {
-                $(careeValueWrap).animate({
-                    opacity: 0
-                }, 500);
-                $(selfl).find('.h6').animate({
-                    opacity: 0
-                }, 500);
-                $(selfl).find('.paragraph-medium').animate({
-                    opacity: 0
-                }, 500);
-                setTimeout(function () {
-                    selfanimate.animate({
-                        width: '250px',
-                        height: '250px',
-                    }, 500);
-                }, 500);
-                setTimeout(function () {
-                    $(".single-career-grid-wrap-left").removeClass("active-left");
-                    $(".single-career-grid-wrap-right").removeClass("active-right");
-                    $(".single-career-value-p-wrap").css("height", "0rem");
-                }, 500);
-                setTimeout(function() {
-                    $(careeValueWrap).animate({
-                        opacity: 1
-                    }, 500);
-                    $(selfl).find('.h6').animate({
-                        opacity: 1
-                    }, 500);
-                    $(selfl).find('.paragraph-medium').animate({
-                        opacity: 1
-                    }, 500);
-                }, 1000);
-    
-                } else {
-    
-                $(careeValueWrap).animate({
-                    opacity: 0
-                }, 500);
-                $(selfl).find('.h6').animate({
-                    opacity: 0
-                }, 500);
-                $(selfl).find('.paragraph-medium').animate({
-                    opacity: 0
-                }, 500);
-                setTimeout(function() {
-                    $(".single-career-grid-wrap-left").removeClass("active-left");
-                    $(".single-career-grid-wrap-right").removeClass("active-right");
-                    $(".single-career-value-p-wrap").css("height", "0rem");
-                    $(selfl).find(".single-career-value-p-wrap").css("height", "auto");
-                    $(selfl).addClass("active-left");
-                    }, 500);
-                setTimeout(function () {
-                    selfanimate.animate({
-                        width: '100%',
-                        height: '100%',
-                    }, 500);
-                }, 500);
-                setTimeout(function() {
-                    $(careeValueWrap).animate({
-                        opacity: 1
-                    }, 500);
-                    $(selfl).find('.h6').animate({
-                        opacity: 1
-                    }, 500);
-                    $(selfl).find('.paragraph-medium').animate({
-                        opacity: 1
-                    }, 500);
-                }, 1000);
-            }
-    });
-    $(".single-career-grid-wrap-right").click(function () {
-        var careeValueWrap = $(".single-career-grid-wrap-single");
-        var selfl = $(this);
-        var selfanimate = $(this).find('.single-career-expansion-animate');
-            if ($(selfl).hasClass("active-right")) {
-                $(careeValueWrap).animate({
-                    opacity: 0
-                }, 500);
-                $(selfl).find('.h6').animate({
-                    opacity: 0
-                }, 500);
-                $(selfl).find('.paragraph-medium').animate({
-                    opacity: 0
-                }, 500);
-                setTimeout(function () {
-                    selfanimate.animate({
-                        width: '250px',
-                        height: '250px',
-                    }, 500);
-                }, 500);
-                setTimeout(function () {
-                    $(".single-career-grid-wrap-left").removeClass("active-left");
-                    $(".single-career-grid-wrap-right").removeClass("active-right");
-                    $(".single-career-value-p-wrap").css("height", "0rem");
-                }, 500);
-                setTimeout(function() {
-                    $(careeValueWrap).animate({
-                        opacity: 1
-                    }, 500);
-                    $(selfl).find('.h6').animate({
-                        opacity: 1
-                    }, 500);
-                    $(selfl).find('.paragraph-medium').animate({
-                        opacity: 1
-                    }, 500);
-                }, 1000);
-    
-                } else {
-    
-                $(careeValueWrap).animate({
-                    opacity: 0
-                }, 500);
-                $(selfl).find('.h6').animate({
-                    opacity: 0
-                }, 500);
-                $(selfl).find('.paragraph-medium').animate({
-                    opacity: 0
-                }, 500);
-                setTimeout(function() {
-                    $(".single-career-grid-wrap-left").removeClass("active-left");
-                    $(".single-career-grid-wrap-right").removeClass("active-right");
-                    $(".single-career-value-p-wrap").css("height", "0rem");
-                    $(selfl).find(".single-career-value-p-wrap").css("height", "auto");
-                    $(selfl).addClass("active-right");
-                    }, 500);
-                setTimeout(function () {
-                    selfanimate.animate({
-                        width: '100%',
-                        height: '100%',
-                    }, 500);
-                }, 500);
-                setTimeout(function() {
-                    $(careeValueWrap).animate({
-                        opacity: 1
-                    }, 500);
-                    $(selfl).find('.h6').animate({
-                        opacity: 1
-                    }, 500);
-                    $(selfl).find('.paragraph-medium').animate({
-                        opacity: 1
-                    }, 500);
-                }, 1000);
-            }
-    });
-
     $.getJSON(
         "https://boards-api.greenhouse.io/v1/boards/moonfare/departments?render_as=list",
         function (data) {
@@ -405,6 +255,7 @@
         var heroVisual = $(".home-page_hero-visual");
         var heroVisualWidth = (heroVisual).width();
         var currentScroll = $(window).scrollTop() + $(window).height();
+
         $(window).scroll(function() {
             heroVisualScrollAdd = $(this).scrollTop();
             heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
@@ -437,17 +288,7 @@
                 });
             }
             else if ($(".careers_values-title").isInViewport()) {
-                d.play();                
-                setTimeout(function() { 
-                    $('.single-career-expansion-animate').each(function (i) {
-                        var $item = $(this);
-                        var singleCareerExpansionAnimateW = $('.single-career-expansion-animate').parent().outerWidth();
-                        var singleCareerExpansionAnimateH = $('.single-career-expansion-animate').parent().outerHeight();
-                        $item.width(singleCareerExpansionAnimateW);
-                        $item.height(singleCareerExpansionAnimateH);
-                    });
-                }, 1000);
-                
+                d.play();
                 $('.single-career-grid-wrap-single').each(function (i) {
                     var $item = $(this);
                     var title = $(this).find('.h6');
@@ -478,5 +319,154 @@
                     $(this).find("._8_fundcards").trigger("click");
                 });
             }
+        });
+
+        $(".single-career-grid-wrap-left").click(function () {
+            var selfl = $(this);
+            var careeValueWrap = $(".single-career-grid-wrap-single");
+            var selfanimate = $(this).find('.single-career-expansion-animate');
+                if ($(selfl).hasClass("active-left")) {
+                    $(careeValueWrap).animate({
+                        opacity: 0
+                    }, 500);
+                    $(selfl).find('.h6').animate({
+                        opacity: 0
+                    }, 500);
+                    $(selfl).find('.paragraph-medium').animate({
+                        opacity: 0
+                    }, 500);
+                    setTimeout(function () {
+                        selfanimate.animate({
+                            width: '250px',
+                            height: '250px',
+                        }, 500);
+                    }, 500);
+                    setTimeout(function () {
+                        $(".single-career-grid-wrap-left").removeClass("active-left");
+                        $(".single-career-grid-wrap-right").removeClass("active-right");
+                        $(".single-career-value-p-wrap").css("height", "0rem");
+                    }, 500);
+                    setTimeout(function() {
+                        $(careeValueWrap).animate({
+                            opacity: 1
+                        }, 500);
+                        $(selfl).find('.h6').animate({
+                            opacity: 1
+                        }, 500);
+                        $(selfl).find('.paragraph-medium').animate({
+                            opacity: 1
+                        }, 500);
+                    }, 1000);
+        
+                    } else {
+        
+                    $(careeValueWrap).animate({
+                        opacity: 0
+                    }, 500);
+                    $(selfl).find('.h6').animate({
+                        opacity: 0
+                    }, 500);
+                    $(selfl).find('.paragraph-medium').animate({
+                        opacity: 0
+                    }, 500);
+                    setTimeout(function() {
+                        $(".single-career-grid-wrap-left").removeClass("active-left");
+                        $(".single-career-grid-wrap-right").removeClass("active-right");
+                        $(".single-career-value-p-wrap").css("height", "0rem");
+                        $(selfl).find(".single-career-value-p-wrap").css("height", "auto");
+                        $(selfl).addClass("active-left");
+                        }, 500);
+                    setTimeout(function () {
+                        selfanimate.animate({
+                            width: '100%',
+                            height: '100%',
+                        }, 500);
+                    }, 500);
+                    setTimeout(function() {
+                        $(careeValueWrap).animate({
+                            opacity: 1
+                        }, 500);
+                        $(selfl).find('.h6').animate({
+                            opacity: 1
+                        }, 500);
+                        $(selfl).find('.paragraph-medium').animate({
+                            opacity: 1
+                        }, 500);
+                    }, 1000);
+                }
+        });
+        $(".single-career-grid-wrap-right").click(function () {
+            var selfl = $(this);
+            var careeValueWrap = $(".single-career-grid-wrap-single");
+            var selfanimate = $(this).find('.single-career-expansion-animate');
+                if ($(selfl).hasClass("active-right")) {
+                    $(careeValueWrap).animate({
+                        opacity: 0
+                    }, 500);
+                    $(selfl).find('.h6').animate({
+                        opacity: 0
+                    }, 500);
+                    $(selfl).find('.paragraph-medium').animate({
+                        opacity: 0
+                    }, 500);
+                    setTimeout(function () {
+                        selfanimate.animate({
+                            width: '250px',
+                            height: '250px',
+                        }, 500);
+                    }, 500);
+                    setTimeout(function () {
+                        $(".single-career-grid-wrap-left").removeClass("active-left");
+                        $(".single-career-grid-wrap-right").removeClass("active-right");
+                        $(".single-career-value-p-wrap").css("height", "0rem");
+                    }, 500);
+                    setTimeout(function() {
+                        $(careeValueWrap).animate({
+                            opacity: 1
+                        }, 500);
+                        $(selfl).find('.h6').animate({
+                            opacity: 1
+                        }, 500);
+                        $(selfl).find('.paragraph-medium').animate({
+                            opacity: 1
+                        }, 500);
+                    }, 1000);
+        
+                    } else {
+        
+                    $(careeValueWrap).animate({
+                        opacity: 0
+                    }, 500);
+                    $(selfl).find('.h6').animate({
+                        opacity: 0
+                    }, 500);
+                    $(selfl).find('.paragraph-medium').animate({
+                        opacity: 0
+                    }, 500);
+                    setTimeout(function() {
+                        $(".single-career-grid-wrap-left").removeClass("active-left");
+                        $(".single-career-grid-wrap-right").removeClass("active-right");
+                        $(".single-career-value-p-wrap").css("height", "0rem");
+                        $(selfl).find(".single-career-value-p-wrap").css("height", "auto");
+                        $(selfl).addClass("active-right");
+                        }, 500);
+                    setTimeout(function () {
+                        selfanimate.animate({
+                            width: '100%',
+                            height: '100%',
+                        }, 500);
+                    }, 500);
+                    setTimeout(function() {
+                        $(careeValueWrap).animate({
+                            opacity: 1
+                        }, 500);
+                        $(selfl).find('.h6').animate({
+                            opacity: 1
+                        }, 500);
+                        $(selfl).find('.paragraph-medium').animate({
+                            opacity: 1
+                        }, 500);
+                    }, 1000);
+                }
         });
     }
