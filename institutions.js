@@ -172,17 +172,17 @@
             }
             else if ($(".fadeup2").isInViewport(100)) {
                 c.play();
+                setTimeout(function() {
+                    $('.institutional-solutions_single-card').each(function (i) {
+                        var $item = $(this).find("._8_fundcards");
+                        setTimeout(function() { 
+                          $item.click();
+                        }, 100*i);
+                    });
+                }, 500);
             }
             else if ($(".fadeup3").isInViewport()) {
                 d.play();
-            }
-            else if ($(".institutional-solutions_grid").isInViewport()) {
-                $('.institutional-solutions_single-card').each(function (i) {
-                    var $item = $(this).find("._8_fundcards");
-                    setTimeout(function() { 
-                      $item.click();
-                    }, 100*i);
-                });
             }
             else if ($(".partners-logos_img").isInViewport()) {
                 $('.partners-logos_img').each(function (i) {
