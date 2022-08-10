@@ -6,6 +6,8 @@
         return c > b && a < d;
     });
 
+    var screenWidth = $(window).width();
+
     $('.knowledge-center_category-tag').eq(0).addClass('active');
     $('.knowledge-center_category-tag').on('click', function(){
         $(this).siblings('.knowledge-center_category-tag').removeClass('active');
@@ -63,80 +65,106 @@
         });
     });
 
-    if ($(window).width() > 991) {
-
-        for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
-            var c = b.item(a);
-            c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
-        }
-
-        var a = anime.timeline({ loop: !1, autoplay: !1 });
-        a.add({
-            targets: ".fadeup0 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 30 * a,
-            begin() {
-                $(".fadeup0").css("opacity", "1");
-            },
-        });
-        a.play();
-        var b = anime.timeline({ loop: !1, autoplay: !1 });
-        b.add({
-            targets: ".fadeup1 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 30 * a,
-            begin() {
-                $(".fadeup1").css("opacity", "1");
-            },
-        });
-        var c = anime.timeline({ loop: !1, autoplay: !1 });
-        c.add({
-            targets: ".fadeup2 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 30 * a,
-            begin() {
-                $(".fadeup2").css("opacity", "1");
-            },
-        });
-
-        var pressFilters = $('.knowledge-center_category-tags').find('._9_tag_animation');
-        console.log(pressFilters);
-        $(pressFilters).each(function (i) {
-            var $item = $(this);
-            setTimeout(function() { 
-                $item.click();
-            }, 100*i);
-        });
-
-        var pressFiles = $('.resource-card-wrap').find('._9_tag_animation');
-
-        //on window scroll
-        $(window).scroll(function(){
-            //if fadeup1 is in viewport
-            if($('.fadeup1').isInViewport()){
-                b.play();
-            }
-            //else if fadeup2 is in viewport
-            else if($('.fadeup2').isInViewport()){
-                c.play();
-                $(pressFiles).each(function (i) {
-                    var $item = $(this);
-                    setTimeout(function() { 
-                        $item.click();
-                    }, 100*i);
-                });
-            };
-        });
+    for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
+        var c = b.item(a);
+        c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
     }
+
+    var aPlayed = false;
+
+    function animationsRender()    {
+        if ($(window).width() > 991) {
+
+            
+
+            var a = anime.timeline({ loop: !1, autoplay: !1 });
+            a.add({
+                targets: ".fadeup0 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 30 * a,
+                begin() {
+                    $(".fadeup0").css("opacity", "1");
+                },
+            });
+
+            $(document).ready(function () {
+                a.play();
+                $(window).focus(function () {
+                    if (!aPlayed) {
+                        a.restart();
+                        aPlayed = true;
+                    }
+                    else {
+                    }
+                });
+            });
+            var b = anime.timeline({ loop: !1, autoplay: !1 });
+            b.add({
+                targets: ".fadeup1 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 30 * a,
+                begin() {
+                    $(".fadeup1").css("opacity", "1");
+                },
+            });
+            var c = anime.timeline({ loop: !1, autoplay: !1 });
+            c.add({
+                targets: ".fadeup2 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 30 * a,
+                begin() {
+                    $(".fadeup2").css("opacity", "1");
+                },
+            });
+
+            var pressFilters = $('.knowledge-center_category-tags').find('._9_tag_animation');
+            $(pressFilters).each(function (i) {
+                var $item = $(this);
+                setTimeout(function() { 
+                    $item.click();
+                }, 100*i);
+            });
+
+            var pressFiles = $('.resource-card-wrap').find('._9_tag_animation');
+
+            //on window scroll
+            $(window).scroll(function(){
+                //if fadeup1 is in viewport
+                if($('.fadeup1').isInViewport()){
+                    b.play();
+                }
+                //else if fadeup2 is in viewport
+                else if($('.fadeup2').isInViewport()){
+                    c.play();
+                    $(pressFiles).each(function (i) {
+                        var $item = $(this);
+                        setTimeout(function() { 
+                            $item.click();
+                        }, 100*i);
+                    });
+                };
+            });
+        }
+    }
+
+    animationsRender();
+
+    $(window).resize(function() {
+        var wwidth = $(window).width();
+        if(screenWidth!==wwidth){
+             screenWidth = $(window).width();
+             animationsRender();
+        }
+    });

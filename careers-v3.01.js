@@ -166,7 +166,7 @@
         var c = b.item(a);
         c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
     }
-
+    var aPlayed = false;
     function animationsRender() {
 
         if ($(window).width() > 991) {

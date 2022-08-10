@@ -64,10 +64,6 @@
         }
     });
 
-    if(instSolutions > screenWidth){
-        $('.institutional_solutions_drag-element').css('display', 'block');
-    }
-
     $('input[type=submit]').click(function() {
         var req = $('.required-form-field');
         $('.form-field').removeClass('invalid-form-field');
@@ -94,103 +90,136 @@
        
     });
 
-    if ($(window).width() > 991) {
+    for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
+        var c = b.item(a);
+        c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
+    }
 
-        for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
-            var c = b.item(a);
-            c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
-        }
+    var aPlayed = false;
 
-        var a = anime.timeline({ loop: !1, autoplay: !1 });
-        a.add({
-            targets: ".fadeup0 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 30 * a,
-            begin() {
-                $(".fadeup0").css("opacity", "1");
-            },
-        });
+    function animationsRender() {
+        
+        if ($(window).width() > 991) {
 
-        a.play();
+            var a = anime.timeline({ loop: !1, autoplay: !1 });
+            a.add({
+                targets: ".fadeup0 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 30 * a,
+                begin() {
+                    $(".fadeup0").css("opacity", "1");
+                },
+            });
 
-        var b = anime.timeline({ loop: !1, autoplay: !1 });
-        b.add({
-            targets: ".fadeup1 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 300 + 30 * a,
-            begin() {
-                $(".fadeup1").css("opacity", "1");
-            },
-        });
+            $(document).ready(function () {
+                a.play();
+                $(window).focus(function() {
+                    if (!aPlayed) {
+                        a.restart();
+                        aPlayed = true;
+                    }
+                    else {
+                        
+                    }
+                });
+            });
 
-        var c = anime.timeline({ loop: !1, autoplay: !1 });
-        c.add({
-            targets: ".fadeup2 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 300 + 30 * a,
-            begin() {
-                $(".fadeup2").css("opacity", "1");
-            },
-        });
+            var b = anime.timeline({ loop: !1, autoplay: !1 });
+            b.add({
+                targets: ".fadeup1 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 300 + 30 * a,
+                begin() {
+                    $(".fadeup1").css("opacity", "1");
+                },
+            });
 
-        var d = anime.timeline({ loop: !1, autoplay: !1 });
-        d.add({
-            targets: ".fadeup3 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 300 + 30 * a,
-            begin() {
-                $(".fadeup3").css("opacity", "1");
-            },
-        });
-          
+            var c = anime.timeline({ loop: !1, autoplay: !1 });
+            c.add({
+                targets: ".fadeup2 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 300 + 30 * a,
+                begin() {
+                    $(".fadeup2").css("opacity", "1");
+                },
+            });
 
-        var heroVisualScrollAdd
-        var heroVisual = $(".home-page_hero-visual");
-        var heroVisualWidth = (heroVisual).width();
-        var currentScroll = $(window).scrollTop() + $(window).height();
-        $(window).scroll(function() {
-            heroVisualScrollAdd = $(this).scrollTop();
-            heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
-            if ($(".fadeup1").isInViewport()) {
-                b.play();
-            }
-            else if ($(".fadeup2").isInViewport(100)) {
-                c.play();
-                setTimeout(function() {
-                    $('.institutional-solutions_single-card').each(function (i) {
-                        var $item = $(this).find("._8_fundcards");
+            var d = anime.timeline({ loop: !1, autoplay: !1 });
+            d.add({
+                targets: ".fadeup3 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 300 + 30 * a,
+                begin() {
+                    $(".fadeup3").css("opacity", "1");
+                },
+            });
+            
+
+            var heroVisualScrollAdd
+            var heroVisual = $(".home-page_hero-visual");
+            var heroVisualWidth = (heroVisual).width();
+            var currentScroll = $(window).scrollTop() + $(window).height();
+            $(window).scroll(function() {
+                heroVisualScrollAdd = $(this).scrollTop();
+                heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
+                if ($(".fadeup1").isInViewport()) {
+                    b.play();
+                }
+                else if ($(".fadeup2").isInViewport(100)) {
+                    c.play();
+                    setTimeout(function() {
+                        $('.institutional-solutions_single-card').each(function (i) {
+                            var $item = $(this).find("._8_fundcards");
+                            setTimeout(function() { 
+                            $item.click();
+                            }, 100*i);
+                        });
+                    }, 500);
+                }
+                else if ($(".fadeup3").isInViewport()) {
+                    d.play();
+                }
+                else if ($(".partners-logos_img").isInViewport()) {
+                    $('.partners-logos_img').each(function (i) {
+                        var $item = $(this); 
                         setTimeout(function() { 
-                          $item.click();
+                        $item.click();
                         }, 100*i);
                     });
-                }, 500);
+                }
+            });
+        }
+    }
+
+    animationsRender();
+        function dragDetector() {
+            if(instSolutions > screenWidth){
+                $('.institutional_solutions_drag-element').css('display', 'block');
             }
-            else if ($(".fadeup3").isInViewport()) {
-                d.play();
-            }
-            else if ($(".partners-logos_img").isInViewport()) {
-                $('.partners-logos_img').each(function (i) {
-                    var $item = $(this); 
-                    setTimeout(function() { 
-                      $item.click();
-                    }, 100*i);
-                });
+        }
+        dragDetector();
+
+        $(window).resize(function() {
+            var wwidth = $(window).width();
+            if(screenWidth!==wwidth){
+                 screenWidth = $(window).width();
+                 animationsRender();
+                 dragDetector();
             }
         });
-    }

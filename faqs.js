@@ -1,5 +1,4 @@
-//on page load
-$(document).ready(function(){
+
     //on click of knowledge-center_category-tag html to lowercase in var
     $('.knowledge-center_category-tag').on('click', function(){
         var tag = $(this).text().toLowerCase();
@@ -25,5 +24,3 @@ $(document).ready(function(){
             });
         }
     });
-
-});
