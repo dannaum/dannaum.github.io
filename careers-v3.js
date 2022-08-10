@@ -162,168 +162,200 @@
 
     //ANIMATIONS START
 
-    if ($(window).width() > 991) {
+    for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
+        var c = b.item(a);
+        c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
+    }
 
-        for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
-            var c = b.item(a);
-            c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
-        }
+    function animationsRender() {
 
-        var a = anime.timeline({ loop: !1, autoplay: !1 });
-        a.add({
-            targets: ".fadeup0 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 30 * a,
-            begin() {
-                $(".fadeup0").css("opacity", "1");
-            },
-        });
-        a.play();        
-        
-        var b = anime.timeline({ loop: !1, autoplay: !1 });
-        b.add({
-            targets: ".fadeup1 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 300 + 30 * a,
-            begin() {
-                $(".fadeup1").css("opacity", "1");
-            },
-        });
-        var c = anime.timeline({ loop: !1, autoplay: !1 });
-        c.add({
-            targets: ".fadeup2 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 300 + 30 * a,
-            begin() {
-                $(".fadeup2").css("opacity", "1");
-            },
-        });
-        var d = anime.timeline({ loop: !1, autoplay: !1 });
-        d.add({
-            targets: ".fadeup3 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 300 + 30 * a,
-            begin() {
-                $(".fadeup3").css("opacity", "1");
-            },
-        });
-        var e = anime.timeline({ loop: !1, autoplay: !1 });
-        e.add({
-            targets: ".fadeup4 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 300 + 30 * a,
-            begin() {
-                $(".fadeup4").css("opacity", "1");
-            },
-        });
-        var fas = anime.timeline({ loop: !1, autoplay: !1 });
-        fas.add({
-            targets: ".fadeup5 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 300 + 30 * a,
-            begin() {
-                $(".fadeup5").css("opacity", "1");
-            },
-        });
+        if ($(window).width() > 991) {
 
-        var viewedCareersGraph = false;
-        var heroVisualScrollAdd
-        var heroVisual = $(".home-page_hero-visual");
-        var heroVisualWidth = (heroVisual).width();
-        var currentScroll = $(window).scrollTop() + $(window).height();
-        var viewedCareerValues = false;
-
-        $(window).scroll(function() {
-            heroVisualScrollAdd = $(this).scrollTop();
-            heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
-            if ($(".fadeup1").isInViewport()) {
-                b.play();
-            }
-            else if ($(".fadeup2").isInViewport()) {
-                c.play();
-                var legendItems = $(".careers_chart-legend").find("._8_fundcards_parent").find("._8_fundcards");
-                $(legendItems).each(function (i) {
-                    var $item = $(this);
-                    setTimeout(function(e) { 
-                      $item.click();
-                    }, 100*i);
+            var a = anime.timeline({ loop: !1, autoplay: !1 });
+            a.add({
+                targets: ".fadeup0 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 30 * a,
+                begin() {
+                    $(".fadeup0").css("opacity", "1");
+                },
+            });
+            $(document).ready(function () {
+                a.play();
+                $(window).focus(function() {
+                    if (!aPlayed) {
+                        a.restart();
+                        aPlayed = true;
+                    }
+                    else {
+                        
+                    }
                 });
-                if (!viewedCareersGraph) {
-                    const chart = new Chart(ctx, config);
-                    viewedCareersGraph = true;
+            });
+            
+            var b = anime.timeline({ loop: !1, autoplay: !1 });
+            b.add({
+                targets: ".fadeup1 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 300 + 30 * a,
+                begin() {
+                    $(".fadeup1").css("opacity", "1");
+                },
+            });
+            var c = anime.timeline({ loop: !1, autoplay: !1 });
+            c.add({
+                targets: ".fadeup2 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 300 + 30 * a,
+                begin() {
+                    $(".fadeup2").css("opacity", "1");
+                },
+            });
+            var d = anime.timeline({ loop: !1, autoplay: !1 });
+            d.add({
+                targets: ".fadeup3 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 300 + 30 * a,
+                begin() {
+                    $(".fadeup3").css("opacity", "1");
+                },
+            });
+            var e = anime.timeline({ loop: !1, autoplay: !1 });
+            e.add({
+                targets: ".fadeup4 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 300 + 30 * a,
+                begin() {
+                    $(".fadeup4").css("opacity", "1");
+                },
+            });
+            var fas = anime.timeline({ loop: !1, autoplay: !1 });
+            fas.add({
+                targets: ".fadeup5 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 300 + 30 * a,
+                begin() {
+                    $(".fadeup5").css("opacity", "1");
+                },
+            });
+
+            var viewedCareersGraph = false;
+            var heroVisualScrollAdd
+            var heroVisual = $(".home-page_hero-visual");
+            var heroVisualWidth = (heroVisual).width();
+            var currentScroll = $(window).scrollTop() + $(window).height();
+            var viewedCareerValues = false;
+
+            $(window).scroll(function() {
+                heroVisualScrollAdd = $(this).scrollTop();
+                heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
+                if ($(".fadeup1").isInViewport()) {
+                    b.play();
                 }
-                else{
-                }
-            }
-            else if ($(".chart-timeline").isInViewport()) {
-                $('.chart-timeline-line').click();
-                $('.chart-single-item_animation').each(function (i) {
-                    var $item = $(this);
-                    setTimeout(function() { 
-                      $item.click();
-                    }, 150*i);
-                });
-            }
-            else if ($(".careers_values-title").isInViewport()) {
-                d.play();
-                if (!viewedCareerValues) {
-                    $('.single-career-grid-wrap-single').each(function (i) {
+                else if ($(".fadeup2").isInViewport()) {
+                    c.play();
+                    var legendItems = $(".careers_chart-legend").find("._8_fundcards_parent").find("._8_fundcards");
+                    $(legendItems).each(function (i) {
                         var $item = $(this);
-                        var title = $(this).find('.h6');
-                        var par = $(this).find('.paragraph-medium');
-                        setTimeout(function() { 
-                            title.delay(500).animate({
-                                opacity: 1
-                            }, 500);
-                            par.delay(500).animate({
-                                opacity: 1
-                            }, 500);
-                            $item.animate({
-                                width: '100%'
-                            }, 500);
-                        }, i * 100);
+                        setTimeout(function(e) { 
+                        $item.click();
+                        }, 100*i);
                     });
-                    viewedCareerValues = true;
+                    if (!viewedCareersGraph) {
+                        const chart = new Chart(ctx, config);
+                        viewedCareersGraph = true;
+                    }
+                    else{
+                    }
                 }
-                else{
+                else if ($(".chart-timeline").isInViewport()) {
+                    $('.chart-timeline-line').click();
+                    $('.chart-single-item_animation').each(function (i) {
+                        var $item = $(this);
+                        setTimeout(function() { 
+                        $item.click();
+                        }, 150*i);
+                    });
                 }
+                else if ($(".careers_values-title").isInViewport()) {
+                    d.play();
+                    if (!viewedCareerValues) {
+                        $('.single-career-grid-wrap-single').each(function (i) {
+                            var $item = $(this);
+                            var title = $(this).find('.h6');
+                            var par = $(this).find('.paragraph-medium');
+                            setTimeout(function() { 
+                                title.delay(500).animate({
+                                    opacity: 1
+                                }, 500);
+                                par.delay(500).animate({
+                                    opacity: 1
+                                }, 500);
+                                $item.animate({
+                                    width: '100%'
+                                }, 500);
+                            }, i * 100);
+                        });
+                        viewedCareerValues = true;
+                    }
+                    else{
+                    }
+                }
+                else if ($(".fadeup4").isInViewport()) {
+                    e.play();
+                }
+                else if ($(".fadeup5").isInViewport()) {
+                    fas.play();
+                }
+                else if ($(".positions_section").isInViewport()) {
+                    //for each ".positions_grid-single-job"
+                    $('.positions_grid-single-job').each(function (i) {
+                        //this find "._8_fundcards" and trigger click
+                        $(this).find("._8_fundcards").trigger("click");
+                    });
+                }
+            });
+        }
+    }
+
+        animationsRender();
+        function dragDetector() {
+            if(timelineSlide < chartSlider){
+                $('.careers_chart-drag-element').css('display', 'block');
             }
-            else if ($(".fadeup4").isInViewport()) {
-                e.play();
-            }
-            else if ($(".fadeup5").isInViewport()) {
-                fas.play();
-            }
-            else if ($(".positions_section").isInViewport()) {
-                //for each ".positions_grid-single-job"
-                $('.positions_grid-single-job').each(function (i) {
-                    //this find "._8_fundcards" and trigger click
-                    $(this).find("._8_fundcards").trigger("click");
-                });
+        }
+        dragDetector();
+
+        $(window).resize(function() {
+            var wwidth = $(window).width();
+            if(screenWidth!==wwidth){
+                 screenWidth = $(window).width();
+                 animationsRender();
+                 dragDetector();
             }
         });
 
@@ -475,4 +507,3 @@
                     }, 1000);
                 }
         });
-    }
