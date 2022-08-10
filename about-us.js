@@ -110,6 +110,7 @@
         var heroVisual = $(".home-page_hero-visual");
         var heroVisualWidth = (heroVisual).width();
         var currentScroll = $(window).scrollTop() + $(window).height();
+        var viewedCareersGraph = false;
         $(window).scroll(function() {
             heroVisualScrollAdd = $(this).scrollTop();
             heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
@@ -119,12 +120,19 @@
 
             else if ($(".fadeup2").isInViewport()) {
                 c.play();
-                $('.careers_chart_legend_item').each(function (i) {
-                    var $item = $(this).find("._8_fundcards");
+                var legendItems = $(".careers_chart-legend").find("._8_fundcards_parent").find("._8_fundcards");
+                $(legendItems).each(function (i) {
+                    var $item = $(this);
                     setTimeout(function(e) { 
                       $item.click();
                     }, 100*i);
                 });
+                if (!viewedCareersGraph) {
+                    const chart = new Chart(ctx, config);
+                    viewedCareersGraph = true;
+                }
+                else{
+                }
             }
             else if ($(".chart-timeline").isInViewport()) {
                 $('.chart-timeline-line').click();

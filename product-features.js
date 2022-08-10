@@ -1,5 +1,11 @@
-//on page load
-$(document).ready(function () {
+    ($.fn.isInViewport = function () {
+        var a = $(this).offset().top,
+            c = a + $(this).outerHeight(),
+            b = $(window).scrollTop(),
+            d = b + $(window).height();
+        return c > b && a < d;
+    });
+
     $('.product-features_slide-nav-number').click(function() {  
         var index = $(this).index();
         $(this).siblings().removeClass('active');
@@ -49,4 +55,39 @@ $(document).ready(function () {
             }
         });
     });
-});
+
+    if ($(window).width() > 991) {
+
+        for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
+            var c = b.item(a);
+            c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
+        }
+        var a = anime.timeline({ loop: !1, autoplay: !1 });
+        a.add({
+            targets: ".fadeup0 .letter",
+            translateY: [100, 0],
+            translateZ: 0,
+            opacity: [0, 1],
+            easing: "easeOutQuint",
+            duration: 800,
+            delay: (b, a) => 30 * a,
+            begin() {
+                $(".fadeup0").css("opacity", "1");
+            },
+        });
+
+        a.play();
+
+        $(window).scroll(function () {
+            if ($(".resouces-grid-right").isInViewport()) {
+                setTimeout(function() {
+                    $('.resources-right-grid_item').each(function (i) {
+                        var $item = $(this).find("._8_fundcards");
+                        setTimeout(function() { 
+                        $item.click();
+                        }, 100*i);
+                    });
+                }, 500);
+            }
+        });
+    }

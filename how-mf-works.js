@@ -6,6 +6,32 @@
         return c > b && a < d;
     });
 
+    //video player start
+    var playButton = $('#play-video');
+    var video = $('#video-player').get(0);
+
+    $(document).on('click', '#play-video, #video-player', function (e) {
+        if (video.paused === false) {
+            video.pause();
+        } else {
+            playButton.css('display', 'none');
+            video.play();
+            video.setAttribute('controls', 'controls');
+        }
+        return false;
+    });
+
+    $(document).on('click', '#home-page-hero-section, .how-it-works_hero-section', function (e) {
+        if (video.paused === false) {
+            video.pause();
+            video.setAttribute('controls', 'controls');
+        } else {
+        }
+        return false;
+    });
+
+    //video player end
+
     if ($(window).width() > 991) {
 
         for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {

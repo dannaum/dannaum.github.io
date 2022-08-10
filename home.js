@@ -211,19 +211,6 @@
             },
         });
 
-        var e = anime.timeline({ loop: !1, autoplay: !1 });
-        e.add({
-            targets: ".fadeup4 .letter",
-            translateY: [100, 0],
-            translateZ: 0,
-            opacity: [0, 1],
-            easing: "easeOutQuint",
-            duration: 800,
-            delay: (b, a) => 300 + 30 * a,
-            begin() {
-                $(".fadeup4").css("opacity", "1");
-            },
-        });
 
         var fd5 = anime.timeline({ loop: !1, autoplay: !1 });
         fd5.add({
@@ -310,17 +297,17 @@
                 else if  (viewedSPGraph) {
                 }
             }
-            else if ($(".fadeup4").isInViewport()) {
-                e.play();
-                $('.invest-your-way_single-item').each(function (i) {
-                    var $item = $(this).find("._8_fundcards");
-                    setTimeout(function() { 
-                      $item.click();
-                    }, 100*i);
-                });
-            }
             else if ($(".fadeup5").isInViewport()) {
                 fd5.play();
+                //timeout 500 ms
+                setTimeout(function() {
+                    $('.past-future_slider-slide').each(function (i) {
+                        var $item = $(this).find("._8_fundcards");
+                        setTimeout(function() { 
+                        $item.click();
+                        }, 100*i);
+                    });
+                }, 500);
             }
             else if ($(".fadeuppe").isInViewport()) {
                 petitle.play();
@@ -339,29 +326,15 @@
                     }, 100*i);
                 });
             }
-            else if ($(".media-animation_trigger").isInViewport()) {
-                $('.alt-single-press_wrap_item').each(function (i) {
-                    var $item = $(this).find("._8_fundcards");
-                    setTimeout(function() { 
-                      $item.click();
-                    }, 100*i);
-                });
-            }
-            else if ($(".closed-funds_animation-trigger").isInViewport()) {
-                $('.past-future_slider-slide').each(function (i) {
-                    var $item = $(this).find("._8_fundcards");
-                    setTimeout(function() { 
-                      $item.click();
-                    }, 100*i);
-                });
-            }
-            else if ($(".resouces-section").isInViewport()) {
-                $('.resources-right-grid_item').each(function (i) {
-                    var $item = $(this).find("._8_fundcards");
-                    setTimeout(function() { 
-                      $item.click();
-                    }, 100*i);
-                });
+            else if ($(".resouces-grid-right").isInViewport()) {
+                setTimeout(function() {
+                    $('.resources-right-grid_item').each(function (i) {
+                        var $item = $(this).find("._8_fundcards");
+                        setTimeout(function() { 
+                        $item.click();
+                        }, 100*i);
+                    });
+                }, 500);
             }
         });
     }
