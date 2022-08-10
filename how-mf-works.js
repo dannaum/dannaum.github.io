@@ -108,6 +108,5 @@
             if(screenWidth!==wwidth){
                  screenWidth = $(window).width();
                  animationsRender();
-                 dragDetector();
             }
         });

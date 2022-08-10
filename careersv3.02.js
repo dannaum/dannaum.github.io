@@ -154,12 +154,6 @@
         $(this).find(".hiring-steps_dt").trigger("click");
     });
 
-    //hiring-steps_dl on click
-    $(".hiring-steps_dl").click(function () {
-        //this parent hiring-steps_dt trigger click
-        $(this).closest(".hiring-steps_dt").trigger("click");
-    });
-
     //ANIMATIONS START
 
     for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {

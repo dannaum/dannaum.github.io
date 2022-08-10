@@ -35,13 +35,13 @@
        
     });
     var aPlayed = false;
+    for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
+        var c = b.item(a);
+        c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
+    }
+
     function animationsRender() {
         if ($(window).width() > 991) {
-
-            for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
-                var c = b.item(a);
-                c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
-            }
 
             var a = anime.timeline({ loop: !1, autoplay: !1 });
             a.add({
