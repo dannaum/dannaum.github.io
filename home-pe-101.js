@@ -1,4 +1,3 @@
-
 if ($(window).width() > 991) {
         $(".home-pe-101_wrappers").eq(1).css("display", "none");
         $(".home-pe-101_wrappers").eq(2).css("display", "none");

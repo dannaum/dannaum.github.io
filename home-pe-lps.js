@@ -55,22 +55,6 @@
         }
     });
 
-    $('.book-demo').on('click', function(){
-        //popup_main animate opacity from 0 to 100
-        $('.popup_main').animate({opacity: 1}, 500).toggle();
-        $('body').css('overflow', 'hidden');
-    });
-    //on click of popup_close-button
-    $('.popup_close-button').on('click', function(){
-        //popup_main animate opacity from 100 to 0
-        $('.popup_main').animate({opacity: 0}, 500);
-        //after 500ms toggle popup_main
-        setTimeout(function(){
-            $('.popup_main').toggle();
-        }, 500);
-        $('body').css('overflow', 'auto');
-    });
-
 
     $('.alt-single-press_wrap').each(function() {
         var parent_index = $(this).parent().index();
@@ -88,55 +72,6 @@
             var a = $(".testimonials_slider-nav").find(".w-slider-dot.w-active").index();
             $(".testimonials_slider-slide").eq(a).find(".hs5").addClass("current-testimonial-quote");
         });
-
-        if ($(window).width() > 991) {
-            $(".home-pe-101_wrappers").eq(1).css("display", "none");
-            $(".home-pe-101_wrappers").eq(2).css("display", "none");
-                $(".home-pe-101_selector").hover(function() {
-                    $(this).siblings().removeClass("active");
-                    $(this).addClass("active");
-                    $(".home-pe-101_selector").find('.paragraph-small-copy').css("opacity", "0");
-                    $(this).find('.paragraph-small-copy').css("opacity", "1");
-                    var index = $(this).index();
-                    $(".home-pe-101_wrappers").css("display", "none");
-                    $(".home-pe-101_wrappers").eq(index).css("display", "block");
-                });
-        }
-        else {
-            var htmlCards = $(".home-pe-101_wrappers").eq(0).html();
-            var htmlCards1 = $(".home-pe-101_wrappers").eq(1).html();
-            var htmlCards2 = $(".home-pe-101_wrappers").eq(2).html();
-            $(".home-pe-101_wrappers").remove();
-            $(".home-pe-101_selector").eq(0).after('<div class="home-pe-101_wrappers">'+ htmlCards +'</div>');
-            $(".home-pe-101_selector").eq(1).after('<div class="home-pe-101_wrappers hidden-div">'+ htmlCards1 +'</div>');
-            $(".home-pe-101_selector").eq(2).after('<div class="home-pe-101_wrappers hidden-div">'+ htmlCards2 +'</div>');
-    
-            $(".home-pe-101_selector").click(function() {
-                if ($(this).hasClass("active")) {
-                    $('.home-pe-101_selector').removeClass("active");
-                    $(".home-pe-101_wrappers").css("display", "none");
-                    $(".home-pe-101_selector").find('.paragraph-small-copy').css("opacity", "0");
-                }
-                else {
-                    $(".home-pe-101_selector").find('.paragraph-small-copy').css("opacity", "0");
-                    $('.home-pe-101_selector').removeClass("active");
-                    $(this).addClass("active");
-                    $(this).find('.paragraph-small-copy').css("opacity", "1");
-                    var index = $(this).index('.home-pe-101_selector');
-                    $(".home-pe-101_wrappers").css("display", "none");
-                    $(".home-pe-101_wrappers").each(function() {
-                        var index1 = $(this).index('.home-pe-101_wrappers');
-                        if (index1 == index) {
-                            $(this).css("display", "block");
-                        }
-                        else {
-                            $(this).css("display", "none");
-                        }
-                    });
-                }
-            });
-            $(".home-pe-101_wrappers").eq(0).css("display", "block");
-        }
 
     for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
         var c = b.item(a);
@@ -185,20 +120,7 @@
                     $(".fadeup1").css("opacity", "1");
                 },
             });
-    
-            var d = anime.timeline({ loop: !1, autoplay: !1 });
-            d.add({
-                targets: ".fadeup3 .letter",
-                translateY: [100, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                easing: "easeOutQuint",
-                duration: 800,
-                delay: (b, a) => 300 + 30 * a,
-                begin() {
-                    $(".fadeup3").css("opacity", "1");
-                },
-            });
+
     
     
             var fd5 = anime.timeline({ loop: !1, autoplay: !1 });
@@ -212,45 +134,6 @@
                 delay: (b, a) => 300 + 30 * a,
                 begin() {
                     $(".fadeup5").css("opacity", "1");
-                },
-            });
-            var petitle = anime.timeline({ loop: !1, autoplay: !1 });
-            petitle.add({
-                targets: ".fadeuppe .letter",
-                translateY: [100, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                easing: "easeOutQuint",
-                duration: 800,
-                delay: (b, a) => 300 + 30 * a,
-                begin() {
-                    $(".fadeuppe").css("opacity", "1");
-                },
-            });
-            var institutionsSectoinTitle = anime.timeline({ loop: !1, autoplay: !1 });
-            institutionsSectoinTitle.add({
-                targets: ".fadeup-institutions-section .letter",
-                translateY: [100, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                easing: "easeOutQuint",
-                duration: 800,
-                delay: (b, a) => 300 + 30 * a,
-                begin() {
-                    $(".fadeup-institutions-section").css("opacity", "1");
-                },
-            });
-            var joinCommunityTitle = anime.timeline({ loop: !1, autoplay: !1 });
-            joinCommunityTitle.add({
-                targets: ".fadeup-join-community-title .letter",
-                translateY: [100, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                easing: "easeOutQuint",
-                duration: 800,
-                delay: (b, a) => 300 + 30 * a,
-                begin() {
-                    $(".fadeup-join-community-title").css("opacity", "1");
                 },
             });
               
@@ -285,15 +168,6 @@
                         });
                     }, 500);
                 }
-                else if ($(".fadeuppe").isInViewport()) {
-                    petitle.play();
-                }
-                else if ($(".fadeup-institutions-section").isInViewport()) {
-                    institutionsSectoinTitle.play();
-                }
-                else if ($(".fadeup-join-community-title").isInViewport()) {
-                    joinCommunityTitle.play();
-                }
                 else if ($(".partners-logos_img").isInViewport()) {
                     $('.partners-logos_img').each(function (i) {
                         var $item = $(this); 
@@ -301,16 +175,6 @@
                           $item.click();
                         }, 100*i);
                     });
-                }
-                else if ($(".resouces-grid-right").isInViewport()) {
-                    setTimeout(function() {
-                        $('.resources-right-grid_item').each(function (i) {
-                            var $item = $(this).find("._8_fundcards");
-                            setTimeout(function() { 
-                            $item.click();
-                            }, 100*i);
-                        });
-                    }, 500);
                 }
             });
         }
