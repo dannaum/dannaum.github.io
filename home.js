@@ -7,7 +7,7 @@
     });
 
     var screenWidth = $(window).width();
-    var closedFundsWrapper = $(".past-future_top-content").outerWidth();
+    var closedFundsWrapper = $(".past-future_content").outerWidth();
     var closedFundsMask = $('.past-future_slider-mask').outerWidth();
     var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
     var closedFundSlideO = $('.past-future_slider-slide').outerWidth();
@@ -40,7 +40,8 @@
         var b = stepsArray[1];
         dd.setStep(parseInt(a)-1, b);
     });
-    var homeBenefitsImageWrap = $('.benefits-home-content').outerWidth();
+    
+    var homeBenefitsImageWrap = $('.home-benefits-section').outerWidth();
     var sp500Width = $('.home-benefits_image').outerWidth();
     var sp500slider = new Dragdealer('home-benefits-drag-tool', {
         speed: 0.1,
@@ -288,13 +289,7 @@
                 else if ($(".fadeuppe").isInViewport()) {
                     petitle.play();
                 }
-                else if ($(".fadeup-institutions-section").isInViewport()) {
-                    institutionsSectoinTitle.play();
-                }
-                else if ($(".fadeup-join-community-title").isInViewport()) {
-                    joinCommunityTitle.play();
-                }
-                else if ($(".partners-logos_img").isInViewport()) {
+                else if ($(".top-strategies_content").isInViewport()) {
                     $('.partners-logos_img').each(function (i) {
                         var $item = $(this); 
                         setTimeout(function() { 
@@ -302,9 +297,9 @@
                         }, 100*i);
                     });
                 }
-                else if ($(".resouces-grid-right").isInViewport()) {
+                else if ($(".resouces-section").isInViewport()) {
                     setTimeout(function() {
-                        $('.resources-right-grid_item').each(function (i) {
+                        $('.single-resource-wrap-item').each(function (i) {
                             var $item = $(this).find("._8_fundcards");
                             setTimeout(function() { 
                             $item.click();
@@ -318,22 +313,31 @@
             const chart = new Chart(ctx, config);
         }
     }
-        animationsRender();
         function dragDetector() {
+            var closedFundsWrapper = $(".past-future_content").outerWidth();
+            var homeBenefitsImageWrap = $('.home-benefits-section').outerWidth();
+            var sp500Width = $('.home-benefits_image').outerWidth();
+            var closedFundSlideO = $('.past-future_slider-slide').outerWidth();
             if(homeBenefitsImageWrap < sp500Width){
                 $('.home-benefits_drag-element').css('display', 'block');
             }
-            if(closedFundsWrapper < closedFundsMask){
+            else {
+                $('.home-benefits_drag-element').css('display', 'none');
+            }
+            if(closedFundsWrapper < (closedFundSlidesN * closedFundSlideO)){
                 $('.past-future-drag-component').css('display', 'block');
+            }
+            else {
+                $('.past-future-drag-component').css('display', 'none');
             }
         }
         dragDetector();
-
-        $(window).resize(function() {
-            var wwidth = $(window).width();
-            if(screenWidth!==wwidth){
-                 screenWidth = $(window).width();
-                 animationsRender();
-                 dragDetector();
+        animationsRender();
+        $(window).on("orientationchange", function () {
+            dragDetector();
+            if ($(window).width() > 991) {
+                animationsRender();
             }
         });
+
+        

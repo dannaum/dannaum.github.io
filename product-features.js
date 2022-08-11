@@ -96,9 +96,9 @@
             });
 
             $(window).scroll(function () {
-                if ($(".resouces-grid-right").isInViewport()) {
+                if ($(".resouces-section").isInViewport()) {
                     setTimeout(function() {
-                        $('.resources-right-grid_item').each(function (i) {
+                        $('.single-resource-wrap-item').each(function (i) {
                             var $item = $(this).find("._8_fundcards");
                             setTimeout(function() { 
                             $item.click();
@@ -111,11 +111,8 @@
     }
 
         animationsRender();
-
-        $(window).resize(function() {
-            var wwidth = $(window).width();
-            if(screenWidth!==wwidth){
-                 screenWidth = $(window).width();
-                 animationsRender();
+        $(window).on("orientationchange", function () {
+            if ($(window).width() > 991) {
+                animationsRender();
             }
         });

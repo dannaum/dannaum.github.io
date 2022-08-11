@@ -104,7 +104,7 @@
                     });
                 }
                 else if ($(".resouces-section").isInViewport()) {
-                    $('.resources-right-grid_item').each(function (i) {
+                    $('.single-resource-wrap-item').each(function (i) {
                         var $item = $(this).find("._8_fundcards");
                         setTimeout(function() { 
                         $item.click();
@@ -115,21 +115,20 @@
             });
         }
     }
-
-        animationsRender();
         function dragDetector() {
             if(sp500Width > screenWidth){
                 $('.past-future-drag-component').css('display', 'block');
                 $('.home-benefits_drag-element').css('display', 'block');
             }
         }
-        dragDetector();
 
-        $(window).resize(function() {
-            var wwidth = $(window).width();
-            if(screenWidth!==wwidth){
-                 screenWidth = $(window).width();
-                 animationsRender();
-                 dragDetector();
+        dragDetector();
+        animationsRender();
+        $(window).on("orientationchange", function () {
+            dragDetector();
+            if ($(window).width() > 991) {
+                animationsRender();
             }
         });
+
+        

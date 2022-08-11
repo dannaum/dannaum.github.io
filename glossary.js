@@ -1,6 +1,4 @@
-//on page load
-$(document).ready(function() {
-    
+
     $(".move-letter").each(function() {
         var letter = $(this).text().toLowerCase();
         var thisMove = $(this).closest('.glossary-letter-content_content-single');
@@ -202,4 +200,3 @@ $(document).ready(function() {
                 }, 1000);
             }
         });
-});

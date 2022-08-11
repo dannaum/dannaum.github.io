@@ -60,19 +60,19 @@
         }
     }
 
-        animationsRender();
         function dragDetector() {
             if(homeBenefitsImageWrap < sp500Width){
                 $('.home-benefits_drag-element').css('display', 'block');
             }
         }
-        dragDetector();
 
-        $(window).resize(function() {
-            var wwidth = $(window).width();
-            if(screenWidth!==wwidth){
-                 screenWidth = $(window).width();
-                 animationsRender();
-                 dragDetector();
+        dragDetector();
+        animationsRender();
+        $(window).on("orientationchange", function () {
+            dragDetector();
+            if ($(window).width() > 991) {
+                animationsRender();
             }
         });
+
+        

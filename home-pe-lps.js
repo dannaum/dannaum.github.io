@@ -182,22 +182,26 @@
             const chart = new Chart(ctx, config);
         }
     }
-        animationsRender();
         function dragDetector() {
             if(homeBenefitsImageWrap < sp500Width){
                 $('.home-benefits_drag-element').css('display', 'block');
             }
+            else {
+                $('.home-benefits_drag-element').css('display', 'none');
+            }
             if(closedFundsWrapper < closedFundsMask){
                 $('.past-future-drag-component').css('display', 'block');
             }
+            else {
+                $('.past-future-drag-component').css('display', 'none');
+            }
         }
-        dragDetector();
 
-        $(window).resize(function() {
-            var wwidth = $(window).width();
-            if(screenWidth!==wwidth){
-                 screenWidth = $(window).width();
-                 animationsRender();
-                 dragDetector();
+        dragDetector();
+        animationsRender();
+        $(window).on("orientationchange", function () {
+            dragDetector();
+            if ($(window).width() > 991) {
+                animationsRender();
             }
         });

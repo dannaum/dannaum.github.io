@@ -60,12 +60,9 @@
             a.play();
         }
     }
-
-    animationsRender();
-        $(window).resize(function() {
-            var wwidth = $(window).width();
-            if(screenWidth!==wwidth){
-                 screenWidth = $(window).width();
-                 animationsRender();
+        animationsRender();
+        $(window).on("orientationchange", function () {
+            if ($(window).width() > 991) {
+                animationsRender();
             }
         });

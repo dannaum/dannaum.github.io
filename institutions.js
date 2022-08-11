@@ -207,19 +207,18 @@
         }
     }
 
-    animationsRender();
         function dragDetector() {
             if(instSolutions > screenWidth){
                 $('.institutional_solutions_drag-element').css('display', 'block');
             }
         }
         dragDetector();
-
-        $(window).resize(function() {
-            var wwidth = $(window).width();
-            if(screenWidth!==wwidth){
-                 screenWidth = $(window).width();
-                 animationsRender();
-                 dragDetector();
+        animationsRender();
+        $(window).on("orientationchange", function () {
+            dragDetector();
+            if ($(window).width() > 991) {
+                animationsRender();
             }
         });
+
+        

@@ -146,8 +146,6 @@
                         const chart = new Chart(ctx, config);
                         viewedCareersGraph = true;
                     }
-                    else{
-                    }
                 }
                 else if ($(".chart-timeline").isInViewport()) {
                     $('.chart-timeline-line').click();
@@ -165,20 +163,19 @@
         }
 
     }
-
-        animationsRender();
         function dragDetector() {
             if(timelineSlide < chartSlider){
                 $('.careers_chart-drag-element').css('display', 'block');
             }
         }
-        dragDetector();
 
-        $(window).resize(function() {
-            var wwidth = $(window).width();
-            if(screenWidth!==wwidth){
-                 screenWidth = $(window).width();
-                 animationsRender();
-                 dragDetector();
+        dragDetector();
+        animationsRender();
+        $(window).on("orientationchange", function () {
+            dragDetector();
+            if ($(window).width() > 991) {
+                animationsRender();
             }
         });
+
+        
