@@ -36,12 +36,6 @@
         }
 
         animationsRender();
-        $(window).on("orientationchange", function () {
-            if ($(window).width() > 991) {
-                animationsRender();
-                $('.animated-word').css('opacity', '1');
-            }
-        });
 
     setTimeout(function() {
         if ($(".positions_grid-right").children().length < 1) {

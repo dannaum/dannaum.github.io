@@ -1,3 +1,5 @@
+//on page load
+$(document).ready(function () {
     ($.fn.isInViewport = function () {
         var a = $(this).offset().top,
             c = a + $(this).outerHeight(),
@@ -159,8 +161,7 @@
                     $(".fadeup0").css("opacity", "1");
                 },
             });
-            //document ready
-            $(document).ready(function() {
+
                 a.play();
                 $(window).focus(function() {
                     if (!aPlayed) {
@@ -171,7 +172,6 @@
                         
                     }
                 });
-            });
     
             var b = anime.timeline({ loop: !1, autoplay: !1 });
             b.add({
@@ -185,22 +185,7 @@
                 begin() {
                     $(".fadeup1").css("opacity", "1");
                 },
-            });
-    
-            var d = anime.timeline({ loop: !1, autoplay: !1 });
-            d.add({
-                targets: ".fadeup3 .letter",
-                translateY: [100, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                easing: "easeOutQuint",
-                duration: 800,
-                delay: (b, a) => 300 + 30 * a,
-                begin() {
-                    $(".fadeup3").css("opacity", "1");
-                },
-            });
-    
+            });    
     
             var fd5 = anime.timeline({ loop: !1, autoplay: !1 });
             fd5.add({
@@ -228,32 +213,6 @@
                     $(".fadeuppe").css("opacity", "1");
                 },
             });
-            var institutionsSectoinTitle = anime.timeline({ loop: !1, autoplay: !1 });
-            institutionsSectoinTitle.add({
-                targets: ".fadeup-institutions-section .letter",
-                translateY: [100, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                easing: "easeOutQuint",
-                duration: 800,
-                delay: (b, a) => 300 + 30 * a,
-                begin() {
-                    $(".fadeup-institutions-section").css("opacity", "1");
-                },
-            });
-            var joinCommunityTitle = anime.timeline({ loop: !1, autoplay: !1 });
-            joinCommunityTitle.add({
-                targets: ".fadeup-join-community-title .letter",
-                translateY: [100, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                easing: "easeOutQuint",
-                duration: 800,
-                delay: (b, a) => 300 + 30 * a,
-                begin() {
-                    $(".fadeup-join-community-title").css("opacity", "1");
-                },
-            });
               
             var viewedSPGraph = false;
             var heroVisualScrollAdd
@@ -265,19 +224,20 @@
                 heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
                 if ($(".fadeup1").isInViewport()) {
                     b.play();
-                    $(this).off(e);
+                    
                 }
                 else if ($('.home-benefits_image-title').isInViewport()) {
                     if (!viewedSPGraph) {
                         const chart = new Chart(ctx, config);
                         viewedSPGraph = true;
+                        
                     }
                     else if  (viewedSPGraph) {
                     }
-                    $(this).off(e);
                 }
-                else if ($(".fadeup5").isInViewport(e)) {
+                else if ($(".fadeup5").isInViewport()) {
                     fd5.play();
+                    //timeout 500 ms
                     setTimeout(function() {
                         $('.past-future_slider-slide').each(function (i) {
                             var $item = $(this).find("._8_fundcards");
@@ -286,31 +246,11 @@
                             }, 100*i);
                         });
                     }, 500);
-                    $(this).off(e);
+
                 }
-                else if ($(".fadeuppe").isInViewport(e)) {
+                else if ($(".fadeuppe").isInViewport()) {
                     petitle.play();
-                    $(this).off(e);
-                }
-                else if ($(".top-strategies_content").isInViewport(e)) {
-                    $('.partners-logos_img').each(function (i) {
-                        var $item = $(this); 
-                        setTimeout(function() { 
-                          $item.click();
-                        }, 100*i);
-                    });
-                    $(this).off(e);
-                }
-                else if ($(".resouces-section").isInViewport(e)) {
-                    setTimeout(function() {
-                        $('.single-resource-wrap-item').each(function (i) {
-                            var $item = $(this).find("._8_fundcards");
-                            setTimeout(function() { 
-                            $item.click();
-                            }, 100*i);
-                        });
-                    }, 500);
-                    $(this).off(e);
+                    
                 }
             });
         }
@@ -341,10 +281,5 @@
 
         $(window).on("orientationchange", function () {
             dragDetector();
-            if ($(window).width() > 991) {
-                animationsRender();
-            }
-            else {
-                $('.animated-word').css('opacity', '1');
-            }
         });
+});

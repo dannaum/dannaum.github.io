@@ -267,11 +267,11 @@
             $(window).scroll(function() {
                 heroVisualScrollAdd = $(this).scrollTop();
                 heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
-                if ($(".fadeup1").isInViewport(e)) {
+                if ($(".fadeup1").isInViewport()) {
                     b.play();
-                    $(this).off(e);
+                    
                 }
-                else if ($(".fadeup2").isInViewport(e)) {
+                else if ($(".fadeup2").isInViewport()) {
                     c.play();
                     var legendItems = $(".careers_chart-legend").find("._8_fundcards_parent").find("._8_fundcards");
                     $(legendItems).each(function (i) {
@@ -286,9 +286,9 @@
                     }
                     else{
                     }
-                    $(this).off(e);
+                    
                 }
-                else if ($(".chart-timeline").isInViewport(e)) {
+                else if ($(".chart-timeline").isInViewport()) {
                     $('.chart-timeline-line').click();
                     $('.chart-single-item_animation').each(function (i) {
                         var $item = $(this);
@@ -296,9 +296,9 @@
                         $item.click();
                         }, 150*i);
                     });
-                    $(this).off(e);
+                    
                 }
-                else if ($(".careers_values-title").isInViewport(e)) {
+                else if ($(".careers_values-title").isInViewport()) {
                     d.play();
                     if (!viewedCareerValues) {
                         $('.single-career-grid-wrap-single').each(function (i) {
@@ -321,23 +321,23 @@
                     }
                     else{
                     }
-                    $(this).off(e);
+                    
                 }
-                else if ($(".fadeup4").isInViewport(e)) {
+                else if ($(".fadeup4").isInViewport()) {
                     e.play();
-                    $(this).off(e);
+                    
                 }
-                else if ($(".fadeup5").isInViewport(e)) {
+                else if ($(".fadeup5").isInViewport()) {
                     fas.play();
-                    $(this).off(e);
+                    
                 }
-                else if ($(".positions_section").isInViewport(e)) {
+                else if ($(".positions_section").isInViewport()) {
                     //for each ".positions_grid-single-job"
                     $('.positions_grid-single-job').each(function (i) {
                         //this find "._8_fundcards" and trigger click
                         $(this).find("._8_fundcards").trigger("click");
                     });
-                    $(this).off(e);
+                    
                 }
             });
         }
@@ -356,10 +356,6 @@
         animationsRender();
         $(window).on("orientationchange", function () {
             dragDetector();
-            if ($(window).width() > 991) {
-                animationsRender();
-                $('.animated-word').css('opacity', '1');
-            }
         });
 
         

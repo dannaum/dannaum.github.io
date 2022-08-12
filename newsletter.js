@@ -61,9 +61,3 @@
         }
     }
         animationsRender();
-        $(window).on("orientationchange", function () {
-            if ($(window).width() > 991) {
-                animationsRender();
-                $('.animated-word').css('opacity', '1');
-            }
-        });

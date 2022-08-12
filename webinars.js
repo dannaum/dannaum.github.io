@@ -59,18 +59,12 @@
             
 
             $(window).scroll(function() {
-                if ($(".fadeup1").isInViewport(e)) {
+                if ($(".fadeup1").isInViewport()) {
                     b.play();
-                    $(this).off(e);
+                    
                 }
             });
         }
     }
 
         animationsRender();
-        $(window).on("orientationchange", function () {
-            if ($(window).width() > 991) {
-                animationsRender();
-                $('.animated-word').css('opacity', '1');
-            }
-        });

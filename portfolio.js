@@ -91,11 +91,11 @@
             
 
             $(window).scroll(function() {
-                if ($(".fadeup1").isInViewport(e)) {
+                if ($(".fadeup1").isInViewport()) {
                     b.play();
-                    $(this).off(e);
+                    
                 }
-                else if ($(".fadeup2").isInViewport(e)) {
+                else if ($(".fadeup2").isInViewport()) {
                     c.play();
                     $('.invest-your-way_item').each(function (i) {
                         var $item = $(this).find("._8_fundcards");
@@ -103,16 +103,16 @@
                         $item.click();
                         }, 100*i);
                     });
-                    $(this).off(e);
+                    
                 }
-                else if ($(".resouces-section").isInViewport(e)) {
+                else if ($(".resouces-section").isInViewport()) {
                     $('.single-resource-wrap-item').each(function (i) {
                         var $item = $(this).find("._8_fundcards");
                         setTimeout(function() { 
                         $item.click();
                         }, 100*i);
                     });
-                    $(this).off(e);
+                    
                 }
 
             });
@@ -129,10 +129,6 @@
         animationsRender();
         $(window).on("orientationchange", function () {
             dragDetector();
-            if ($(window).width() > 991) {
-                animationsRender();
-                $('.animated-word').css('opacity', '1');
-            }
         });
 
         
