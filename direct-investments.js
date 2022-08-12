@@ -31,7 +31,7 @@
     */
 
     var screenWidth = $(window).width();
-    var closedFundsWrapper = $(".past-future_top-content").outerWidth();
+    var closedFundsWrapper = $(".past-future_content").outerWidth();
     var closedFundsMask = $('.past-future_slider-mask').outerWidth();
     var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
     var closedFundSlideO = $('.past-future_slider-slide').outerWidth();
@@ -154,39 +154,45 @@
             $(window).scroll(function() {
                 heroVisualScrollAdd = $(this).scrollTop();
                 heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
-                if ($(".fadeup1").isInViewport()) {
+                if ($(".fadeup1").isInViewport(e)) {
                     b.play();
+                    $(this).off(e);
                 }
-                else if ($(".fadeup5").isInViewport()) {
+                else if ($(".fadeup5").isInViewport(e)) {
                     fd5.play();
+                    $(this).off(e);
                 }
-                else if ($(".past-future_slider").isInViewport()) {
+                else if ($(".past-future_slider").isInViewport(e)) {
                     $('.past-future_slider-slide').each(function (i) {
                         var $item = $(this).find("._8_fundcards");
                         setTimeout(function() { 
                         $item.click();
                         }, 100*i);
                     });
+                    $(this).off(e);
                 }
-                else if ($(".resouces-section").isInViewport()) {
+                else if ($(".resouces-section").isInViewport(e)) {
                     $('.single-resource-wrap-item').each(function (i) {
                         var $item = $(this).find("._8_fundcards");
                         setTimeout(function() { 
                         $item.click();
                         }, 100*i);
                     });
+                    $(this).off(e);
                 }
             });
         }
     }
-        function dragDetector() {
-            if(sp500Width > screenWidth){
-                $('.home-benefits_drag-element').css('display', 'block');
-            }
-            if(closedFundsWrapper < closedFundsMask){
-                $('.past-future-drag-component').css('display', 'block');
-            }
+    function dragDetector() {
+        var closedFundsWrapper = $(".past-future_content").outerWidth();
+        var closedFundSlideO = $('.past-future_slider-slide').outerWidth();
+        if(closedFundsWrapper < (closedFundSlidesN * closedFundSlideO)){
+            $('.past-future-drag-component').css('display', 'block');
         }
+        else {
+            $('.past-future-drag-component').css('display', 'none');
+        }
+    }
 
         dragDetector();
         animationsRender();
@@ -194,6 +200,7 @@
             dragDetector();
             if ($(window).width() > 991) {
                 animationsRender();
+                $('.animated-word').css('opacity', '1');
             }
         });
 

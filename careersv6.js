@@ -267,10 +267,11 @@
             $(window).scroll(function() {
                 heroVisualScrollAdd = $(this).scrollTop();
                 heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
-                if ($(".fadeup1").isInViewport()) {
+                if ($(".fadeup1").isInViewport(e)) {
                     b.play();
+                    $(this).off(e);
                 }
-                else if ($(".fadeup2").isInViewport()) {
+                else if ($(".fadeup2").isInViewport(e)) {
                     c.play();
                     var legendItems = $(".careers_chart-legend").find("._8_fundcards_parent").find("._8_fundcards");
                     $(legendItems).each(function (i) {
@@ -285,8 +286,9 @@
                     }
                     else{
                     }
+                    $(this).off(e);
                 }
-                else if ($(".chart-timeline").isInViewport()) {
+                else if ($(".chart-timeline").isInViewport(e)) {
                     $('.chart-timeline-line').click();
                     $('.chart-single-item_animation').each(function (i) {
                         var $item = $(this);
@@ -294,8 +296,9 @@
                         $item.click();
                         }, 150*i);
                     });
+                    $(this).off(e);
                 }
-                else if ($(".careers_values-title").isInViewport()) {
+                else if ($(".careers_values-title").isInViewport(e)) {
                     d.play();
                     if (!viewedCareerValues) {
                         $('.single-career-grid-wrap-single').each(function (i) {
@@ -318,19 +321,23 @@
                     }
                     else{
                     }
+                    $(this).off(e);
                 }
-                else if ($(".fadeup4").isInViewport()) {
+                else if ($(".fadeup4").isInViewport(e)) {
                     e.play();
+                    $(this).off(e);
                 }
-                else if ($(".fadeup5").isInViewport()) {
+                else if ($(".fadeup5").isInViewport(e)) {
                     fas.play();
+                    $(this).off(e);
                 }
-                else if ($(".positions_section").isInViewport()) {
+                else if ($(".positions_section").isInViewport(e)) {
                     //for each ".positions_grid-single-job"
                     $('.positions_grid-single-job').each(function (i) {
                         //this find "._8_fundcards" and trigger click
                         $(this).find("._8_fundcards").trigger("click");
                     });
+                    $(this).off(e);
                 }
             });
         }

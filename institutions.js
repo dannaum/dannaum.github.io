@@ -178,10 +178,11 @@
             $(window).scroll(function() {
                 heroVisualScrollAdd = $(this).scrollTop();
                 heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
-                if ($(".fadeup1").isInViewport()) {
+                if ($(".fadeup1").isInViewport(e)) {
                     b.play();
+                    $(this).off(e);
                 }
-                else if ($(".fadeup2").isInViewport(100)) {
+                else if ($(".fadeup2").isInViewport(e)) {
                     c.play();
                     setTimeout(function() {
                         $('.institutional-solutions_single-card').each(function (i) {
@@ -191,17 +192,20 @@
                             }, 100*i);
                         });
                     }, 500);
+                    $(this).off(e);
                 }
-                else if ($(".fadeup3").isInViewport()) {
+                else if ($(".fadeup3").isInViewport(e)) {
                     d.play();
+                    $(this).off(e);
                 }
-                else if ($(".partners-logos_img").isInViewport()) {
+                else if ($(".partners-logos_img").isInViewport(e)) {
                     $('.partners-logos_img').each(function (i) {
                         var $item = $(this); 
                         setTimeout(function() { 
                         $item.click();
                         }, 100*i);
                     });
+                    $(this).off(e);
                 }
             });
         }
@@ -218,6 +222,7 @@
             dragDetector();
             if ($(window).width() > 991) {
                 animationsRender();
+                $('.animated-word').css('opacity', '1');
             }
         });
 

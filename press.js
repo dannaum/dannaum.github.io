@@ -139,11 +139,12 @@
             //on window scroll
             $(window).scroll(function(){
                 //if fadeup1 is in viewport
-                if($('.fadeup1').isInViewport()){
+                if($('.fadeup1').isInViewport(e)){
                     b.play();
+                    $(this).off(e);
                 }
                 //else if fadeup2 is in viewport
-                else if($('.fadeup2').isInViewport()){
+                else if($('.fadeup2').isInViewport(e)){
                     c.play();
                     $(pressFiles).each(function (i) {
                         var $item = $(this);
@@ -151,6 +152,7 @@
                             $item.click();
                         }, 100*i);
                     });
+                    $(this).off(e);
                 };
             });
         }
@@ -160,5 +162,6 @@
         $(window).on("orientationchange", function () {
             if ($(window).width() > 991) {
                 animationsRender();
+                $(".animated-word").css("opacity","1");
             }
         });

@@ -1,9 +1,3 @@
-  //on window resize
-$(window).resize(function() {
-    if ($(window).width() > 991) {
-        $('.animated-word').css('opacity', '1');
-    }
-});
 if ($(window).width() <= 991) {
     $('.nav_dt').click(function() {
         var $this = $(this);
@@ -26,7 +20,6 @@ if ($(window).width() <= 991) {
     }, 500);
     });
 }
-
 $('.w-nav-button').on('click', function(){
     //if this has class w--open
     if($(this).hasClass('w--open')){

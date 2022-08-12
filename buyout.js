@@ -74,8 +74,9 @@
                 },
             });
             $(window).scroll(function() {
-                if ($(".fadeup1").isInViewport()) {
+                if ($(".fadeup1").isInViewport(e)) {
                     b.play();
+                    $(this).off(e);
                 }
             });
         }
@@ -92,6 +93,7 @@
             dragDetector();
             if ($(window).width() > 991) {
                 animationsRender();
+                $('.animated-word').css('opacity', '1');
             }
         });
 

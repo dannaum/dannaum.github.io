@@ -40,7 +40,7 @@
         var b = stepsArray[1];
         dd.setStep(parseInt(a)-1, b);
     });
-    var homeBenefitsImageWrap = $('.benefits-home-content').outerWidth();
+    var homeBenefitsImageWrap = $('.home-benefits-section').outerWidth();
     var sp500Width = $('.home-benefits_image').outerWidth();
     var sp500slider = new Dragdealer('home-benefits-drag-tool', {
         speed: 0.1,
@@ -145,20 +145,21 @@
             $(window).scroll(function() {
                 heroVisualScrollAdd = $(this).scrollTop();
                 heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
-                if ($(".fadeup1").isInViewport()) {
+                if ($(".fadeup1").isInViewport(e)) {
                     b.play();
+                    $(this).off(e);
                 }
-                else if ($('.home-benefits_image-title').isInViewport()) {
+                else if ($('.home-benefits_image-title').isInViewport(e)) {
                     if (!viewedSPGraph) {
                         const chart = new Chart(ctx, config);
                         viewedSPGraph = true;
                     }
                     else if  (viewedSPGraph) {
                     }
+                    $(this).off(e);
                 }
-                else if ($(".fadeup5").isInViewport()) {
+                else if ($(".fadeup5").isInViewport(e)) {
                     fd5.play();
-                    //timeout 500 ms
                     setTimeout(function() {
                         $('.past-future_slider-slide').each(function (i) {
                             var $item = $(this).find("._8_fundcards");
@@ -167,14 +168,16 @@
                             }, 100*i);
                         });
                     }, 500);
+                    $(this).off(e);
                 }
-                else if ($(".partners-logos_img").isInViewport()) {
+                else if ($(".partners-logos_img").isInViewport(e)) {
                     $('.partners-logos_img').each(function (i) {
                         var $item = $(this); 
                         setTimeout(function() { 
                           $item.click();
                         }, 100*i);
                     });
+                    $(this).off(e);
                 }
             });
         }
@@ -182,26 +185,30 @@
             const chart = new Chart(ctx, config);
         }
     }
-        function dragDetector() {
-            if(homeBenefitsImageWrap < sp500Width){
-                $('.home-benefits_drag-element').css('display', 'block');
-            }
-            else {
-                $('.home-benefits_drag-element').css('display', 'none');
-            }
-            if(closedFundsWrapper < closedFundsMask){
-                $('.past-future-drag-component').css('display', 'block');
-            }
-            else {
-                $('.past-future-drag-component').css('display', 'none');
-            }
+    function dragDetector() {
+        var closedFundsWrapper = $(".past-future_content").outerWidth();
+        var homeBenefitsImageWrap = $('.home-benefits-section').outerWidth();
+        var sp500Width = $('.home-benefits_image').outerWidth();
+        var closedFundSlideO = $('.past-future_slider-slide').outerWidth();
+        if(homeBenefitsImageWrap < sp500Width){
+            $('.home-benefits_drag-element').css('display', 'block');
         }
-
+        else {
+            $('.home-benefits_drag-element').css('display', 'none');
+        }
+        if(closedFundsWrapper < (closedFundSlidesN * closedFundSlideO)){
+            $('.past-future-drag-component').css('display', 'block');
+        }
+        else {
+            $('.past-future-drag-component').css('display', 'none');
+        }
+    }
+    dragDetector();
+    animationsRender();
+    $(window).on("orientationchange", function () {
         dragDetector();
-        animationsRender();
-        $(window).on("orientationchange", function () {
-            dragDetector();
-            if ($(window).width() > 991) {
-                animationsRender();
-            }
-        });
+        if ($(window).width() > 991) {
+            animationsRender();
+            $('.animated-word').css('opacity', '1');
+        }
+    });
