@@ -5,33 +5,6 @@
             d = b + $(window).height();
         return c > b && a < d;
     });
-    var screenWidth = $(window).width();
-    //video player start
-    var playButton = $('#play-video');
-    var video = $('#video-player').get(0);
-
-    $(document).on('click', '#play-video, #video-player', function (e) {
-        if (video.paused === false) {
-            video.pause();
-        } else {
-            playButton.css('display', 'none');
-            video.play();
-            video.setAttribute('controls', 'controls');
-        }
-        return false;
-    });
-
-    $(document).on('click', '#home-page-hero-section, .how-it-works_hero-section', function (e) {
-        if (video.paused === false) {
-            video.pause();
-            video.setAttribute('controls', 'controls');
-        } else {
-        }
-        return false;
-    });
-
-    //video player end
-
     for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
         var c = b.item(a);
         c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
@@ -58,7 +31,7 @@
                     $(".fadeup0").css("opacity", "1");
                 },
             });
-            $(document).ready(function () {
+            
                 a.play();
                 $(window).focus(function() {
                     if (!aPlayed) {
@@ -69,7 +42,6 @@
                         
                     }
                 });
-            });
 
             var b = anime.timeline({ loop: !1, autoplay: !1 });
             b.add({
@@ -105,3 +77,23 @@
     }
 
     animationsRender();
+    var screenWidth = $(window).width();
+    //video player start
+    var playButton = $('#play-video');
+    var video = $('#video-player').get(0);
+
+    $(document).on('click', '#play-video', function (e) {
+            playButton.css('display', 'none');
+            video.play();
+            video.setAttribute('controls', 'controls');
+            return false;
+    });
+
+    $(document).on('click', '.our-method_section', function (e) {
+        if (video.paused === false) {
+            video.pause();
+            video.setAttribute('controls', 'controls');
+        } else {
+        }
+        return false;
+    });

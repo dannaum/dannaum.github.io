@@ -31,7 +31,6 @@
                     $(".fadeup0").css("opacity", "1");
                 },
             });
-            $(document).ready(function () {
                 a.play();
                 $(window).focus(function () {
                     if (!aPlayed) {
@@ -41,7 +40,6 @@
                     else {
                     }
                 });
-            });
 
             var b = anime.timeline({ loop: !1, autoplay: !1 });
             b.add({

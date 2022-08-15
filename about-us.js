@@ -6,6 +6,115 @@
         return c > b && a < d;
     });
 
+    for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
+        var c = b.item(a);
+        c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
+    }
+    var aPlayed = false;
+    function animationsRender() {
+        if ($(window).width() > 991) {
+
+            var a = anime.timeline({ loop: !1, autoplay: !1 });
+            a.add({
+                targets: ".fadeup0 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 30 * a,
+                begin() {
+                    $(".fadeup0").css("opacity", "1");
+                },
+            });
+            var b = anime.timeline({ loop: !1, autoplay: !1 });
+            b.add({
+                targets: ".fadeup1 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 30 * a,
+                begin() {
+                    $(".fadeup1").css("opacity", "1");
+                },
+            });
+            var c = anime.timeline({ loop: !1, autoplay: !1 });
+            c.add({
+                targets: ".fadeup2 .letter",
+                translateY: [100, 0],
+                translateZ: 0,
+                opacity: [0, 1],
+                easing: "easeOutQuint",
+                duration: 800,
+                delay: (b, a) => 30 * a,
+                begin() {
+                    $(".fadeup2").css("opacity", "1");
+                },
+            });
+
+            
+                a.play();
+                $(window).focus(function() {
+                    if (!aPlayed) {
+                        a.restart();
+                        aPlayed = true;
+                    }
+                    else {
+                        
+                    }
+                });
+
+            var heroVisualScrollAdd
+            var heroVisual = $(".home-page_hero-visual");
+            var heroVisualWidth = (heroVisual).width();
+            var currentScroll = $(window).scrollTop() + $(window).height();
+            var viewedCareersGraph = false;
+            $(window).scroll(function() {
+                heroVisualScrollAdd = $(this).scrollTop();
+                heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
+
+                if($('.fadeup1').isInViewport()){
+                        b.play();
+                        
+                }
+
+                else if ($(".fadeup2").isInViewport()) {
+                        c.play();
+                        var legendItems = $(".careers_chart-legend").find("._8_fundcards_parent").find("._8_fundcards");
+                        $(legendItems).each(function (i) {
+                            var $item = $(this);
+                            setTimeout(function(e) { 
+                            $item.click();
+                            }, 100*i);
+                        });
+                    if (!viewedCareersGraph) {
+                        const chart = new Chart(ctx, config);
+                        viewedCareersGraph = true;
+                    }
+                    
+                }
+                else if ($(".chart-timeline").isInViewport()) {
+                    $('.chart-timeline-line').click();
+                    $('.chart-single-item_animation').each(function (i) {
+                        var $item = $(this);
+                        setTimeout(function() { 
+                        $item.click();
+                        }, 50*i);
+                    });
+                    
+                }
+            });
+        }
+        else {
+            const chart = new Chart(ctx, config);
+        }
+
+    }
+
+    animationsRender();
+
     $('.blue-highlight').wrap('<span class="tool-tip_wrapper"></span>');
     var highlight = [];
     var tip_single = [];
@@ -59,114 +168,6 @@
         $('.chart-timeline').css('margin-left', -x * (myChartWidth - careersChartContent));
     }
     });
-
-    for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
-        var c = b.item(a);
-        c.innerHTML = c.innerHTML.replace(/(^|<\/?[^>]+>|\s+)([^\s<]+)/g, '$1<span class="letter">$2</span>');
-    }
-    var aPlayed = false;
-    function animationsRender() {
-        if ($(window).width() > 991) {
-
-            var a = anime.timeline({ loop: !1, autoplay: !1 });
-            a.add({
-                targets: ".fadeup0 .letter",
-                translateY: [100, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                easing: "easeOutQuint",
-                duration: 800,
-                delay: (b, a) => 30 * a,
-                begin() {
-                    $(".fadeup0").css("opacity", "1");
-                },
-            });
-            var b = anime.timeline({ loop: !1, autoplay: !1 });
-            b.add({
-                targets: ".fadeup1 .letter",
-                translateY: [100, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                easing: "easeOutQuint",
-                duration: 800,
-                delay: (b, a) => 30 * a,
-                begin() {
-                    $(".fadeup1").css("opacity", "1");
-                },
-            });
-            var c = anime.timeline({ loop: !1, autoplay: !1 });
-            c.add({
-                targets: ".fadeup2 .letter",
-                translateY: [100, 0],
-                translateZ: 0,
-                opacity: [0, 1],
-                easing: "easeOutQuint",
-                duration: 800,
-                delay: (b, a) => 30 * a,
-                begin() {
-                    $(".fadeup2").css("opacity", "1");
-                },
-            });
-
-            $(document).ready(function () {
-                a.play();
-                $(window).focus(function() {
-                    if (!aPlayed) {
-                        a.restart();
-                        aPlayed = true;
-                    }
-                    else {
-                        
-                    }
-                });
-            });
-
-            var heroVisualScrollAdd
-            var heroVisual = $(".home-page_hero-visual");
-            var heroVisualWidth = (heroVisual).width();
-            var currentScroll = $(window).scrollTop() + $(window).height();
-            var viewedCareersGraph = false;
-            $(window).scroll(function() {
-                heroVisualScrollAdd = $(this).scrollTop();
-                heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
-
-                if($('.fadeup1').isInViewport()){
-                        b.play();
-                        
-                }
-
-                else if ($(".fadeup2").isInViewport()) {
-                        c.play();
-                        var legendItems = $(".careers_chart-legend").find("._8_fundcards_parent").find("._8_fundcards");
-                        $(legendItems).each(function (i) {
-                            var $item = $(this);
-                            setTimeout(function(e) { 
-                            $item.click();
-                            }, 100*i);
-                        });
-                    if (!viewedCareersGraph) {
-                        const chart = new Chart(ctx, config);
-                        viewedCareersGraph = true;
-                    }
-                    
-                }
-                else if ($(".chart-timeline").isInViewport()) {
-                    $('.chart-timeline-line').click();
-                    $('.chart-single-item_animation').each(function (i) {
-                        var $item = $(this);
-                        setTimeout(function() { 
-                        $item.click();
-                        }, 50*i);
-                    });
-                    
-                }
-            });
-        }
-        else {
-            const chart = new Chart(ctx, config);
-        }
-
-    }
         function dragDetector() {
             if(careersChartContent < myChartWidth){
                 $('.careers_chart-drag-element').css('display', 'block');
@@ -174,9 +175,15 @@
         }
 
         dragDetector();
-        animationsRender();
-        $(window).on("orientationchange", function () {
-            dragDetector();
+        var resizeDone;
+        $(window).resize(function() {
+            clearTimeout(resizeDone);
+            resizeDone = setTimeout(doneResizing, 500);
+            
         });
+
+        function doneResizing(){
+            dragDetector();
+        }
 
         

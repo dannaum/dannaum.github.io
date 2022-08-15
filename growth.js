@@ -6,21 +6,6 @@
             d = b + $(window).height();
         return c > b && a < d;
     });
-    var screenWidth = $(window).width();
-    var homeBenefitsImageWrap = $('.private-market-value_content').outerWidth();
-    var sp500Width = $('.direct-invest_graph').outerWidth();
-    var sp500slider = new Dragdealer('home-benefits-drag-tool', {
-        speed: 0.1,
-        requestAnimationFrame: true,
-        horizontal: true,
-        vertical: false,
-        xPrecision: sp500Width,
-        reflow: true,
-        animationCallback: function(x, y) {
-            $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.direct-invest_graph-wrap').css('margin-left', -x * (sp500Width - screenWidth +64));
-        }
-    });
 
     for (var b = document.getElementsByClassName("animated-word"), a = 0; a < b.length; a++) {
         var c = b.item(a);
@@ -44,7 +29,6 @@
                 },
             });
 
-            $(document).ready(function () {
                 a.play();
                 $(window).focus(function() {
                     if (!aPlayed) {
@@ -55,10 +39,28 @@
                         
                     }
                 });
-            });
 
         }
     }
+
+    animationsRender();
+    
+    var screenWidth = $(window).width();
+    var homeBenefitsImageWrap = $('.private-market-value_content').outerWidth();
+    var sp500Width = $('.direct-invest_graph').outerWidth();
+    var sp500slider = new Dragdealer('home-benefits-drag-tool', {
+        speed: 0.1,
+        requestAnimationFrame: true,
+        horizontal: true,
+        vertical: false,
+        xPrecision: sp500Width,
+        reflow: true,
+        animationCallback: function(x, y) {
+            $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
+            $('.direct-invest_graph-wrap').css('margin-left', -x * (sp500Width - screenWidth +64));
+        }
+    });
+
 
         function dragDetector() {
             if(homeBenefitsImageWrap < sp500Width){
@@ -67,9 +69,14 @@
         }
 
         dragDetector();
-        animationsRender();
-        $(window).on("orientationchange", function () {
-            dragDetector();
+        var resizeDone;
+        $(window).resize(function() {
+            clearTimeout(resizeDone);
+            resizeDone = setTimeout(doneResizing, 500);
+            
         });
 
+        function doneResizing(){
+            dragDetector();
+        }
         
