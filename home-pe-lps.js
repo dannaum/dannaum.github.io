@@ -231,5 +231,9 @@
         });
 
         function doneResizing(){
+            screenWidth = $(window).width();
+            if(screenWidth > 991){
+                $('.animated-word').css('opacity', '1');
+            }
             dragDetector();
         }

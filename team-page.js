@@ -71,3 +71,17 @@
             ourTeamsDrag.setValue(parseFloat(a)-0.1, b);
 
     });
+
+    var resizeDone;
+        $(window).resize(function() {
+            clearTimeout(resizeDone);
+            resizeDone = setTimeout(doneResizing, 500);
+            
+        });
+
+        function doneResizing(){
+            screenWidth = $(window).width();
+            if(screenWidth > 991){
+                $('.animated-word').css('opacity', '1');
+            }
+        }
