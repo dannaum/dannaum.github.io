@@ -243,7 +243,7 @@
     function doneResizing(){
             screenWidth = $(window).width();
             if(screenWidth > 991){
-                $('.animated-word').css('opacity', '1');
+                $('.animated-word, .animated-content, .animated-image, .animated-hero-visual, ._5_text_blocks, ._8_fundcards_parent, ._9_tagblock, ._9_tag_animation_parent, .animated-button, .animated-pill-button').css('opacity', '0');
             }
         dragDetector();
     }
