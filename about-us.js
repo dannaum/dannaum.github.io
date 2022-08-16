@@ -90,7 +90,23 @@
                             }, 100*i);
                         });
                     if (!viewedCareersGraph) {
-                        const chart = new Chart(ctx, config);
+                        const myChart = new Chart(document.getElementById('myChart'),config);
+                        function toggleDataFirst() {
+                        myChart.isDatasetVisible(0), myChart.isDatasetVisible(1), myChart.isDatasetVisible(2), myChart.show(0), myChart.hide(1), myChart.hide(2);
+                        }
+                        function toggleDataSecond() {
+                            myChart.isDatasetVisible(0), myChart.isDatasetVisible(1), myChart.isDatasetVisible(2), myChart.hide(0), myChart.show(1), myChart.hide(2);
+                        }
+                        function toggleDataThird() {
+                            myChart.isDatasetVisible(0), myChart.isDatasetVisible(1), myChart.isDatasetVisible(2), myChart.hide(0), myChart.hide(1), myChart.show(2);
+                        }
+                        function toggleDataAll() {
+                            myChart.isDatasetVisible(0), myChart.isDatasetVisible(1), myChart.isDatasetVisible(2), myChart.show(0), myChart.show(1), myChart.show(2);
+                        }
+                        document.querySelector("#first-chart").addEventListener("click", toggleDataFirst);
+                        document.querySelector("#second-chart").addEventListener("click", toggleDataSecond);
+                        document.querySelector("#third-chart").addEventListener("click", toggleDataThird);
+                        document.querySelector("#all-chart").addEventListener("click", toggleDataAll);
                         viewedCareersGraph = true;
                     }
                     
@@ -108,7 +124,23 @@
             });
         }
         else {
-            const chart = new Chart(ctx, config);
+            const myChart = new Chart(document.getElementById('myChart'),config);
+            function toggleDataFirst() {
+            myChart.isDatasetVisible(0), myChart.isDatasetVisible(1), myChart.isDatasetVisible(2), myChart.show(0), myChart.hide(1), myChart.hide(2);
+            }
+            function toggleDataSecond() {
+                myChart.isDatasetVisible(0), myChart.isDatasetVisible(1), myChart.isDatasetVisible(2), myChart.hide(0), myChart.show(1), myChart.hide(2);
+            }
+            function toggleDataThird() {
+                myChart.isDatasetVisible(0), myChart.isDatasetVisible(1), myChart.isDatasetVisible(2), myChart.hide(0), myChart.hide(1), myChart.show(2);
+            }
+            function toggleDataAll() {
+                myChart.isDatasetVisible(0), myChart.isDatasetVisible(1), myChart.isDatasetVisible(2), myChart.show(0), myChart.show(1), myChart.show(2);
+            }
+            document.querySelector("#first-chart").addEventListener("click", toggleDataFirst);
+            document.querySelector("#second-chart").addEventListener("click", toggleDataSecond);
+            document.querySelector("#third-chart").addEventListener("click", toggleDataThird);
+            document.querySelector("#all-chart").addEventListener("click", toggleDataAll);
         }
 
     }
@@ -190,3 +222,16 @@
             dragDetector();
         }
         
+
+        function toggleDataFirst() {
+            myChart.isDatasetVisible(0), myChart.isDatasetVisible(1), myChart.isDatasetVisible(2), myChart.show(0), myChart.hide(1), myChart.hide(2);
+        }
+        function toggleDataSecond() {
+            myChart.isDatasetVisible(0), myChart.isDatasetVisible(1), myChart.isDatasetVisible(2), myChart.hide(0), myChart.show(1), myChart.hide(2);
+        }
+        function toggleDataThird() {
+            myChart.isDatasetVisible(0), myChart.isDatasetVisible(1), myChart.isDatasetVisible(2), myChart.hide(0), myChart.hide(1), myChart.show(2);
+        }
+        function toggleDataAll() {
+            myChart.isDatasetVisible(0), myChart.isDatasetVisible(1), myChart.isDatasetVisible(2), myChart.show(0), myChart.show(1), myChart.show(2);
+        }

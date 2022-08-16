@@ -261,24 +261,15 @@
 
         function dragDetector() {
             var closedFundsWrapper = $(".past-future_content").outerWidth();
+            console.log('closedFundsWrapper',closedFundsWrapper);
             var closedFundsMask = $('.past-future_slider-mask').outerWidth();
             var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
             var closedFundSlidesOW = $('.past-future_slider-mask').find('.past-future_slider-slide').outerWidth();
             var closedFundsTotalWidth = (closedFundSlidesN * closedFundSlidesOW);
+            console.log('closedFundsTotalWidth',closedFundsTotalWidth);
             var homeBenefitsImageWrap = $('.home-benefits-section').outerWidth();
             var sp500Width = $('.home-benefits_image').outerWidth();
-            dd = new Dragdealer('content-scroller', {
-                steps: closedFundSlidesN,
-                speed: 0.1,
-                requestAnimationFrame: true,
-                horizontal: true,
-                vertical: false,
-                reflow: true,
-                animationCallback: function(x, y) {
-                    $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
-                    $('.past-future_slider-mask').css('margin-left', -x * (64 +closedFundsTotalWidth - closedFundsWrapper));
-                }
-            });
+            dd.reflow();
             if(homeBenefitsImageWrap < sp500Width){
                 $('.home-benefits_drag-element').css('display', 'block');
             }

@@ -200,3 +200,14 @@
                 }, 1000);
             }
         });
+
+        //for each ".glossary-letter-content_content-single"
+        $('.glossary-letter-content_content-single').each(function() {
+            //this find ".pill-text"
+            var pillText = $(this).find('.pill-text');
+            //if pillText hasClass  'w-condition-invisible'
+            if (pillText.hasClass('w-condition-invisible')) {
+                //pillText remove
+                pillText.remove();
+            }
+        });

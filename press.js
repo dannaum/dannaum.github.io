@@ -103,7 +103,7 @@
 
     $('.knowledge-center_category-tag').eq(0).addClass('active');
     $('.knowledge-center_category-tag').on('click', function(){
-        $(this).siblings('.knowledge-center_category-tag').removeClass('active');
+        $('.knowledge-center_category-tag').removeClass('active');
         var tagName = $(this).text().toLowerCase();
         if($(this).hasClass('active')){
             $(this).removeClass('active');

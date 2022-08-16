@@ -1,5 +1,6 @@
 
     //on click of knowledge-center_category-tag html to lowercase in var
+    $('.knowledge-center_category-tag').eq(0).addClass('active');
     $('.knowledge-center_category-tag').on('click', function(){
         var tag = $(this).text().toLowerCase();
         $(this).siblings('.knowledge-center_category-tag').removeClass('active');
