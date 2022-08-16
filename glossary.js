@@ -2,7 +2,6 @@
     $(".move-letter").each(function() {
         var letter = $(this).text().toLowerCase();
         var thisMove = $(this).closest('.glossary-letter-content_content-single');
-        console.log(letter);
         $(".count-letter").each(function() {
             var text = $(this).text().toLowerCase();
             var moveTo = $(this).closest('.glossary-letter-content').find('.glossary-letter-content_content');
