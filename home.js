@@ -132,15 +132,9 @@
     var closedFundSlidesOW = $('.past-future_slider-mask').find('.past-future_slider-slide').outerWidth();
     var closedFundsTotalWidth = (closedFundSlidesN * closedFundSlidesOW);
     var dd = new Dragdealer('content-scroller', {
-        steps: closedFundSlidesN,
-        speed: 0.1,
-        requestAnimationFrame: true,
-        horizontal: true,
-        vertical: false,
-        reflow: true,
         animationCallback: function(x, y) {
             $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
-            $('.past-future_slider-mask').css('margin-left', -x * (64 +closedFundsTotalWidth - closedFundsWrapper));
+            $('.past-future_slider-mask').css('margin-left', -x * (6422 +closedFundsTotalWidth - closedFundsWrapper));
         }
     });
 
@@ -169,7 +163,6 @@
         horizontal: true,
         vertical: false,
         xPrecision: sp500Width,
-        reflow: true,
         animationCallback: function(x, y) {
             $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
             $('.home-benefits_image-wrap').css('margin-left', -x * (sp500Width - screenWidth +64));
@@ -233,12 +226,15 @@
             $(".home-pe-101_selector").eq(2).after('<div class="home-pe-101_wrappers hidden-div">'+ htmlCards2 +'</div>');
     
             $(".home-pe-101_selector").click(function() {
+                var pe101Icon = $(this).find(".home-pe-101_selector-icon");
                 if ($(this).hasClass("active")) {
                     $('.home-pe-101_selector').removeClass("active");
                     $(".home-pe-101_wrappers").css("display", "none");
                     $(".home-pe-101_selector").find('.paragraph-small-copy').css("opacity", "0");
                 }
                 else {
+                    $('.home-pe-101_selector-icon').removeClass("active");
+                    $(pe101Icon).addClass("active");
                     $(".home-pe-101_selector").find('.paragraph-small-copy').css("opacity", "0");
                     $('.home-pe-101_selector').removeClass("active");
                     $(this).addClass("active");
@@ -267,7 +263,6 @@
             var closedFundsTotalWidth = (closedFundSlidesN * closedFundSlidesOW);
             var homeBenefitsImageWrap = $('.home-benefits-section').outerWidth();
             var sp500Width = $('.home-benefits_image').outerWidth();
-            dd.reflow();
             if(homeBenefitsImageWrap < sp500Width){
                 $('.home-benefits_drag-element').css('display', 'block');
             }

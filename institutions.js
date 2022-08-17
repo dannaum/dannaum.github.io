@@ -154,7 +154,7 @@
         horizontal: true,
         vertical: false,
         xPrecision: instSolutions,
-        reflow: true,
+        
         callback: function (x,y ) {
             var thisss = instSolutionsDragDealer.getValue();
         },

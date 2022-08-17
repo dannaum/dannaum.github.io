@@ -132,7 +132,7 @@
         requestAnimationFrame: true,
         horizontal: true,
         vertical: false,
-        reflow: true,
+        
         animationCallback: function(x, y) {
             $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
             $('.past-future_slider-mask').css('margin-left', -x * (64 +closedFundsTotalWidth - closedFundsWrapper));
@@ -163,7 +163,7 @@
         horizontal: true,
         vertical: false,
         xPrecision: sp500Width,
-        reflow: true,
+        
         animationCallback: function(x, y) {
             $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
             $('.home-benefits_image-wrap').css('margin-left', -x * (sp500Width - screenWidth +64));
@@ -203,7 +203,7 @@
             requestAnimationFrame: true,
             horizontal: true,
             vertical: false,
-            reflow: true,
+            
             animationCallback: function(x, y) {
                 $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
                 $('.past-future_slider-mask').css('margin-left', -x * (64 +closedFundsTotalWidth - closedFundsWrapper));

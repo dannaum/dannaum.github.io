@@ -112,7 +112,7 @@
         horizontal: true,
         vertical: false,
         xPrecision: sp500Width,
-        reflow: true,
+        
         animationCallback: function(x, y) {
             $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
             $('.direct-invest_graph-wrap').css('margin-left', -x * (sp500Width - screenWidth +64));

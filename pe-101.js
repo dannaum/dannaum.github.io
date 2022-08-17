@@ -49,7 +49,7 @@
         horizontal: true,
         vertical: false,
         xPrecision: peBCardsGrid,
-        reflow: true,
+        
         animationCallback: function(x, y) {
             $('.pe-101-b_drag-line-active').css('width', Math.round(x * 100) + '%');
             $('.pe-101_grid-4-basics').css('margin-left', +x * (peBContent - peBCardsGrid));
@@ -62,7 +62,7 @@
         horizontal: true,
         vertical: false,
         xPrecision: peBCardsGrid,
-        reflow: true,
+        
         animationCallback: function(x, y) {
             $('.pe-101-s_drag-line-active').css('width', Math.round(x * 100) + '%');
             $('.pe-101_grid-4-strategies').css('margin-left', +x * (peBContent - peSCardsGrid));

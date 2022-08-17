@@ -39,9 +39,7 @@ $(document).ready(function(){
         vertical: false,
         snap: true,
         xPrecision: availWidth,
-        reflow: true,
         callback: function(x, y) {
-            dd.reflow(x, y);
             if (x == 0) {
                 //past-future_slider find w-slider-dot eq 
                 $('.past-future_slider').find('.w-slider-dot').eq(0).click();
