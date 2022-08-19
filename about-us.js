@@ -201,8 +201,24 @@
     }
     });
         function dragDetector() {
+            var myChartWidth = $('#myChart').outerWidth();
+            var careersChartContent = $('.wrapper-content').outerWidth();
+            var careersChartTimeline = $('.chart-timeline').innerWidth();
+            var careersChartTimelineWrap = $('.chart-timeline_wrap').innerWidth();
+            myChartDrag = new Dragdealer('careers-drag', {
+            horizontal: true,
+            vertical: false,
+            xPrecision: myChartWidth,
+            animationCallback: function(x, y) {
+                $('#myChart').css('margin-left', -x * (myChartWidth - careersChartContent));
+                $('.chart-timeline').css('margin-left', -x * (myChartWidth - careersChartContent));
+            }
+            });
             if(careersChartContent < myChartWidth){
-                $('.careers_chart-drag-element').css('display', 'block');
+                $('.careers_chart-drag-element').css('opacity', '1');
+            }
+            else{
+                $('.careers_chart-drag-element').css('opacity', '0');
             }
         }
 

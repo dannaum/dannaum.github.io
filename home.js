@@ -127,7 +127,6 @@
 
     var screenWidth = $(window).width();
     var closedFundsWrapper = $(".past-future_content").outerWidth();
-    var closedFundsMask = $('.past-future_slider-mask').outerWidth();
     var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
     var closedFundSlidesOW = $('.past-future_slider-mask').find('.past-future_slider-slide').outerWidth();
     var closedFundsTotalWidth = (closedFundSlidesN * closedFundSlidesOW);
@@ -139,8 +138,8 @@
         vertical: false,
         animationCallback: function(x, y) {
             $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
-            $('.past-future_slider-mask').css('margin-left', -x * (64 +closedFundsTotalWidth - closedFundsWrapper));
-        }
+            $('.past-future_slider').css('margin-left', -x * (closedFundsTotalWidth - closedFundsWrapper + 32));
+        },
     });
 
     $('.past-future_slider-wrap').on('click', '.past-future_right-arrow', function(e) {
@@ -171,7 +170,7 @@
         reflow: true,
         animationCallback: function(x, y) {
             $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.home-benefits_image-wrap').css('margin-left', -x * (sp500Width - screenWidth +64));
+            $('.home-benefits_image-wrap').css('margin-left', -x * (sp500Width - homeBenefitsImageWrap + 32));
         }
     });
 
@@ -263,7 +262,6 @@
 
         function dragDetector() {
             var closedFundsWrapper = $(".past-future_content").outerWidth();
-            var closedFundsMask = $('.past-future_slider-mask').outerWidth();
             var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
             var closedFundSlidesOW = $('.past-future_slider-mask').find('.past-future_slider-slide').outerWidth();
             var closedFundsTotalWidth = (closedFundSlidesN * closedFundSlidesOW);
@@ -275,23 +273,39 @@
                 vertical: false,
                 animationCallback: function(x, y) {
                     $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
-                    $('.past-future_slider-mask').css('margin-left', -x * (64 +closedFundsTotalWidth - closedFundsWrapper));
-                }
+                    $('.past-future_slider').css('margin-left', -x * (closedFundsTotalWidth - closedFundsWrapper + 32));
+                },
             });
+
+            if(closedFundsWrapper < (closedFundsTotalWidth)){
+                $('.past-future-drag-component').css('opacity', '1');
+            }
+            else {
+                $('.past-future-drag-component').css('opacity', '0');
+            }
+
             var homeBenefitsImageWrap = $('.home-benefits-section').outerWidth();
             var sp500Width = $('.home-benefits_image').outerWidth();
+            sp500slider = new Dragdealer('home-benefits-drag-tool', {
+                speed: 0.1,
+                requestAnimationFrame: true,
+                horizontal: true,
+                vertical: false,
+                xPrecision: sp500Width,
+                reflow: true,
+                animationCallback: function(x, y) {
+                    $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
+                    $('.home-benefits_image-wrap').css('margin-left', -x * (sp500Width - homeBenefitsImageWrap + 32));
+                }
+            });
+            
             if(homeBenefitsImageWrap < sp500Width){
-                $('.home-benefits_drag-element').css('display', 'block');
+                $('.home-benefits_drag-element').css('opacity', '1');
             }
             else {
-                $('.home-benefits_drag-element').css('display', 'none');
+                $('.home-benefits_drag-element').css('opacity', '0');
             }
-            if(closedFundsWrapper < (closedFundsTotalWidth)){
-                $('.past-future-drag-component').css('display', 'block');
-            }
-            else {
-                $('.past-future-drag-component').css('display', 'none');
-            }
+            
         }
         dragDetector();
         var resizeDone;

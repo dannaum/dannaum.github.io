@@ -111,7 +111,6 @@
 
     var screenWidth = $(window).width();
     var closedFundsWrapper = $(".past-future_content").outerWidth();
-    var closedFundsMask = $('.past-future_slider-mask').outerWidth();
     var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
     var closedFundSlidesOW = $('.past-future_slider-mask').find('.past-future_slider-slide').outerWidth();
     var closedFundsTotalWidth = (closedFundSlidesN * closedFundSlidesOW);
@@ -121,11 +120,10 @@
         requestAnimationFrame: true,
         horizontal: true,
         vertical: false,
-        
         animationCallback: function(x, y) {
             $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
-            $('.past-future_slider-mask').css('margin-left', -x * (64 +closedFundsTotalWidth - closedFundsWrapper));
-        }
+            $('.past-future_slider').css('margin-left', -x * (closedFundsTotalWidth - closedFundsWrapper + 32));
+        },
     });
 
     $('.past-future_slider-wrap').on('click', '.past-future_right-arrow', function(e) {
@@ -145,6 +143,7 @@
         dd.setStep(parseInt(a)-1, b);
     });
     
+    var homeBenefitsImageWrap = $('.direct-invest_graph-wrap-div').outerWidth();
     var sp500Width = $('.direct-invest_graph').outerWidth();
     var sp500slider = new Dragdealer('home-benefits-drag-tool', {
         speed: 0.1,
@@ -152,16 +151,14 @@
         horizontal: true,
         vertical: false,
         xPrecision: sp500Width,
-        
         animationCallback: function(x, y) {
             $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.direct-invest_graph-wrap').css('margin-left', -x * (sp500Width - screenWidth +64));
+            $('.direct-invest_graph-wrap-div').css('margin-left', -x * (sp500Width - homeBenefitsImageWrap + 32));
         }
     });
 
     function dragDetector() {
         var closedFundsWrapper = $(".past-future_content").outerWidth();
-        var closedFundsMask = $('.past-future_slider-mask').outerWidth();
         var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
         var closedFundSlidesOW = $('.past-future_slider-mask').find('.past-future_slider-slide').outerWidth();
         var closedFundsTotalWidth = (closedFundSlidesN * closedFundSlidesOW);
@@ -173,15 +170,38 @@
             vertical: false,
             animationCallback: function(x, y) {
                 $('.past-future-slider-active_line').css('width', Math.round(x * 100) + '%');
-                $('.past-future_slider-mask').css('margin-left', -x * (64 +closedFundsTotalWidth - closedFundsWrapper));
-            }
+                $('.past-future_slider').css('margin-left', -x * (closedFundsTotalWidth - closedFundsWrapper + 32));
+            },
         });
+
         if(closedFundsWrapper < (closedFundsTotalWidth)){
-            $('.past-future-drag-component').css('display', 'block');
+            $('.past-future-drag-component').css('opacity', '1');
         }
         else {
-            $('.past-future-drag-component').css('display', 'none');
+            $('.past-future-drag-component').css('opacity', '0');
         }
+
+            var homeBenefitsImageWrap = $('.direct-invest_graph-wrap-div').outerWidth();
+            var sp500Width = $('.direct-invest_graph').outerWidth();
+            sp500slider = new Dragdealer('home-benefits-drag-tool', {
+                speed: 0.1,
+                requestAnimationFrame: true,
+                horizontal: true,
+                vertical: false,
+                xPrecision: sp500Width,
+                animationCallback: function(x, y) {
+                    $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
+                    $('.direct-invest_graph-wrap-div').css('margin-left', -x * (sp500Width - homeBenefitsImageWrap + 32));
+                }
+            });
+
+            if(homeBenefitsImageWrap < sp500Width){
+                $('.home-benefits_drag-element').css('opacity', '1');
+            }
+            else {
+                $('.home-benefits_drag-element').css('opacity', '0');
+            }
+        
     }
 
     dragDetector();

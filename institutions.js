@@ -146,24 +146,6 @@
         $('body').css('overflow', 'auto');
     });
 
-    var instSolutions = $('.institutional-solutions_grid').outerWidth();
-    var screenWidth = $(window).width();
-    var instSolutionsDragDealer = new Dragdealer('inst-solutions-drag', {
-        speed: 0.1,
-        requestAnimationFrame: true,
-        horizontal: true,
-        vertical: false,
-        xPrecision: instSolutions,
-        
-        callback: function (x,y ) {
-            var thisss = instSolutionsDragDealer.getValue();
-        },
-        animationCallback: function(x, y) {
-            $('.institutional_solutions_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.institutional-solutions_grid').css('margin-left', -x * (instSolutions - screenWidth + 32));
-        }
-    });
-
     $('input[type=submit]').click(function() {
         var req = $('.required-form-field');
         $('.form-field').removeClass('invalid-form-field');
@@ -189,27 +171,65 @@
         },1000)
        
     });
+    var instSolutionsWrap = $('.institutional-solutions_grid-wrap').outerWidth();
+    var instSolutions = $('.institutional-solutions_grid').outerWidth();
+    var screenWidth = $(window).width();
+    var instSolutionsDragDealer = new Dragdealer('inst-solutions-drag', {
+        speed: 0.1,
+        requestAnimationFrame: true,
+        horizontal: true,
+        vertical: false,
+        xPrecision: instSolutions,
+        
+        callback: function (x,y ) {
+            var thisss = instSolutionsDragDealer.getValue();
+        },
+        animationCallback: function(x, y) {
+            $('.institutional_solutions_drag-line-active').css('width', Math.round(x * 100) + '%');
+            $('.institutional-solutions_grid').css('margin-left', -x * (instSolutions - instSolutionsWrap + 32));
+        }
+    });
 
 
-        function dragDetector() {
-            if(instSolutions > screenWidth){
-                $('.institutional_solutions_drag-element').css('display', 'block');
+    function dragDetector() {
+        var instSolutionsWrap = $('.institutional-solutions_grid-wrap').outerWidth();
+        var instSolutions = $('.institutional-solutions_grid').outerWidth();
+        var instSolutionsDragDealer = new Dragdealer('inst-solutions-drag', {
+            speed: 0.1,
+            requestAnimationFrame: true,
+            horizontal: true,
+            vertical: false,
+            xPrecision: instSolutions,
+            
+            callback: function (x,y ) {
+                var thisss = instSolutionsDragDealer.getValue();
+            },
+            animationCallback: function(x, y) {
+                $('.institutional_solutions_drag-line-active').css('width', Math.round(x * 100) + '%');
+                $('.institutional-solutions_grid').css('margin-left', -x * (instSolutions - instSolutionsWrap + 32));
             }
+        });
+        if(instSolutions > instSolutionsWrap){
+            $('.institutional_solutions_drag-element').css('opacity', '1');
+        }
+        else{
+            $('.institutional_solutions_drag-element').css('opacity', '0');
+        }
+    }
+    dragDetector();
+    var resizeDone;
+    $(window).resize(function() {
+        clearTimeout(resizeDone);
+        resizeDone = setTimeout(doneResizing, 500);
+        
+    });
+
+    function doneResizing(){
+        screenWidth = $(window).width();
+        if(screenWidth > 991){
+            $('.animated-word, .animated-content, .animated-image, .animated-hero-visual, ._5_text_blocks, ._8_fundcards_parent, ._9_tagblock, ._9_tag_animation_parent, .animated-button, .animated-pill-button').css('opacity', '1');
         }
         dragDetector();
-        var resizeDone;
-        $(window).resize(function() {
-            clearTimeout(resizeDone);
-            resizeDone = setTimeout(doneResizing, 500);
-            
-        });
-
-        function doneResizing(){
-            screenWidth = $(window).width();
-            if(screenWidth > 991){
-                $('.animated-word, .animated-content, .animated-image, .animated-hero-visual, ._5_text_blocks, ._8_fundcards_parent, ._9_tagblock, ._9_tag_animation_parent, .animated-button, .animated-pill-button').css('opacity', '1');
-            }
-            dragDetector();
-        }
+    }
 
         

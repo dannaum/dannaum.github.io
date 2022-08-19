@@ -67,7 +67,7 @@
     }
     animationsRender();
     var screenWidth = $(window).width();
-    var homeBenefitsImageWrap = $('.private-market-value_content').outerWidth();
+    var homeBenefitsImageWrap = $('.direct-invest_graph-wrap-div').outerWidth();
     var sp500Width = $('.direct-invest_graph').outerWidth();
     var sp500slider = new Dragdealer('home-benefits-drag-tool', {
         speed: 0.1,
@@ -77,13 +77,30 @@
         xPrecision: sp500Width,
         animationCallback: function(x, y) {
             $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.direct-invest_graph-wrap').css('margin-left', -x * (sp500Width - screenWidth +64));
+            $('.direct-invest_graph-wrap-div').css('margin-left', -x * (sp500Width - homeBenefitsImageWrap + 32));
         }
     });
 
         function dragDetector() {
+            var homeBenefitsImageWrap = $('.direct-invest_graph-wrap-div').outerWidth();
+            var sp500Width = $('.direct-invest_graph').outerWidth();
+            var sp500slider = new Dragdealer('home-benefits-drag-tool', {
+                speed: 0.1,
+                requestAnimationFrame: true,
+                horizontal: true,
+                vertical: false,
+                xPrecision: sp500Width,
+                animationCallback: function(x, y) {
+                    $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
+                    $('.direct-invest_graph-wrap-div').css('margin-left', -x * (sp500Width - homeBenefitsImageWrap + 32));
+                }
+            });
+
             if(homeBenefitsImageWrap < sp500Width){
-                $('.home-benefits_drag-element').css('display', 'block');
+                $('.home-benefits_drag-element').css('opacity', '1');
+            }
+            else {
+                $('.home-benefits_drag-element').css('opacity', '0');
             }
         }
         dragDetector();
