@@ -195,7 +195,7 @@
                 }
             });
 
-            if(homeBenefitsImageWrap < (sp500Width + 32)){
+            if(homeBenefitsImageWrap < sp500Width){
                 $('.home-benefits_drag-element').css('opacity', '1');
             }
             else {
