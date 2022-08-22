@@ -187,31 +187,29 @@
     });
 
     var screenWidth = $(window).width();
-    var myChartWidth = $('#myChart').outerWidth();
-    var careersChartContent = $('.wrapper-content').outerWidth();
-    var careersChartTimeline = $('.chart-timeline').innerWidth();
-    var careersChartTimelineWrap = $('.chart-timeline_wrap').innerWidth();
-    var myChartDrag = new Dragdealer('careers-drag', {
+    var chartSlider = $('#myChart').outerWidth();
+    var timelineSlide = $('.chart-timeline_wrap').outerWidth();
+    myChartDrag = new Dragdealer('careers-drag', {
     horizontal: true,
     vertical: false,
-    xPrecision: myChartWidth,
+    xPrecision: chartSlider,
     animationCallback: function(x, y) {
-        $('#myChart').css('margin-left', -x * (myChartWidth - careersChartContent));
-        $('.chart-timeline').css('margin-left', -x * (myChartWidth - careersChartContent));
+        $('.careers-chart_drag-line-active').css('width', Math.round(x * 100) + '%');
+        $('#myChart').css('margin-left', -x * (chartSlider - timelineSlide));
+        $('.chart-timeline').css('margin-left', -x * (chartSlider - timelineSlide));
     }
     });
         function dragDetector() {
-            var myChartWidth = $('#myChart').outerWidth();
-            var careersChartContent = $('.wrapper-content').outerWidth();
-            var careersChartTimeline = $('.chart-timeline').innerWidth();
-            var careersChartTimelineWrap = $('.chart-timeline_wrap').innerWidth();
+            var chartSlider = $('#myChart').outerWidth();
+            var timelineSlide = $('.chart-timeline_wrap').outerWidth();
             myChartDrag = new Dragdealer('careers-drag', {
             horizontal: true,
             vertical: false,
-            xPrecision: myChartWidth,
+            xPrecision: chartSlider,
             animationCallback: function(x, y) {
-                $('#myChart').css('margin-left', -x * (myChartWidth - careersChartContent));
-                $('.chart-timeline').css('margin-left', -x * (myChartWidth - careersChartContent));
+                $('.careers-chart_drag-line-active').css('width', Math.round(x * 100) + '%');
+                $('#myChart').css('margin-left', -x * (chartSlider - timelineSlide));
+                $('.chart-timeline').css('margin-left', -x * (chartSlider - timelineSlide));
             }
             });
             if(careersChartContent < myChartWidth){
