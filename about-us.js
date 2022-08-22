@@ -200,8 +200,8 @@
     }
     });
         function dragDetector() {
-            var chartSlider = $('#myChart').outerWidth();
-            var timelineSlide = $('.chart-timeline_wrap').outerWidth();
+            var chartSlider = Math.round($('#myChart').outerWidth());
+            var timelineSlide = Math.round($('.chart-timeline_wrap').outerWidth());
             myChartDrag = new Dragdealer('careers-drag', {
             horizontal: true,
             vertical: false,
@@ -212,7 +212,7 @@
                 $('.chart-timeline').css('margin-left', -x * (chartSlider - timelineSlide));
             }
             });
-            if(careersChartContent < myChartWidth){
+            if(timelineSlide < chartSlider){
                 $('.careers_chart-drag-element').css('opacity', '1');
             }
             else{
