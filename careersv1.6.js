@@ -349,15 +349,15 @@
     });
     
     var chartSlider = $('#myChart').outerWidth();
-    var timelineSlide = $('.chart-timeline').outerWidth();
-    var myChartDrag = new Dragdealer('careers-drag', {
+    var timelineSlide = $('.chart-timeline_wrap').outerWidth();
+    myChartDrag = new Dragdealer('careers-drag', {
     horizontal: true,
     vertical: false,
     xPrecision: chartSlider,
     animationCallback: function(x, y) {
         $('.careers-chart_drag-line-active').css('width', Math.round(x * 100) + '%');
-        $('#myChart').css('margin-left', -x * (chartSlider/2) /16 + 'REM');
-        $('.chart-timeline').css('margin-left', -x * (timelineSlide/2) /16 + 'REM');
+        $('#myChart').css('margin-left', -x * (chartSlider - timelineSlide));
+        $('.chart-timeline').css('margin-left', -x * (chartSlider - timelineSlide));
     }
     });
 
@@ -394,18 +394,18 @@
             }
             });
             var chartSlider = $('#myChart').outerWidth();
-            var timelineSlide = $('.chart-timeline').outerWidth();
+            var timelineSlide = $('.chart-timeline_wrap').outerWidth();
             myChartDrag = new Dragdealer('careers-drag', {
             horizontal: true,
             vertical: false,
             xPrecision: chartSlider,
             animationCallback: function(x, y) {
                 $('.careers-chart_drag-line-active').css('width', Math.round(x * 100) + '%');
-                $('#myChart').css('margin-left', -x * (chartSlider/2) /16 + 'REM');
-                $('.chart-timeline').css('margin-left', -x * (timelineSlide/2) /16 + 'REM');
+                $('#myChart').css('margin-left', -x * (chartSlider - timelineSlide));
+                $('.chart-timeline').css('margin-left', -x * (chartSlider - timelineSlide));
             }
             });
-            if(timelineSlide < chartSlider){
+            if(timelineSlide < (chartSlider +1)){
                 $('.careers_chart-drag-element').css('opacity', '1');
             }
             else{
