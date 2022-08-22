@@ -170,7 +170,7 @@
         reflow: true,
         animationCallback: function(x, y) {
             $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.home-benefits_image-wrap').css('margin-left', -x * (sp500Width - homeBenefitsImageWrap + 32));
+            $('.home-benefits_image-wrap').css('margin-left', -x * (sp500Width - homeBenefitsImageWrap + 128));
         }
     });
 
@@ -295,11 +295,11 @@
                 reflow: true,
                 animationCallback: function(x, y) {
                     $('.home-benefits_drag-line-active').css('width', Math.round(x * 100) + '%');
-                    $('.home-benefits_image-wrap').css('margin-left', -x * (sp500Width - homeBenefitsImageWrap + 32));
+                    $('.home-benefits_image-wrap').css('margin-left', -x * (sp500Width - homeBenefitsImageWrap + 128));
                 }
             });
             
-            if(homeBenefitsImageWrap < sp500Width){
+            if(homeBenefitsImageWrap < (sp500Width + 32)){
                 $('.home-benefits_drag-element').css('opacity', '1');
             }
             else {

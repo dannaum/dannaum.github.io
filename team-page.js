@@ -41,7 +41,7 @@
         }
     }, 1000);
 
-    var totalTeams = $('.our-teams_slider').find('.our-teams_slider-single').length;
+        var totalTeams = $('.our-teams_slider').find('.our-teams_slider-single').length;
         var screenWidth = $(window).width();
         var ourTeamsSlider = $('.our-teams_slider-single').outerWidth();
         var ourTeamsDrag = new Dragdealer('our-team-drag', {
@@ -50,7 +50,7 @@
         xPrecision: ourTeamsSlider,
         animationCallback: function(x, y) {
             $('.our-teams_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.our-teams_slider').css('margin-left', -x * ((ourTeamsSlider * totalTeams) - screenWidth +32));
+            $('.our-teams_slider').css('margin-left', -x * ((ourTeamsSlider * totalTeams) - screenWidth + 32));
         }
         });
 
@@ -71,6 +71,22 @@
             ourTeamsDrag.setValue(parseFloat(a)-0.1, b);
 
     });
+
+    function dragDetector() {
+        var screenWidth = $(window).width();
+        var totalTeams = $('.our-teams_slider').find('.our-teams_slider-single').length;
+        var ourTeamsSlider = $('.our-teams_slider-single').outerWidth();
+        ourTeamsDrag = new Dragdealer('our-team-drag', {
+        horizontal: true,
+        vertical: false,
+        xPrecision: ourTeamsSlider,
+        animationCallback: function(x, y) {
+            $('.our-teams_drag-line-active').css('width', Math.round(x * 100) + '%');
+            $('.our-teams_slider').css('margin-left', -x * ((ourTeamsSlider * totalTeams) - screenWidth +32));
+        }
+        });
+    }
+    dragDetector();
 
     var resizeDone;
         $(window).resize(function() {

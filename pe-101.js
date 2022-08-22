@@ -34,40 +34,80 @@
         }
     }
 
-        animationsRender();
-        
-    var screenWidth = $(window).width();
+    animationsRender();
     var peBContent = $('.pe-101-content-basics').outerWidth();
-    var peCard = $('.pe-101_grid-single').outerWidth();
-    var peBCardLength = $('.pe-101_grid-4-basics').find('.pe-101_grid-single').length;
-    var peBCardsGrid = $('.pe-101_grid-4-basics').outerWidth();
-    var peSCardsGrid = $('.pe-101_grid-4-strategies').outerWidth();
-    var peSCardLength = $('.pe-101_grid-4-strategies').children().length;
+    var peBTotalWidth = $('.pe-101_grid-4-basics').outerWidth();
     var peBSlider = new Dragdealer('pe-101b-drag-tool', {
         speed: 0.1,
         requestAnimationFrame: true,
         horizontal: true,
         vertical: false,
-        xPrecision: peBCardsGrid,
-        
         animationCallback: function(x, y) {
             $('.pe-101-b_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.pe-101_grid-4-basics').css('margin-left', +x * (peBContent - peBCardsGrid));
+            $('.pe-101_grid-4-basics').css('margin-left', -x * (peBTotalWidth - peBContent));
         }
     });
 
-    var peBSlider = new Dragdealer('pe-101s-drag-tool', {
+    var peSContent = $(".pe-101-content").outerWidth();
+    var peSCardsGrid = $('.pe-101_grid-4-strategies').outerWidth();
+    var peSSlider = new Dragdealer('pe-101s-drag-tool', {
         speed: 0.1,
         requestAnimationFrame: true,
         horizontal: true,
         vertical: false,
-        xPrecision: peBCardsGrid,
-        
         animationCallback: function(x, y) {
             $('.pe-101-s_drag-line-active').css('width', Math.round(x * 100) + '%');
-            $('.pe-101_grid-4-strategies').css('margin-left', +x * (peBContent - peSCardsGrid));
+            $('.pe-101_grid-4-strategies').css('margin-left', -x * (peSCardsGrid - peSContent));
         }
     });
+
+    //dragDetector
+    function dragDetector() {
+    var peBContent = $('.pe-101-content-basics').outerWidth();
+    var peBTotalWidth = $('.pe-101_grid-4-basics').outerWidth();
+    peBSlider = new Dragdealer('pe-101b-drag-tool', {
+        speed: 0.1,
+        requestAnimationFrame: true,
+        horizontal: true,
+        vertical: false,
+        animationCallback: function(x, y) {
+            $('.pe-101-b_drag-line-active').css('width', Math.round(x * 100) + '%');
+            $('.pe-101_grid-4-basics').css('margin-left', -x * (peBTotalWidth - peBContent));
+        }
+    });
+
+    //if peBtotalWidth > peBContent
+    if(peBTotalWidth > peBContent){
+        //".pe-101-b_drag-component" opacity 1
+        $('.pe-101-b_drag-component').css('opacity', '1');
+    }
+    else {
+        $('.pe-101-b_drag-component').css('opacity', '0');
+    }
+
+    var peSContent = $(".pe-101-content").outerWidth();
+    var peSCardsGrid = $('.pe-101_grid-4-strategies').outerWidth();
+    peSSlider = new Dragdealer('pe-101s-drag-tool', {
+        speed: 0.1,
+        requestAnimationFrame: true,
+        horizontal: true,
+        vertical: false,
+        animationCallback: function(x, y) {
+            $('.pe-101-s_drag-line-active').css('width', Math.round(x * 100) + '%');
+            $('.pe-101_grid-4-strategies').css('margin-left', -x * (peSCardsGrid - peSContent));
+        }
+    });
+
+    if(peSCardsGrid > peSContent){
+        //".pe-101-b_drag-component" opacity 1
+        $('.pe-101-s_drag-component').css('opacity', '1');
+    }
+    else {
+        $('.pe-101-s_drag-component').css('opacity', '0');
+    }
+
+    }
+    dragDetector();
 
     var resizeDone;
         $(window).resize(function() {
@@ -81,4 +121,5 @@
             if(screenWidth > 991){
                 $('.animated-word, .animated-content, .animated-image, .animated-hero-visual, ._5_text_blocks, ._8_fundcards_parent, ._9_tagblock, ._9_tag_animation_parent, .animated-button, .animated-pill-button').css('opacity', '1');
             }
+            dragDetector();
         }

@@ -119,16 +119,16 @@
         auctionDrag.setStep(index);
     });
 
-    var auctionSlide = $('.secondary-auction_hover').outerWidth();
-    var auctionSlideN = $('.secondary-auction-timeline_divider').find('.secondary-auction_hover').length;
     var screenWidth = $(window).width();
     var auctionTimelineSlide = $('.auction-timeline').outerWidth();
-    var chartPrecision = $('.auction-timeline_drag-element').outerWidth();
+    var auctionSlide = $('.secondary-auction_hover').outerWidth();
+    var auctionContent = Math.round($('.secondary-auction-timeline_content').outerWidth());
+    var auctionSlideN = $('.secondary-auction-timeline_divider').find('.secondary-auction_hover').length;
+    var auctionTotalWidth = Math.round(auctionSlide * auctionSlideN);
     var auctionDrag = new Dragdealer('auction-timeline', {
     horizontal: true,
     steps: auctionSlideN,
     vertical: false,
-    xPrecision: chartPrecision,
     callback: function(x, y) {
         var steps = auctionDrag.getStep() + '';
         var stepsArray = steps.split(',');
@@ -148,28 +148,82 @@
                 }
             }
         });
-
     },
     animationCallback: function(x, y) {
         $('.auction-chart-timeline-line-active').css('width', Math.round(x * 100) + '%');
         $('.auction-timeline_drag-line-active').css('width', Math.round(x * 100) + '%');
-        $('.secondary-auction-timeline_divider').css('margin-left', -x * (auctionSlideN * auctionSlide - screenWidth) );
-        $('.auction-timeline').css('margin-left', -x * (auctionTimelineSlide - screenWidth + 128));
+        $('.secondary-auction-timeline_divider').css('margin-left', -x * (auctionTotalWidth - auctionContent) );
+        $('.auction-timeline').css('margin-left', -x * (auctionTimelineSlide - screenWidth + 64));
     }
     });
 
+    function dragDetector() {
+        var screenWidth = $(window).width();
+        var auctionTimelineSlide = $('.auction-timeline').outerWidth();
+        var auctionSlide = $('.secondary-auction_hover').outerWidth();
+        var auctionContent = Math.round($('.secondary-auction-timeline_content').outerWidth());
+        var auctionSlideN = $('.secondary-auction-timeline_divider').find('.secondary-auction_hover').length;
+        var auctionTotalWidth = Math.round(auctionSlide * auctionSlideN);
+        auctionDrag = new Dragdealer('auction-timeline', {
+        horizontal: true,
+        steps: auctionSlideN,
+        vertical: false,
+        callback: function(x, y) {
+            var steps = auctionDrag.getStep() + '';
+            var stepsArray = steps.split(',');
+            var a = stepsArray[0];
+            var b = stepsArray[1];
+            $('.auction-single-icon-wrap').each(function(index) {
+                var thisIndex = $(this).index();
+                if (thisIndex <= a) {
+                    $(this).addClass('active-auction-icon');
+                    $(this).find('.auction-timeline_icon-wrap').addClass('auction-icon_active');
+                }
+                else
+                {
+                    if (thisIndex > a) {
+                        $(this).removeClass('active-auction-icon');
+                        $(this).find('.auction-timeline_icon-wrap').removeClass('auction-icon_active');
+                    }
+                }
+            });
+        },
+        animationCallback: function(x, y) {
+            $('.auction-chart-timeline-line-active').css('width', Math.round(x * 100) + '%');
+            $('.auction-timeline_drag-line-active').css('width', Math.round(x * 100) + '%');
+            $('.secondary-auction-timeline_divider').css('margin-left', -x * (auctionTotalWidth - auctionContent) );
+            $('.auction-timeline').css('margin-left', -x * (auctionTimelineSlide - screenWidth + 64));
+        }
+        });
+        if (auctionContent < auctionTotalWidth) {
+            $('.auction-timeline_drag-component').css('opacity', 1);
+        }
+        else {
+            $('.auction-timeline_drag-component').css('opacity', 0);
+        }
+    }
+    
+    dragDetector();
     var resizeDone;
     $(window).resize(function() {
         clearTimeout(resizeDone);
         resizeDone = setTimeout(doneResizing, 500);
-        
-    });
+        });
 
     function doneResizing(){
         screenWidth = $(window).width();
         if(screenWidth > 991){
             $('.animated-word, .animated-content, .animated-image, .animated-hero-visual, ._5_text_blocks, ._8_fundcards_parent, ._9_tagblock, ._9_tag_animation_parent, .animated-button, .animated-pill-button').css('opacity', '1');
+            $('.auction-chart-hover-child').each(function() {
+                $(this).removeClass('show-action-chart-hover-child');
+            });
         }
+        else {
+            $('.auction-chart-hover-child').each(function() {
+                $(this).addClass('show-action-chart-hover-child');
+            });
+        }
+        dragDetector();
     }
 
     
