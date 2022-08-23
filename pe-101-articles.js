@@ -1,14 +1,14 @@
-$(document).ready(function() {
+$(document).ready(function () {
     //SIDEBAR GENERATOR
-    $('p:contains("start-sidebar")').each(function() {
+    $('p:contains("start-sidebar")').each(function () {
         $(this).nextUntil('p:contains("end-sidebar")').wrapAll('<div class="glossary-article-siderbar"/>');
-    }); 
+    });
 
     $('p:contains("start-sidebar")').remove();
     $('p:contains("end-sidebar")').remove();
 
     //CTA GENERATOR
-    $('p:contains("start-cta")').each(function() {
+    $('p:contains("start-cta")').each(function () {
         var ctaWrapper = $('<div class="glossary-article-cta">');
         var ctaTextWrapper = $('<div class="glossary-article-cta-text">');
         var ctaButton = $('<a href="https://app.moonfare.com/" class="button-primary">Learn More</a>');
@@ -18,13 +18,13 @@ $(document).ready(function() {
         $(this).nextUntil('p:contains("end-cta")').remove();
         $(this).after(ctaWrapper);
     });
-    
-    $(".blog-rich-text").find("h2").each(function() {
+
+    $(".blog-rich-text").find("h2").each(function () {
         var text = $(this).text();
         var textId = text.replace(/[^a-zA-Z0-9]/g, '');
         textId = textId.toLowerCase();
         $(this).attr("id", textId);
-        $('.glossary-article_navigation').append('<a href="#' + textId +'" class="glossary-article_navigation-link"><h3 class="hs7 bottom-margin-0">' + text + '</h3></a>');
+        $('.glossary-article_navigation').append('<a href="#' + textId + '" class="glossary-article_navigation-link"><h3 class="hs7 bottom-margin-0">' + text + '</h3></a>');
     });
 
     $(".glossary-article_navigation-link").first().addClass("active");
@@ -37,8 +37,8 @@ $(document).ready(function() {
         return c > b && a < d;
     });
     //window on scroll
-    $(window).on('scroll', function() {
-        $(".blog-rich-text").find("h2").each(function() {
+    $(window).on('scroll', function () {
+        $(".blog-rich-text").find("h2").each(function () {
             if ($(this).isInViewport()) {
                 var whichSection = $(this).index("h2");
                 $('.glossary-article_navigation-link').removeClass('active');
@@ -53,7 +53,7 @@ $(document).ready(function() {
         }
     }
 
-    $(window).on('resize orientationchange', function() {
+    $(window).on('resize orientationchange', function () {
         if ($(window).width() < 991) {
             $(".glossary-article_navigation").css("display", "none");
         }
@@ -65,7 +65,7 @@ $(document).ready(function() {
     var schemastring = ['CITATIONS'];
     schemastring = schemastring.toString();
     var schemas = schemastring.split(",");
-    schemas = schemas.map(function(schema) {
+    schemas = schemas.map(function (schema) {
         return '"' + schema + '"';
     });
     var script = document.createElement('script');
