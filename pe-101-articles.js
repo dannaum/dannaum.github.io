@@ -1,10 +1,23 @@
 $(document).ready(function() {
+    //SIDEBAR GENERATOR
     $('p:contains("start-sidebar")').each(function() {
         $(this).nextUntil('p:contains("end-sidebar")').wrapAll('<div class="glossary-article-siderbar"/>');
-    });
+    }); 
 
     $('p:contains("start-sidebar")').remove();
     $('p:contains("end-sidebar")').remove();
+
+    //CTA GENERATOR
+    $('p:contains("start-cta")').each(function() {
+        var ctaWrapper = $('<div class="glossary-article-cta">');
+        var ctaTextWrapper = $('<div class="glossary-article-cta-text">');
+        var ctaButton = $('<a href="https://app.moonfare.com/" class="button-primary">Learn More</a>');
+        ctaWrapper.append(ctaTextWrapper);
+        ctaWrapper.append(ctaButton);
+        $(this).nextUntil('p:contains("end-cta")').appendTo(ctaTextWrapper);
+        $(this).nextUntil('p:contains("end-cta")').remove();
+        $(this).after(ctaWrapper);
+    });
     
     $(".blog-rich-text").find("h2").each(function() {
         var text = $(this).text();

@@ -80,8 +80,8 @@
                 }
                 else if ($(".fadeup2").isInViewport()) {
                     c.play();
-                    $('.invest-your-way_item').each(function (i) {
-                        var $item = $(this).find("._8_fundcards");
+                    $(".invest-your-way_grid ._8_fundcards").each(function(i) {
+                        var $item = $(this);
                         setTimeout(function() { 
                         $item.click();
                         }, 100*i);
@@ -142,11 +142,15 @@
         }
     }
     dragDetector();
-    var resizeDone;
-    $(window).resize(function() {
-        clearTimeout(resizeDone);
-        resizeDone = setTimeout(doneResizing, 500);
-        
+        var resizeDone;
+        var cachedWidth = $(window).width();
+        $(window).resize(function(){
+            var newWidth = $(window).width();
+            if(newWidth !== cachedWidth){
+                clearTimeout(resizeDone);
+                resizeDone = setTimeout(doneResizing, 500);
+                cachedWidth = newWidth;
+            }
         });
 
     function doneResizing(){

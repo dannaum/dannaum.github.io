@@ -89,12 +89,16 @@
         }
     });
 
-        var resizeDone;
-        $(window).resize(function() {
+    var resizeDone;
+    var cachedWidth = $(window).width();
+    $(window).resize(function(){
+        var newWidth = $(window).width();
+        if(newWidth !== cachedWidth){
             clearTimeout(resizeDone);
             resizeDone = setTimeout(doneResizing, 500);
-            
-        });
+            cachedWidth = newWidth;
+        }
+    });
 
         function doneResizing(){
             screenWidth = $(window).width();

@@ -233,12 +233,16 @@
     }
 
     dragDetector();
-    var resizeDone;
-    $(window).resize(function() {
-        clearTimeout(resizeDone);
-        resizeDone = setTimeout(doneResizing, 500);
-        
-    });
+        var resizeDone;
+        var cachedWidth = $(window).width();
+        $(window).resize(function(){
+            var newWidth = $(window).width();
+            if(newWidth !== cachedWidth){
+                clearTimeout(resizeDone);
+                resizeDone = setTimeout(doneResizing, 500);
+                cachedWidth = newWidth;
+            }
+        });
 
     function doneResizing(){
             screenWidth = $(window).width();

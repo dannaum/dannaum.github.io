@@ -212,20 +212,24 @@
                 $('.chart-timeline').css('margin-left', -x * (chartSlider - timelineSlide));
             }
             });
-            if(timelineSlide < chartSlider){
+            if((timelineSlide +1) < chartSlider){
                 $('.careers_chart-drag-element').css('opacity', '1');
             }
             else{
                 $('.careers_chart-drag-element').css('opacity', '0');
             }
         }
-
+        
         dragDetector();
         var resizeDone;
-        $(window).resize(function() {
-            clearTimeout(resizeDone);
-            resizeDone = setTimeout(doneResizing, 500);
-            
+        var cachedWidth = $(window).width();
+        $(window).resize(function(){
+            var newWidth = $(window).width();
+            if(newWidth !== cachedWidth){
+                clearTimeout(resizeDone);
+                resizeDone = setTimeout(doneResizing, 500);
+                cachedWidth = newWidth;
+            }
         });
 
         function doneResizing(){
