@@ -126,9 +126,9 @@ function animationsRender() {
 animationsRender();
 
 var screenWidth = $(window).width();
-var closedFundsWrapper = $(".past-future_content").outerWidth();
+var closedFundsWrapper = Math.round($(".past-future_content").outerWidth());
 var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
-var closedFundSlidesOW = $('.past-future_slider-mask').find('.past-future_slider-slide').outerWidth();
+var closedFundSlidesOW = Math.round($('.past-future_slider-mask').find('.past-future_slider-slide').outerWidth());
 var closedFundsTotalWidth = (closedFundSlidesN * closedFundSlidesOW);
 var dd = new Dragdealer('content-scroller', {
     steps: closedFundSlidesN,
@@ -261,9 +261,9 @@ else {
 }
 
 function dragDetector() {
-    var closedFundsWrapper = $(".past-future_content").outerWidth();
+    var closedFundsWrapper = Math.round($(".past-future_content").outerWidth());
     var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
-    var closedFundSlidesOW = $('.past-future_slider-mask').find('.past-future_slider-slide').outerWidth();
+    var closedFundSlidesOW = Math.round($('.past-future_slider-mask').find('.past-future_slider-slide').outerWidth());
     var closedFundsTotalWidth = (closedFundSlidesN * closedFundSlidesOW);
     dd = new Dragdealer('content-scroller', {
         steps: closedFundSlidesN,
