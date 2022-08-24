@@ -129,7 +129,7 @@ var screenWidth = $(window).width();
 var closedFundsWrapper = Math.round($(".past-future_content").outerWidth());
 var closedFundSlidesN = $('.past-future_slider-mask').find('.past-future_slider-slide').length;
 var closedFundSlidesOW = Math.round($('.past-future_slider-mask').find('.past-future_slider-slide').outerWidth());
-var closedFundsTotalWidth = (closedFundSlidesN * closedFundSlidesOW);
+var closedFundsTotalWidth = Math.round($('.past-future_slider-mask').outerWidth());
 var dd = new Dragdealer('content-scroller', {
     steps: closedFundSlidesN,
     speed: 0.1,
@@ -262,9 +262,7 @@ else {
 
 function dragDetector() {
     var closedFundsWrapper = Math.round($(".past-future_content").outerWidth());
-    var closedFundsTotalWidth = $('.past-future_slider-mask').outerWidth();
-    var closedFundsTotalWidth = $('.past-future_slider-mask').outerWidth();
-    console.log(closedFundsTotalWidth);
+    var closedFundsTotalWidth = Math.round($('.past-future_slider-mask').outerWidth());
     dd = new Dragdealer('content-scroller', {
         steps: closedFundSlidesN,
         speed: 0.1,
