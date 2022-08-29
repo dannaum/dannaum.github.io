@@ -146,7 +146,6 @@ $('.knowledge-center_category-tag').on('click', function () {
     }
 });
 
-dragDetector();
 var resizeDone;
 var cachedWidth = $(window).width();
 $(window).resize(function () {

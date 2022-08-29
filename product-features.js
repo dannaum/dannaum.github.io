@@ -111,7 +111,6 @@ observeTransform(document.querySelector('.product-features_hero-slider-slide'), 
     });
 });
 
-dragDetector();
 var resizeDone;
 var cachedWidth = $(window).width();
 $(window).resize(function () {
