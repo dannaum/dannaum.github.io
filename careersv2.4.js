@@ -599,7 +599,7 @@ if (screenWidth > 991) {
 var openPosDiv = $('#open-pos-div').offset().top;
 
 //on click of ".careers_hero-cta"
-$(".careers_hero-cta").click(function () {
+$("#careers_hero-cta").click(function () {
     //scroll to #open-pos-div
     $('html, body').animate({
         scrollTop: openPosDiv
