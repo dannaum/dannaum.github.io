@@ -48,6 +48,8 @@ $('.form-field-empty').on('input', function () {
     var inputValue = $(this).val().toLowerCase();
     //for each ".glossary-search-result"
     $('.glossary-search-result').each(function () {
+        //get length of this
+        var length = $('.glossary-search-results').children().length;
         //get the text of this ".glossary-search-result"
         var text = $(this).text().toLowerCase();
         //if the text of this ".glossary-search-result" contains the input value
@@ -57,6 +59,13 @@ $('.form-field-empty').on('input', function () {
         } else {
             //hide this ".glossary-search-result"
             $(this).css('display', 'none');
+        }
+        //if all of thius ".glossary-search-result" are hidden
+        if (length == $('.glossary-search-result:hidden').length) {
+            $('.no-results').css('display', 'block');
+        }
+        else {
+            $('.no-results').css('display', 'none');
         }
     });
     //if the input value is empty
@@ -209,3 +218,37 @@ $('.hs5').each(function () {
         }, 1000);
     }
 });
+
+function dragDetector() {
+    var navbarHeight = $(".navbar_section").outerHeight();
+    var glossaryNavbarHeight = $(".glossary-navigation").outerHeight();
+    $(".glossary-navigation").css("top", navbarHeight);
+
+}
+
+dragDetector();
+var resizeDone;
+var cachedWidth = $(window).width();
+$(window).resize(function () {
+    var newWidth = $(window).width();
+    if (newWidth !== cachedWidth) {
+        clearTimeout(resizeDone);
+        resizeDone = setTimeout(doneResizing, 500);
+        cachedWidth = newWidth;
+    }
+});
+
+function doneResizing() {
+    screenWidth = $(window).width();
+    if (screenWidth > 991) {
+        $('.animated-word, .animated-content, .animated-image, .animated-hero-visual, ._5_text_blocks, ._8_fundcards_parent, ._9_tagblock, ._9_tag_animation_parent, .animated-button, .animated-pill-button').css('opacity', '1');
+    }
+    dragDetector();
+}
+function pageLoaded() {
+    screenWidth = $(window).width();
+    if (screenWidth <= 991) {
+        $('.animated-word, .animated-content, .animated-image, .animated-hero-visual, ._5_text_blocks, ._8_fundcards_parent, ._9_tagblock, ._9_tag_animation_parent, .animated-button, .animated-pill-button').css('opacity', '1');
+    }
+}
+pageLoaded();
