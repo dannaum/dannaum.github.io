@@ -270,7 +270,6 @@ if ($(window).width() > 991) {
     );
 
   $(".home-pe-101_selector").click(function () {
-    var pe101Icon = $(this).find(".home-pe-101_selector-icon");
     if ($(this).hasClass("active")) {
       $(".home-pe-101_selector").removeClass("active");
       $(".home-pe-101_wrappers").css("display", "none");
@@ -278,8 +277,6 @@ if ($(window).width() > 991) {
         .find(".paragraph-small-copy")
         .css("opacity", "0");
     } else {
-      $(".home-pe-101_selector-icon").removeClass("active");
-      $(pe101Icon).addClass("active");
       $(".home-pe-101_selector")
         .find(".paragraph-small-copy")
         .css("opacity", "0");
