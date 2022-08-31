@@ -339,3 +339,13 @@ readingBlock.each(function () {
         readingTime.text(readingTime.text().replace("mins", "分钟"));
     }
 });
+
+//each p
+$("h2, h3, p").each(function () {
+    //get this html
+    var html = $(this).html();
+    //if this contains "&lt;NEWLINE&gt;" replace with "<br>"
+    if (html.indexOf("&lt;NEWLINE&gt;") > -1) {
+      $(this).html(html.replace(/&lt;NEWLINE&gt;/g, "<br>"));
+    }
+  });
