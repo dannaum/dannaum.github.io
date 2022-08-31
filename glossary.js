@@ -172,7 +172,7 @@ $('.glossary-search-result').on('click', function () {
             //scroll to this ".hs5"
             $('html, body').animate({
                 scrollTop: $(this).offset().top - navbarHeight - glossaryNavbarHeight
-            }, 1000);
+            }, 2000);
         }
     });
     $('.form-field-empty').val('');
@@ -185,7 +185,7 @@ $(".countable").on("click", function () {
     //scroll to glossary-letter-content at index
     $('html, body').animate({
         scrollTop: $(".glossary-letter-content").eq(index).offset().top - navbarHeight - glossaryNavbarHeight
-    }, 1000);
+    }, 2500);
 });
 
 var getUrlParameter = function getUrlParameter(sParam) {
@@ -215,7 +215,7 @@ $('.hs5').each(function () {
     if (term == tech) {
         $('html, body').animate({
             scrollTop: $(this).offset().top - navbarHeight - glossaryNavbarHeight
-        }, 1000);
+        }, 2000);
     }
 });
 
