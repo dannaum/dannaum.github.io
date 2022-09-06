@@ -1,11 +1,8 @@
 var navbarHeight = $('.navbar-section').outerHeight();
 var videoPlayerPos = $('#video-player').offset().top;
 
-
-//for each ".women-pe_video-slider-slide"
 $('.women-pe_video-slider-slide').each(function (index, element) {
     var index = $(this).index('.women-pe_video-slider-slide')
-    //this find ".women-pe_episode-tag-number" text(index +1)
     $(this).find('.women-pe_episode-tag-number').text(index + 1);
 });
 
@@ -28,12 +25,8 @@ $(".women-pe_single-video").click(function (e) {
     }, 500);
 });
 
-//on click of "#play-video"
 $("#play-video").click(function (e) {
-    //#video-player play
     $("#video-player")[0].play();
-    //#video-player controls
     $("#video-player").attr("controls", "controls");
-    //hide #play-video
     $("#play-video").hide();
 });
