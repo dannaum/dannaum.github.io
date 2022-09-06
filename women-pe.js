@@ -2,7 +2,7 @@ var navbarHeight = $('.navbar-section').outerHeight();
 var videoPlayerPos = $('#video-player').offset().top;
 
 $('.women-pe_video-slider-slide').each(function (index, element) {
-    var index = $(this).index('.women-pe_video-slider-slide')
+    var index = $(this).index('.women-pe_video-slider-slide');
     $(this).find('.women-pe_episode-tag-number').text(index + 1);
 });
 
