@@ -384,7 +384,7 @@ function pageLoaded() {
 pageLoaded();
 
 $("#start-email-form").submit(function (e) {
-  e.preventDefault();
+  return false;
 });
 $("#start-email-input").focus(function () {
   $("#start-disclaimer").animate({ opacity: 1 }, 200);
