@@ -129,7 +129,9 @@ var closedFundSlidesN = $(".past-future_slider-mask").find(
 var closedFundSlidesOW = Math.round(
   $(".past-future_slider-mask").find(".past-future_slider-slide").outerWidth()
 );
-var closedFundsTotalWidth = closedFundSlidesN * closedFundSlidesOW;
+var closedFundsTotalWidth = Math.round(
+  $(".past-future_slider-mask").outerWidth()
+);
 var dd = new Dragdealer("content-scroller", {
   steps: closedFundSlidesN,
   speed: 0.1,
@@ -383,94 +385,27 @@ function pageLoaded() {
 }
 pageLoaded();
 
-function checkCurrencies() {
-  var paragraphCurrency = document.getElementsByTagName("p");
-  var country = getCookie("country-based");
-  if (country === "US") {
-    for (var i = 0; i < paragraphCurrency.length; i++) {
-      if (paragraphCurrency[i].innerHTML.indexOf("€50,000") > -1) {
-        paragraphCurrency[i].innerHTML = paragraphCurrency[i].innerHTML.replace(
-          "€50,000",
-          "$125,000"
-        );
-      }
-      if (paragraphCurrency[i].innerHTML.indexOf("€2 billion") > -1) {
-        paragraphCurrency[i].innerHTML = paragraphCurrency[i].innerHTML.replace(
-          "€2 billion",
-          "$2 billion"
-        );
-      }
-    }
-    $("#email-form").attr("redirect", "https://us.moonfare.com/registration");
+var readingBlock = $(".pe-101_reading-time-block");
+readingBlock.each(function () {
+  var readingTime = $(this).find(".paragraph-small");
+  if (readingTime.text().indexOf("mins") > -1) {
+    readingTime.text(readingTime.text().replace("mins", "分鐘"));
   }
-  if (country === "CH") {
-    for (var i = 0; i < paragraphCurrency.length; i++) {
-      if (paragraphCurrency[i].innerHTML.indexOf("€50,000") > -1) {
-        paragraphCurrency[i].innerHTML = paragraphCurrency[i].innerHTML.replace(
-          "€50,000",
-          "CHF 50,000"
-        );
-      }
-      if (paragraphCurrency[i].innerHTML.indexOf("€2 billion") > -1) {
-        paragraphCurrency[i].innerHTML = paragraphCurrency[i].innerHTML.replace(
-          "€2 billion",
-          "CHF 2 billion"
-        );
-      }
-    }
-  }
-  if (country === "GB") {
-    for (var i = 0; i < paragraphCurrency.length; i++) {
-      if (paragraphCurrency[i].innerHTML.indexOf("€50,000") > -1) {
-        paragraphCurrency[i].innerHTML = paragraphCurrency[i].innerHTML.replace(
-          "€50,000",
-          "£50,000"
-        );
-      }
-      if (paragraphCurrency[i].innerHTML.indexOf("€2 billion") > -1) {
-        paragraphCurrency[i].innerHTML = paragraphCurrency[i].innerHTML.replace(
-          "€2 billion",
-          "£1.7 billion"
-        );
-      }
-    }
-  }
-  if (country === "HK") {
-    for (var i = 0; i < paragraphCurrency.length; i++) {
-      if (paragraphCurrency[i].innerHTML.indexOf("€50,000") > -1) {
-        paragraphCurrency[i].innerHTML = paragraphCurrency[i].innerHTML.replace(
-          "€50,000",
-          "$60,000"
-        );
-      }
-      if (paragraphCurrency[i].innerHTML.indexOf("€2 billion") > -1) {
-        paragraphCurrency[i].innerHTML = paragraphCurrency[i].innerHTML.replace(
-          "€2 billion",
-          "$2 billion"
-        );
-      }
-    }
-  }
-  if (country === "SG") {
-    for (var i = 0; i < paragraphCurrency.length; i++) {
-      if (paragraphCurrency[i].innerHTML.indexOf("€50,000") > -1) {
-        paragraphCurrency[i].innerHTML = paragraphCurrency[i].innerHTML.replace(
-          "€50,000",
-          "SGD 80,000"
-        );
-      }
-      if (paragraphCurrency[i].innerHTML.indexOf("€2 billion") > -1) {
-        paragraphCurrency[i].innerHTML = paragraphCurrency[i].innerHTML.replace(
-          "€2 billion",
-          "SGD 2.9 billion"
-        );
-      }
-    }
-  }
-}
-checkCurrencies();
+});
 
+//each p
+$("h2, h3, p").each(function () {
+  //get this html
+  var html = $(this).html();
+  //if this contains "&lt;NEWLINE&gt;" replace with "<br>"
+  if (html.indexOf("&lt;NEWLINE&gt;") > -1) {
+    $(this).html(html.replace(/&lt;NEWLINE&gt;/g, "<br>"));
+  }
+});
 
+$("#start-email-form").submit(function (e) {
+  e.preventDefault();
+});
 $("#start-email-input").focus(function () {
   $("#start-disclaimer").animate({ opacity: 1 }, 200);
   $(this).addClass("start-input");
