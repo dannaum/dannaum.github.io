@@ -129,9 +129,7 @@ var closedFundSlidesN = $(".past-future_slider-mask").find(
 var closedFundSlidesOW = Math.round(
   $(".past-future_slider-mask").find(".past-future_slider-slide").outerWidth()
 );
-var closedFundsTotalWidth = Math.round(
-  $(".past-future_slider-mask").outerWidth()
-);
+var closedFundsTotalWidth = closedFundSlidesN * closedFundSlidesOW;
 var dd = new Dragdealer("content-scroller", {
   steps: closedFundSlidesN,
   speed: 0.1,
@@ -385,20 +383,15 @@ function pageLoaded() {
 }
 pageLoaded();
 
-var readingBlock = $(".pe-101_reading-time-block");
-readingBlock.each(function () {
-  var readingTime = $(this).find(".paragraph-small");
-  if (readingTime.text().indexOf("mins") > -1) {
-    readingTime.text(readingTime.text().replace("mins", "分鐘"));
-  }
+$("#start-email-form").submit(function (e) {
+  e.preventDefault();
+});
+$("#start-email-input").focus(function () {
+  $("#start-disclaimer").animate({ opacity: 1 }, 200);
+  $(this).addClass("start-input");
 });
 
-//each p
-$("h2, h3, p").each(function () {
-  //get this html
-  var html = $(this).html();
-  //if this contains "&lt;NEWLINE&gt;" replace with "<br>"
-  if (html.indexOf("&lt;NEWLINE&gt;") > -1) {
-    $(this).html(html.replace(/&lt;NEWLINE&gt;/g, "<br>"));
-  }
+$("#start-email-input").blur(function () {
+  $("#start-disclaimer").animate({ opacity: 0 }, 200);
+  $(this).removeClass("start-input");
 });
