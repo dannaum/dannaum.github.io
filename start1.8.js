@@ -474,9 +474,9 @@ function checkCurrencies() {
 checkCurrencies();
 
 $("#start-email-form").submit(function (e) {
+    window.location.href = "https://app.moonfare.com/registration";
   return false;
   preventDefault(e);
-  window.location.href = "https://app.moonfare.com";
 });
 $("#start-email-input").focus(function () {
   $("#start-disclaimer").animate({ opacity: 1 }, 200);

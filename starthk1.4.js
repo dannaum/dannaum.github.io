@@ -389,7 +389,7 @@ var readingBlock = $(".pe-101_reading-time-block");
 readingBlock.each(function () {
   var readingTime = $(this).find(".paragraph-small");
   if (readingTime.text().indexOf("mins") > -1) {
-    readingTime.text(readingTime.text().replace("mins", "分钟"));
+    readingTime.text(readingTime.text().replace("mins", "分鐘"));
   }
 });
 
@@ -404,9 +404,9 @@ $("h2, h3, p").each(function () {
 });
 
 $("#start-email-form").submit(function (e) {
+    window.location.href = "https://app.moonfare.com/registration";
   return false;
   preventDefault(e);
-  window.location.href = "https://app.moonfare.com";
 });
 $("#start-email-input").focus(function () {
   $("#start-disclaimer").animate({ opacity: 1 }, 200);
