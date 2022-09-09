@@ -384,6 +384,7 @@ function pageLoaded() {
 pageLoaded();
 
 $("#start-email-form").submit(function (e) {
+  window.location.href = "https://app.moonfare.com/registration";
   return false;
 });
 $("#start-email-input").focus(function () {

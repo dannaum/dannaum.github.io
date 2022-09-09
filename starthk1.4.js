@@ -404,7 +404,7 @@ $("h2, h3, p").each(function () {
 });
 
 $("#start-email-form").submit(function (e) {
-    window.location.href = "https://app.moonfare.com/registration";
+  window.location.href = "https://app.moonfare.com/registration";
   return false;
   preventDefault(e);
 });
