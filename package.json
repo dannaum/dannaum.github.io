@@ -1,0 +1,19 @@
+{
+  "name": "mf_v-c",
+  "version": "1.0.0",
+  "description": "",
+  "main": "[GLOBAL]cookie-detector.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dannaum/mf_v-c.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dannaum/mf_v-c/issues"
+  },
+  "homepage": "https://github.com/dannaum/mf_v-c#readme"
+}
