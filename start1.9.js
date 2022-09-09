@@ -401,10 +401,11 @@ function checkCurrencies() {
         );
       }
     }
-    $("#start-email-form").attr(
-      "redirect",
-      "https://us.moonfare.com/registration"
-    );
+    $("#start-email-form").submit(function (e) {
+      window.location.href = "https://us.moonfare.com/registration";
+      return false;
+      preventDefault(e);
+    });
   }
   if (country === "CH") {
     for (var i = 0; i < paragraphCurrency.length; i++) {
@@ -474,10 +475,15 @@ function checkCurrencies() {
 checkCurrencies();
 
 $("#start-email-form").submit(function (e) {
-  window.location.href = "https://app.moonfare.com";
+  var country = getCookie("country-based");
+  if (country == "US") {
+    window.location.href = "https://us.moonfare.com/registration";
+  } else {
+    window.location.href = "https://app.moonfare.com/registration";
+  }
   return false;
-  preventDefault(e);
 });
+
 $("#start-email-input").focus(function () {
   $("#start-disclaimer").animate({ opacity: 1 }, 200);
   $(this).addClass("start-input");
