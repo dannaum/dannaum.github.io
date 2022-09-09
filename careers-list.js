@@ -9,6 +9,7 @@ function animationsRender() {
 
     if ($(window).width() > 991) {
 
+		
         var a = anime.timeline({ loop: !1, autoplay: !1 });
         a.add({
             targets: ".fadeup0 .letter",
