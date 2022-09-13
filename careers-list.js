@@ -227,9 +227,6 @@ $('#send-resume').click(function () {
 
 
 function dragDetector() {
-    if (careersChartContent < myChartWidth) {
-        $('.careers_chart-drag-element').css('display', 'block');
-    }
 }
 
 dragDetector();
