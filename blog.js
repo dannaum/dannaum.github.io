@@ -77,16 +77,53 @@ $('.knowledge-center_category-tag').on('click', function () {
                 $(this).css('display', 'block');
             }
             else if (tag == 'all') {
+				$('#blog-load-more').css('display', 'block');
                 $(this).closest('.single-blog_item').css('display', 'block');
                 $('.blog-hero_article-wrapper').css('display', 'block');
                 $('.blog-articles_section').css('display', 'block');
                 $('.blog-articles_section-search').css('display', 'none');
+				blogItems.each(function () {
+					$(this).removeClass("filtered-item");
+					if ($(this).index() > 5) {
+						$(this).css('display', 'none');
+					}
+					else
+					{
+						$(this).css('display', 'block');
+						$(this).addClass('filtered-item');
+					}
+				});
             }
             else {
                 $(this).css('display', 'none');
             }
         });
     }
+});
+
+var blogItems = $('.blog-static-results_grid').find('.single-blog_item');
+blogItems.each(function () {
+	if ($(this).index() > 5) {
+		$(this).css('display', 'none');
+	}
+	else
+	{
+		$(this).css('display', 'block');
+		$(this).addClass('filtered-item');
+	}
+});
+
+$('#blog-load-more').on('click', function () {
+    var lastIndex = $('.filtered-item:visible').last().index('.filtered-item');
+    $(blogItems).each(function () {
+        if ($(this).index() > 5 && $(this).index() < lastIndex + 7) {
+            $(this).css('display', 'block');
+			$(this).addClass('filtered-item');
+        }
+    });
+	if ($(blogItems).last().index('.filtered-item') == lastIndex) {
+		$('#blog-load-more').css('display', 'none');
+	}
 });
 
 var resizeDone;
