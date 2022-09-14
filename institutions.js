@@ -146,6 +146,17 @@ $('.popup_close-button').on('click', function () {
     $('body').css('overflow', 'auto');
 });
 
+//on click of ".popup_main" but not children
+$(".popup_main").on("click", (e) => {
+	if (e.target !== e.currentTarget) return;
+	// popup_main animate opacity from 100 to 0
+	$(".popup_main").animate({ opacity: 0 }, 500);
+	setTimeout(() => {
+		$(".popup_main").toggle();
+	}, 500);
+	$("body").css("overflow", "auto");
+});
+
 $('input[type=submit]').click(function () {
     var req = $('.required-form-field');
     $('.form-field').removeClass('invalid-form-field');
