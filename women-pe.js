@@ -61,7 +61,7 @@ animationsRender(),
       .text(e + 1);
   });
 let videoPlayerPos = $("#video-player").offset().top,
-  navbarHeight = $(".navbar_section").outerHeight();
+navbarHeight = $(".navbar_section").outerHeight();
 const video = $("#video-player").get(0);
 $("#video-player").click(() => {
   if (video.paused) {
