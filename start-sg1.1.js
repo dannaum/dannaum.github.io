@@ -17,9 +17,7 @@ for (
     '$1<span class="letter">$2</span>'
   );
 }
-
 var aPlayed = false;
-
 function animationsRender() {
   if ($(window).width() > 991) {
     var a = anime.timeline({ loop: !1, autoplay: !1 });
@@ -59,9 +57,9 @@ function animationsRender() {
       },
     });
 
-    var c = anime.timeline({ loop: !1, autoplay: !1 });
-    c.add({
-      targets: ".fadeup2 .letter",
+    var fd5 = anime.timeline({ loop: !1, autoplay: !1 });
+    fd5.add({
+      targets: ".fadeup5 .letter",
       translateY: [100, 0],
       translateZ: 0,
       opacity: [0, 1],
@@ -69,13 +67,12 @@ function animationsRender() {
       duration: 800,
       delay: (b, a) => 300 + 30 * a,
       begin() {
-        $(".fadeup2").css("opacity", "1");
+        $(".fadeup5").css("opacity", "1");
       },
     });
-
-    var d = anime.timeline({ loop: !1, autoplay: !1 });
-    d.add({
-      targets: ".fadeup3 .letter",
+    var petitle = anime.timeline({ loop: !1, autoplay: !1 });
+    petitle.add({
+      targets: ".fadeuppe .letter",
       translateY: [100, 0],
       translateZ: 0,
       opacity: [0, 1],
@@ -83,10 +80,11 @@ function animationsRender() {
       duration: 800,
       delay: (b, a) => 300 + 30 * a,
       begin() {
-        $(".fadeup3").css("opacity", "1");
+        $(".fadeuppe").css("opacity", "1");
       },
     });
 
+    var viewedSPGraph = false;
     var heroVisualScrollAdd;
     var heroVisual = $(".home-page_hero-visual");
     var heroVisualWidth = heroVisual.width();
@@ -96,33 +94,107 @@ function animationsRender() {
       heroVisual.width(heroVisualScrollAdd + heroVisualWidth);
       if ($(".fadeup1").isInViewport()) {
         b.play();
-      } else if ($(".fadeup2").isInViewport()) {
-        c.play();
+      } else if ($(".home-benefits_image-title").isInViewport()) {
+        if (!viewedSPGraph) {
+          const chart = new Chart(ctx, config);
+          viewedSPGraph = true;
+        } else if (viewedSPGraph) {
+        }
+      } else if ($(".fadeup5").isInViewport()) {
+        fd5.play();
+        //timeout 500 ms
         setTimeout(function () {
-          $(".institutional-solutions_single-card").each(function (i) {
+          $(".past-future_slider-slide").each(function (i) {
             var $item = $(this).find("._8_fundcards");
             setTimeout(function () {
               $item.click();
             }, 100 * i);
           });
         }, 500);
-      } else if ($(".fadeup3").isInViewport()) {
-        d.play();
-      } else if ($(".partners-logos_img").isInViewport()) {
-        $(".partners-logos_img").each(function (i) {
-          var $item = $(this);
-          setTimeout(function () {
-            $item.click();
-          }, 100 * i);
-        });
+      } else if ($(".fadeuppe").isInViewport()) {
+        petitle.play();
       }
     });
+  } else {
+    const chart = new Chart(ctx, config);
   }
 }
-
 animationsRender();
 
-//on click of .book-demo
+var screenWidth = $(window).width();
+var closedFundsWrapper = Math.round($(".past-future_content").outerWidth());
+var closedFundSlidesN = $(".past-future_slider-mask").find(
+  ".past-future_slider-slide"
+).length;
+var closedFundSlidesOW = Math.round(
+  $(".past-future_slider-mask").find(".past-future_slider-slide").outerWidth()
+);
+var closedFundsTotalWidth = Math.round(
+  $(".past-future_slider-mask").outerWidth()
+);
+var dd = new Dragdealer("content-scroller", {
+  steps: closedFundSlidesN,
+  speed: 0.1,
+  requestAnimationFrame: true,
+  horizontal: true,
+  vertical: false,
+  animationCallback: function (x, y) {
+    $(".past-future-slider-active_line").css(
+      "width",
+      Math.round(x * 100) + "%"
+    );
+    $(".past-future_slider").css(
+      "margin-left",
+      -x * (closedFundsTotalWidth - closedFundsWrapper + 32)
+    );
+  },
+});
+
+$(".past-future_slider-wrap").on(
+  "click",
+  ".past-future_right-arrow",
+  function (e) {
+    var steps = dd.getStep() + "";
+    var stepsArray = steps.split(",");
+    var a = stepsArray[0];
+    var b = stepsArray[1];
+    dd.setStep(parseInt(a) + 1, b);
+  }
+);
+
+$(".past-future_slider-wrap").on(
+  "click",
+  ".past-future_left-arrow",
+  function (e) {
+    var steps = dd.getStep() + "";
+    var stepsArray = steps.split(",");
+    var a = stepsArray[0];
+    var b = stepsArray[1];
+    dd.setStep(parseInt(a) - 1, b);
+  }
+);
+
+var homeBenefitsImageWrap = $(".home-benefits-section").outerWidth();
+var sp500Width = $(".home-benefits_image").outerWidth();
+var sp500slider = new Dragdealer("home-benefits-drag-tool", {
+  speed: 0.1,
+  requestAnimationFrame: true,
+  horizontal: true,
+  vertical: false,
+  xPrecision: sp500Width,
+  reflow: true,
+  animationCallback: function (x, y) {
+    $(".home-benefits_drag-line-active").css(
+      "width",
+      Math.round(x * 100) + "%"
+    );
+    $(".home-benefits_image-wrap").css(
+      "margin-left",
+      -x * (sp500Width - homeBenefitsImageWrap + 128)
+    );
+  },
+});
+
 $(".book-demo").on("click", function () {
   //popup_main animate opacity from 0 to 100
   $(".popup_main").animate({ opacity: 1 }, 500).toggle();
@@ -150,89 +222,147 @@ $(".popup_main").on("click", (e) => {
   $("body").css("overflow", "auto");
 });
 
-$("input[type=submit]").click(function () {
-  var req = $(".required-form-field");
-  $(".form-field").removeClass("invalid-form-field");
-  $.each(req, function (e) {
-    var curr_val = $(this).val();
-    if (!curr_val) {
-      $(this).addClass("invalid-form-field");
-      $("html, body").animate(
-        {
-          // added for scrolling purposes
-          scrollTop: $(this).offset().top - 100,
-        },
-        -200
-      );
-      return false;
+$(".alt-single-press_wrap").each(function () {
+  var parent_index = $(this).parent().index();
+  $(this).attr("data-testid", "alt-single-press-wrap-" + parent_index);
+});
+
+$(".past-future_single-card").each(function () {
+  var parent_index = $(this).parent().index();
+  $(this).attr("data-testid", "closed-funds-card-" + parent_index);
+});
+
+$(".testimonials_slider-slide")
+  .eq(0)
+  .find(".hs5")
+  .addClass("current-testimonial-quote"),
+  $(".testimonials_click").click(function () {
+    $(".hs5").removeClass("current-testimonial-quote");
+    var a = $(".testimonials_slider-nav")
+      .find(".w-slider-dot.w-active")
+      .index();
+    $(".testimonials_slider-slide")
+      .eq(a)
+      .find(".hs5")
+      .addClass("current-testimonial-quote");
+  });
+
+if ($(window).width() > 991) {
+  $(".home-pe-101_wrappers").eq(1).css("display", "none");
+  $(".home-pe-101_wrappers").eq(2).css("display", "none");
+  $(".home-pe-101_selector").hover(function () {
+    $(this).siblings().removeClass("active");
+    $(this).addClass("active");
+    $(".home-pe-101_selector")
+      .find(".paragraph-small-copy")
+      .css("opacity", "0");
+    $(this).find(".paragraph-small-copy").css("opacity", "1");
+    var index = $(this).index();
+    $(".home-pe-101_wrappers").css("display", "none");
+    $(".home-pe-101_wrappers").eq(index).css("display", "block");
+  });
+} else {
+  var htmlCards = $(".home-pe-101_wrappers").eq(0).html();
+  var htmlCards1 = $(".home-pe-101_wrappers").eq(1).html();
+  var htmlCards2 = $(".home-pe-101_wrappers").eq(2).html();
+  $(".home-pe-101_wrappers").remove();
+  $(".home-pe-101_selector")
+    .eq(0)
+    .after('<div class="home-pe-101_wrappers">' + htmlCards + "</div>");
+  $(".home-pe-101_selector")
+    .eq(1)
+    .after(
+      '<div class="home-pe-101_wrappers hidden-div">' + htmlCards1 + "</div>"
+    );
+  $(".home-pe-101_selector")
+    .eq(2)
+    .after(
+      '<div class="home-pe-101_wrappers hidden-div">' + htmlCards2 + "</div>"
+    );
+
+  $(".home-pe-101_selector").click(function () {
+    if ($(this).hasClass("active")) {
+      $(".home-pe-101_selector").removeClass("active");
+      $(".home-pe-101_wrappers").css("display", "none");
+      $(".home-pe-101_selector")
+        .find(".paragraph-small-copy")
+        .css("opacity", "0");
+    } else {
+      $(".home-pe-101_selector")
+        .find(".paragraph-small-copy")
+        .css("opacity", "0");
+      $(".home-pe-101_selector").removeClass("active");
+      $(this).addClass("active");
+      $(this).find(".paragraph-small-copy").css("opacity", "1");
+      var index = $(this).index(".home-pe-101_selector");
+      $(".home-pe-101_wrappers").css("display", "none");
+      $(".home-pe-101_wrappers").each(function () {
+        var index1 = $(this).index(".home-pe-101_wrappers");
+        if (index1 == index) {
+          $(this).css("display", "block");
+        } else {
+          $(this).css("display", "none");
+        }
+      });
     }
   });
-});
-
-$("#hubspot-form").submit(function () {
-  $("html,body").animate(
-    {
-      scrollTop: $("#snd-msg-form").offset().top - $(window).height() / 2,
-    },
-    1000
-  );
-  setTimeout(function () {
-    $(".form-field").delay(2000).val("");
-  }, 1000);
-});
-var instSolutionsWrap = $(".institutional-solutions_grid-wrap").outerWidth();
-var instSolutions = $(".institutional-solutions_grid").outerWidth();
-var screenWidth = $(window).width();
-var instSolutionsDragDealer = new Dragdealer("inst-solutions-drag", {
-  speed: 0.1,
-  requestAnimationFrame: true,
-  horizontal: true,
-  vertical: false,
-  xPrecision: instSolutions,
-
-  callback: function (x, y) {
-    var thisss = instSolutionsDragDealer.getValue();
-  },
-  animationCallback: function (x, y) {
-    $(".institutional_solutions_drag-line-active").css(
-      "width",
-      Math.round(x * 100) + "%"
-    );
-    $(".institutional-solutions_grid").css(
-      "margin-left",
-      -x * (instSolutions - instSolutionsWrap + 32)
-    );
-  },
-});
+  $(".home-pe-101_wrappers").eq(0).css("display", "block");
+}
 
 function dragDetector() {
-  var instSolutionsWrap = $(".institutional-solutions_grid-wrap").outerWidth();
-  var instSolutions = $(".institutional-solutions_grid").outerWidth();
-  var instSolutionsDragDealer = new Dragdealer("inst-solutions-drag", {
+  var closedFundsWrapper = Math.round($(".past-future_content").outerWidth());
+  var closedFundsTotalWidth = Math.round(
+    $(".past-future_slider-mask").outerWidth()
+  );
+  dd = new Dragdealer("content-scroller", {
+    steps: closedFundSlidesN,
     speed: 0.1,
     requestAnimationFrame: true,
     horizontal: true,
     vertical: false,
-    xPrecision: instSolutions,
-
-    callback: function (x, y) {
-      var thisss = instSolutionsDragDealer.getValue();
-    },
     animationCallback: function (x, y) {
-      $(".institutional_solutions_drag-line-active").css(
+      $(".past-future-slider-active_line").css(
         "width",
         Math.round(x * 100) + "%"
       );
-      $(".institutional-solutions_grid").css(
+      $(".past-future_slider").css(
         "margin-left",
-        -x * (instSolutions - instSolutionsWrap + 32)
+        -x * (closedFundsTotalWidth - closedFundsWrapper + 32)
       );
     },
   });
-  if (instSolutions > instSolutionsWrap) {
-    $(".institutional_solutions_drag-element").css("opacity", "1");
+
+  if (closedFundsWrapper < closedFundsTotalWidth) {
+    $(".past-future-drag-component").css("opacity", "1");
   } else {
-    $(".institutional_solutions_drag-element").css("opacity", "0");
+    $(".past-future-drag-component").css("opacity", "0");
+  }
+
+  var homeBenefitsImageWrap = $(".home-benefits-section").outerWidth();
+  var sp500Width = $(".home-benefits_image").outerWidth();
+  sp500slider = new Dragdealer("home-benefits-drag-tool", {
+    speed: 0.1,
+    requestAnimationFrame: true,
+    horizontal: true,
+    vertical: false,
+    xPrecision: sp500Width,
+    reflow: true,
+    animationCallback: function (x, y) {
+      $(".home-benefits_drag-line-active").css(
+        "width",
+        Math.round(x * 100) + "%"
+      );
+      $(".home-benefits_image-wrap").css(
+        "margin-left",
+        -x * (sp500Width - homeBenefitsImageWrap + 128)
+      );
+    },
+  });
+
+  if (homeBenefitsImageWrap < sp500Width + 32) {
+    $(".home-benefits_drag-element").css("opacity", "1");
+  } else {
+    $(".home-benefits_drag-element").css("opacity", "0");
   }
 }
 dragDetector();
@@ -266,8 +396,42 @@ function pageLoaded() {
 }
 pageLoaded();
 
+var readingBlock = $(".pe-101_reading-time-block");
+readingBlock.each(function () {
+  var readingTime = $(this).find(".paragraph-small");
+  if (readingTime.text().indexOf("mins") > -1) {
+    readingTime.text(readingTime.text().replace("mins", "分钟"));
+  }
+});
+
+//each p
+$("h2, h3, p").each(function () {
+  //get this html
+  var html = $(this).html();
+  //if this contains "&lt;NEWLINE&gt;" replace with "<br>"
+  if (html.indexOf("&lt;NEWLINE&gt;") > -1) {
+    $(this).html(html.replace(/&lt;NEWLINE&gt;/g, "<br>"));
+  }
+});
+
+$("#start-email-form").submit(function (e) {
+  window.location.href = "https://app.moonfare.com/registration";
+  return false;
+  preventDefault(e);
+});
+$("#start-email-input").focus(function () {
+  $("#start-disclaimer").animate({ opacity: 1 }, 200);
+  $(this).addClass("start-input");
+});
+
+$("#start-email-input").blur(function () {
+  $("#start-disclaimer").animate({ opacity: 0 }, 200);
+  $(this).removeClass("start-input");
+});
+
+
 const selectorInput =
-  '<select id="international-country-code-select-input" class="form-field required-form-field bottom-margin-16" name="" aria-invalid="false" aria-labelledby="international-country-code-select-label" aria-describedby="international-country-code-select-description" aria-required="false"><option label="Country Code" disabled="" value="">Country Code</option><option label="Country" value="">Country Code</option><option label="Afghanistan (‫افغانستان‬‎)" value="AF">Afghanistan (‫افغانستان‬‎)</option><option label="Albania (Shqipëri)" value="AL">Albania (Shqipëri)</option><option label="Algeria (‫الجزائر‬‎)" value="DZ">Algeria (‫الجزائر‬‎)</option><option label="American Samoa" value="AS">American Samoa</option><option label="Andorra" value="AD">Andorra</option><option label="Angola" value="AO">Angola</option><option label="Anguilla" value="AI">Anguilla</option><option label="Antigua and Barbuda" value="AG">Antigua and Barbuda</option><option label="Argentina" value="AR">Argentina</option><option label="Armenia (Հայաստան)" value="AM">Armenia (Հայաստան)</option><option label="Aruba" value="AW">Aruba</option><option label="Australia" value="AU">Australia</option><option label="Austria (Österreich)" value="AT">Austria (Österreich)</option><option label="Azerbaijan (Azərbaycan)" value="AZ">Azerbaijan (Azərbaycan)</option><option label="Bahamas" value="BS">Bahamas</option><option label="Bahrain (‫البحرين‬‎)" value="BH">Bahrain (‫البحرين‬‎)</option><option label="Bangladesh (বাংলাদেশ)" value="BD">Bangladesh (বাংলাদেশ)</option><option label="Barbados" value="BB">Barbados</option><option label="Belarus (Беларусь)" value="BY">Belarus (Беларусь)</option><option label="Belgium (België)" value="BE">Belgium (België)</option><option label="Belize" value="BZ">Belize</option><option label="Benin (Bénin)" value="BJ">Benin (Bénin)</option><option label="Bermuda" value="BM">Bermuda</option><option label="Bhutan (འབྲུག)" value="BT">Bhutan (འབྲུག)</option><option label="Bolivia" value="BO">Bolivia</option><option label="Bosnia and Herzegovina (Босна и Херцеговина)" value="BA">Bosnia and Herzegovina (Босна и Херцеговина)</option><option label="Botswana" value="BW">Botswana</option><option label="Brazil (Brasil)" value="BR">Brazil (Brasil)</option><option label="British Indian Ocean Territory" value="IO">British Indian Ocean Territory</option><option label="British Virgin Islands" value="VG">British Virgin Islands</option><option label="Brunei" value="BN">Brunei</option><option label="Bulgaria (България)" value="BG">Bulgaria (България)</option><option label="Burkina Faso" value="BF">Burkina Faso</option><option label="Burundi (Uburundi)" value="BI">Burundi (Uburundi)</option><option label="Cambodia (កម្ពុជា)" value="KH">Cambodia (កម្ពុជា)</option><option label="Cameroon (Cameroun)" value="CM">Cameroon (Cameroun)</option><option label="Canada" value="CA">Canada</option><option label="Cape Verde (Kabu Verdi)" value="CV">Cape Verde (Kabu Verdi)</option><option label="Caribbean Netherlands" value="BQ">Caribbean Netherlands</option><option label="Cayman Islands" value="KY">Cayman Islands</option><option label="Central African Republic (République centrafricaine)" value="CF">Central African Republic (République centrafricaine)</option><option label="Chad (Tchad)" value="TD">Chad (Tchad)</option><option label="Chile" value="CL">Chile</option><option label="China (中国)" value="CN">China (中国)</option><option label="Colombia" value="CO">Colombia</option><option label="Comoros (‫جزر القمر‬‎)" value="KM">Comoros (‫جزر القمر‬‎)</option><option label="Congo (DRC) (Jamhuri ya Kidemokrasia ya Kongo)" value="CD">Congo (DRC) (Jamhuri ya Kidemokrasia ya Kongo)</option><option label="Congo (Republic) (Congo-Brazzaville)" value="CG">Congo (Republic) (Congo-Brazzaville)</option><option label="Cook Islands" value="CK">Cook Islands</option><option label="Costa Rica" value="CR">Costa Rica</option><option label="Côte d’Ivoire" value="CI">Côte d’Ivoire</option><option label="Croatia (Hrvatska)" value="HR">Croatia (Hrvatska)</option><option label="Cuba" value="CU">Cuba</option><option label="Curaçao" value="CW">Curaçao</option><option label="Cyprus (Κύπρος)" value="CY">Cyprus (Κύπρος)</option><option label="Czech Republic (Česká republika)" value="CZ">Czech Republic (Česká republika)</option><option label="Denmark (Danmark)" value="DK">Denmark (Danmark)</option><option label="Djibouti" value="DJ">Djibouti</option><option label="Dominica" value="DM">Dominica</option><option label="Dominican Republic (República Dominicana)" value="DO">Dominican Republic (República Dominicana)</option><option label="Ecuador" value="EC">Ecuador</option><option label="Egypt (‫مصر‬‎)" value="EG">Egypt (‫مصر‬‎)</option><option label="El Salvador" value="SV">El Salvador</option><option label="Equatorial Guinea (Guinea Ecuatorial)" value="GQ">Equatorial Guinea (Guinea Ecuatorial)</option><option label="Eritrea" value="ER">Eritrea</option><option label="Estonia (Eesti)" value="EE">Estonia (Eesti)</option><option label="Ethiopia" value="ET">Ethiopia</option><option label="Falkland Islands (Islas Malvinas)" value="FK">Falkland Islands (Islas Malvinas)</option><option label="Faroe Islands (Føroyar)" value="FO">Faroe Islands (Føroyar)</option><option label="Fiji" value="FJ">Fiji</option><option label="Finland (Suomi)" value="FI">Finland (Suomi)</option><option label="France" value="FR">France</option><option label="French Guiana (Guyane française)" value="GF">French Guiana (Guyane française)</option><option label="French Polynesia (Polynésie française)" value="PF">French Polynesia (Polynésie française)</option><option label="Gabon" value="GA">Gabon</option><option label="Gambia" value="GM">Gambia</option><option label="Georgia (საქართველო)" value="GE">Georgia (საქართველო)</option><option label="Germany (Deutschland)" value="DE">Germany (Deutschland)</option><option label="Ghana (Gaana)" value="GH">Ghana (Gaana)</option><option label="Gibraltar" value="GI">Gibraltar</option><option label="Greece (Ελλάδα)" value="GR">Greece (Ελλάδα)</option><option label="Greenland (Kalaallit Nunaat)" value="GL">Greenland (Kalaallit Nunaat)</option><option label="Grenada" value="GD">Grenada</option><option label="Guadeloupe" value="GP">Guadeloupe</option><option label="Guam" value="GU">Guam</option><option label="Guatemala" value="GT">Guatemala</option><option label="Guinea (Guinée)" value="GN">Guinea (Guinée)</option><option label="Guinea-Bissau (Guiné Bissau)" value="GW">Guinea-Bissau (Guiné Bissau)</option><option label="Guyana" value="GY">Guyana</option><option label="Haiti" value="HT">Haiti</option><option label="Honduras" value="HN">Honduras</option><option label="Hong Kong (香港)" value="HK">Hong Kong (香港)</option><option label="Hungary (Magyarország)" value="HU">Hungary (Magyarország)</option><option label="Iceland (Ísland)" value="IS">Iceland (Ísland)</option><option label="India (भारत)" value="IN">India (भारत)</option><option label="Indonesia" value="ID">Indonesia</option><option label="Iran (‫ایران‬‎)" value="IR">Iran (‫ایران‬‎)</option><option label="Iraq (‫العراق‬‎)" value="IQ">Iraq (‫العراق‬‎)</option><option label="Ireland" value="IE">Ireland</option><option label="Israel (‫ישראל‬‎)" value="IL">Israel (‫ישראל‬‎)</option><option label="Italy (Italia)" value="IT">Italy (Italia)</option><option label="Jamaica" value="JM">Jamaica</option><option label="Japan (日本)" value="JP">Japan (日本)</option><option label="Jordan (‫الأردن‬‎)" value="JO">Jordan (‫الأردن‬‎)</option><option label="Kazakhstan (Казахстан)" value="KZ">Kazakhstan (Казахстан)</option><option label="Kenya" value="KE">Kenya</option><option label="Kiribati" value="KI">Kiribati</option><option label="Kosovo" value="XK">Kosovo</option><option label="Kuwait (‫الكويت‬‎)" value="KW">Kuwait (‫الكويت‬‎)</option><option label="Kyrgyzstan (Кыргызстан)" value="KG">Kyrgyzstan (Кыргызстан)</option><option label="Laos (ລາວ)" value="LA">Laos (ລາວ)</option><option label="Latvia (Latvija)" value="LV">Latvia (Latvija)</option><option label="Lebanon (‫لبنان‬‎)" value="LB">Lebanon (‫لبنان‬‎)</option><option label="Lesotho" value="LS">Lesotho</option><option label="Liberia" value="LR">Liberia</option><option label="Libya (‫ليبيا‬‎)" value="LY">Libya (‫ليبيا‬‎)</option><option label="Liechtenstein" value="LI">Liechtenstein</option><option label="Lithuania (Lietuva)" value="LT">Lithuania (Lietuva)</option><option label="Luxembourg" value="LU">Luxembourg</option><option label="Macau (澳門)" value="MO">Macau (澳門)</option><option label="Macedonia (FYROM) (Македонија)" value="MK">Macedonia (FYROM) (Македонија)</option><option label="Madagascar (Madagasikara)" value="MG">Madagascar (Madagasikara)</option><option label="Malawi" value="MW">Malawi</option><option label="Malaysia" value="MY">Malaysia</option><option label="Maldives" value="MV">Maldives</option><option label="Mali" value="ML">Mali</option><option label="Malta" value="MT">Malta</option><option label="Marshall Islands" value="MH">Marshall Islands</option><option label="Martinique" value="MQ">Martinique</option><option label="Mauritania (‫موريتانيا‬‎)" value="MR">Mauritania (‫موريتانيا‬‎)</option><option label="Mauritius (Moris)" value="MU">Mauritius (Moris)</option><option label="Mexico (México)" value="MX">Mexico (México)</option><option label="Micronesia" value="FM">Micronesia</option><option label="Moldova (Republica Moldova)" value="MD">Moldova (Republica Moldova)</option><option label="Monaco" value="MC">Monaco</option><option label="Mongolia (Монгол)" value="MN">Mongolia (Монгол)</option><option label="Montenegro (Crna Gora)" value="ME">Montenegro (Crna Gora)</option><option label="Montserrat" value="MS">Montserrat</option><option label="Morocco (‫المغرب‬‎)" value="MA">Morocco (‫المغرب‬‎)</option><option label="Mozambique (Moçambique)" value="MZ">Mozambique (Moçambique)</option><option label="Myanmar (Burma) (မြန်မာ)" value="MM">Myanmar (Burma) (မြန်မာ)</option><option label="Namibia (Namibië)" value="NA">Namibia (Namibië)</option><option label="Nauru" value="NR">Nauru</option><option label="Nepal (नेपाल)" value="NP">Nepal (नेपाल)</option><option label="Netherlands (Nederland)" value="NL">Netherlands (Nederland)</option><option label="New Caledonia (Nouvelle-Calédonie)" value="NC">New Caledonia (Nouvelle-Calédonie)</option><option label="New Zealand" value="NZ">New Zealand</option><option label="Nicaragua" value="NI">Nicaragua</option><option label="Niger (Nijar)" value="NE">Niger (Nijar)</option><option label="Nigeria" value="NG">Nigeria</option><option label="Niue" value="NU">Niue</option><option label="Norfolk Island" value="NF">Norfolk Island</option><option label="North Korea (조선 민주주의 인민 공화국)" value="KP">North Korea (조선 민주주의 인민 공화국)</option><option label="Northern Mariana Islands" value="MP">Northern Mariana Islands</option><option label="Norway (Norge)" value="NO">Norway (Norge)</option><option label="Oman (‫عُمان‬‎)" value="OM">Oman (‫عُمان‬‎)</option><option label="Pakistan (‫پاکستان‬‎)" value="PK">Pakistan (‫پاکستان‬‎)</option><option label="Palau" value="PW">Palau</option><option label="Palestine (‫فلسطين‬‎)" value="PS">Palestine (‫فلسطين‬‎)</option><option label="Panama (Panamá)" value="PA">Panama (Panamá)</option><option label="Papua New Guinea" value="PG">Papua New Guinea</option><option label="Paraguay" value="PY">Paraguay</option><option label="Peru (Perú)" value="PE">Peru (Perú)</option><option label="Philippines" value="PH">Philippines</option><option label="Poland (Polska)" value="PL">Poland (Polska)</option><option label="Portugal" value="PT">Portugal</option><option label="Puerto Rico" value="PR">Puerto Rico</option><option label="Qatar (‫قطر‬‎)" value="QA">Qatar (‫قطر‬‎)</option><option label="Réunion (La Réunion)" value="RE">Réunion (La Réunion)</option><option label="Romania (România)" value="RO">Romania (România)</option><option label="Russia (Россия)" value="RU">Russia (Россия)</option><option label="Rwanda" value="RW">Rwanda</option><option label="Saint Barthélemy (Saint-Barthélemy)" value="BL">Saint Barthélemy (Saint-Barthélemy)</option><option label="Saint Helena" value="SH">Saint Helena</option><option label="Saint Kitts and Nevis" value="KN">Saint Kitts and Nevis</option><option label="Saint Lucia" value="LC">Saint Lucia</option><option label="Saint Martin (Saint-Martin (partie française))" value="MF">Saint Martin (Saint-Martin (partie française))</option><option label="Saint Pierre and Miquelon (Saint-Pierre-et-Miquelon)" value="PM">Saint Pierre and Miquelon (Saint-Pierre-et-Miquelon)</option><option label="Saint Vincent and the Grenadines" value="VC">Saint Vincent and the Grenadines</option><option label="Samoa" value="WS">Samoa</option><option label="San Marino" value="SM">San Marino</option><option label="São Tomé and Príncipe (São Tomé e Príncipe)" value="ST">São Tomé and Príncipe (São Tomé e Príncipe)</option><option label="Saudi Arabia (‫المملكة العربية السعودية‬‎)" value="SA">Saudi Arabia (‫المملكة العربية السعودية‬‎)</option><option label="Senegal (Sénégal)" value="SN">Senegal (Sénégal)</option><option label="Serbia (Србија)" value="RS">Serbia (Србија)</option><option label="Seychelles" value="SC">Seychelles</option><option label="Sierra Leone" value="SL">Sierra Leone</option><option label="Singapore" value="SG">Singapore</option><option label="Sint Maarten" value="SX">Sint Maarten</option><option label="Slovakia (Slovensko)" value="SK">Slovakia (Slovensko)</option><option label="Slovenia (Slovenija)" value="SI">Slovenia (Slovenija)</option><option label="Solomon Islands" value="SB">Solomon Islands</option><option label="Somalia (Soomaaliya)" value="SO">Somalia (Soomaaliya)</option><option label="South Africa" value="ZA">South Africa</option><option label="South Korea (대한민국)" value="KR">South Korea (대한민국)</option><option label="South Sudan (‫جنوب السودان‬‎)" value="SS">South Sudan (‫جنوب السودان‬‎)</option><option label="Spain (España)" value="ES">Spain (España)</option><option label="Sri Lanka (ශ්‍රී ලංකාව)" value="LK">Sri Lanka (ශ්‍රී ලංකාව)</option><option label="Sudan (‫السودان‬‎)" value="SD">Sudan (‫السودان‬‎)</option><option label="Suriname" value="SR">Suriname</option><option label="Swaziland" value="SZ">Swaziland</option><option label="Sweden (Sverige)" value="SE">Sweden (Sverige)</option><option label="Switzerland (Schweiz)" value="CH">Switzerland (Schweiz)</option><option label="Syria (‫سوريا‬‎)" value="SY">Syria (‫سوريا‬‎)</option><option label="Taiwan (台灣)" value="TW">Taiwan (台灣)</option><option label="Tajikistan" value="TJ">Tajikistan</option><option label="Tanzania" value="TZ">Tanzania</option><option label="Thailand (ไทย)" value="TH">Thailand (ไทย)</option><option label="Timor-Leste" value="TL">Timor-Leste</option><option label="Togo" value="TG">Togo</option><option label="Tokelau" value="TK">Tokelau</option><option label="Tonga" value="TO">Tonga</option><option label="Trinidad and Tobago" value="TT">Trinidad and Tobago</option><option label="Tunisia (‫تونس‬‎)" value="TN">Tunisia (‫تونس‬‎)</option><option label="Turkey (Türkiye)" value="TR">Turkey (Türkiye)</option><option label="Turkmenistan" value="TM">Turkmenistan</option><option label="Turks and Caicos Islands" value="TC">Turks and Caicos Islands</option><option label="Tuvalu" value="TV">Tuvalu</option><option label="U.S. Virgin Islands" value="VI">U.S. Virgin Islands</option><option label="Uganda" value="UG">Uganda</option><option label="Ukraine (Україна)" value="UA">Ukraine (Україна)</option><option label="United Arab Emirates (‫الإمارات العربية المتحدة‬‎)" value="AE">United Arab Emirates (‫الإمارات العربية المتحدة‬‎)</option><option label="United Kingdom" value="GB">United Kingdom</option><option label="United States" value="US">United States</option><option label="Uruguay" value="UY">Uruguay</option><option label="Uzbekistan (Oʻzbekiston)" value="UZ">Uzbekistan (Oʻzbekiston)</option><option label="Vanuatu" value="VU">Vanuatu</option><option label="Vatican City (Città del Vaticano)" value="VA">Vatican City (Città del Vaticano)</option><option label="Venezuela" value="VE">Venezuela</option><option label="Vietnam (Việt Nam)" value="VN">Vietnam (Việt Nam)</option><option label="Wallis and Futuna" value="WF">Wallis and Futuna</option><option label="Yemen (‫اليمن‬‎)" value="YE">Yemen (‫اليمن‬‎)</option><option label="Zambia" value="ZM">Zambia</option><option label="Zimbabwe" value="ZW">Zimbabwe</option></select>';
+  '<select id="international-country-code-select-input" class="form-field required-form-field bottom-margin-16" name="" aria-invalid="false" aria-labelledby="international-country-code-select-label" aria-describedby="international-country-code-select-description" aria-required="false"><option label="Country Code" disabled="" value="">Country Code</option><option label="Country Code" value="">Country Code</option><option label="Afghanistan (‫افغانستان‬‎)" value="AF">Afghanistan (‫افغانستان‬‎)</option><option label="Albania (Shqipëri)" value="AL">Albania (Shqipëri)</option><option label="Algeria (‫الجزائر‬‎)" value="DZ">Algeria (‫الجزائر‬‎)</option><option label="American Samoa" value="AS">American Samoa</option><option label="Andorra" value="AD">Andorra</option><option label="Angola" value="AO">Angola</option><option label="Anguilla" value="AI">Anguilla</option><option label="Antigua and Barbuda" value="AG">Antigua and Barbuda</option><option label="Argentina" value="AR">Argentina</option><option label="Armenia (Հայաստան)" value="AM">Armenia (Հայաստան)</option><option label="Aruba" value="AW">Aruba</option><option label="Australia" value="AU">Australia</option><option label="Austria (Österreich)" value="AT">Austria (Österreich)</option><option label="Azerbaijan (Azərbaycan)" value="AZ">Azerbaijan (Azərbaycan)</option><option label="Bahamas" value="BS">Bahamas</option><option label="Bahrain (‫البحرين‬‎)" value="BH">Bahrain (‫البحرين‬‎)</option><option label="Bangladesh (বাংলাদেশ)" value="BD">Bangladesh (বাংলাদেশ)</option><option label="Barbados" value="BB">Barbados</option><option label="Belarus (Беларусь)" value="BY">Belarus (Беларусь)</option><option label="Belgium (België)" value="BE">Belgium (België)</option><option label="Belize" value="BZ">Belize</option><option label="Benin (Bénin)" value="BJ">Benin (Bénin)</option><option label="Bermuda" value="BM">Bermuda</option><option label="Bhutan (འབྲུག)" value="BT">Bhutan (འབྲུག)</option><option label="Bolivia" value="BO">Bolivia</option><option label="Bosnia and Herzegovina (Босна и Херцеговина)" value="BA">Bosnia and Herzegovina (Босна и Херцеговина)</option><option label="Botswana" value="BW">Botswana</option><option label="Brazil (Brasil)" value="BR">Brazil (Brasil)</option><option label="British Indian Ocean Territory" value="IO">British Indian Ocean Territory</option><option label="British Virgin Islands" value="VG">British Virgin Islands</option><option label="Brunei" value="BN">Brunei</option><option label="Bulgaria (България)" value="BG">Bulgaria (България)</option><option label="Burkina Faso" value="BF">Burkina Faso</option><option label="Burundi (Uburundi)" value="BI">Burundi (Uburundi)</option><option label="Cambodia (កម្ពុជា)" value="KH">Cambodia (កម្ពុជា)</option><option label="Cameroon (Cameroun)" value="CM">Cameroon (Cameroun)</option><option label="Canada" value="CA">Canada</option><option label="Cape Verde (Kabu Verdi)" value="CV">Cape Verde (Kabu Verdi)</option><option label="Caribbean Netherlands" value="BQ">Caribbean Netherlands</option><option label="Cayman Islands" value="KY">Cayman Islands</option><option label="Central African Republic (République centrafricaine)" value="CF">Central African Republic (République centrafricaine)</option><option label="Chad (Tchad)" value="TD">Chad (Tchad)</option><option label="Chile" value="CL">Chile</option><option label="China (中国)" value="CN">China (中国)</option><option label="Colombia" value="CO">Colombia</option><option label="Comoros (‫جزر القمر‬‎)" value="KM">Comoros (‫جزر القمر‬‎)</option><option label="Congo (DRC) (Jamhuri ya Kidemokrasia ya Kongo)" value="CD">Congo (DRC) (Jamhuri ya Kidemokrasia ya Kongo)</option><option label="Congo (Republic) (Congo-Brazzaville)" value="CG">Congo (Republic) (Congo-Brazzaville)</option><option label="Cook Islands" value="CK">Cook Islands</option><option label="Costa Rica" value="CR">Costa Rica</option><option label="Côte d’Ivoire" value="CI">Côte d’Ivoire</option><option label="Croatia (Hrvatska)" value="HR">Croatia (Hrvatska)</option><option label="Cuba" value="CU">Cuba</option><option label="Curaçao" value="CW">Curaçao</option><option label="Cyprus (Κύπρος)" value="CY">Cyprus (Κύπρος)</option><option label="Czech Republic (Česká republika)" value="CZ">Czech Republic (Česká republika)</option><option label="Denmark (Danmark)" value="DK">Denmark (Danmark)</option><option label="Djibouti" value="DJ">Djibouti</option><option label="Dominica" value="DM">Dominica</option><option label="Dominican Republic (República Dominicana)" value="DO">Dominican Republic (República Dominicana)</option><option label="Ecuador" value="EC">Ecuador</option><option label="Egypt (‫مصر‬‎)" value="EG">Egypt (‫مصر‬‎)</option><option label="El Salvador" value="SV">El Salvador</option><option label="Equatorial Guinea (Guinea Ecuatorial)" value="GQ">Equatorial Guinea (Guinea Ecuatorial)</option><option label="Eritrea" value="ER">Eritrea</option><option label="Estonia (Eesti)" value="EE">Estonia (Eesti)</option><option label="Ethiopia" value="ET">Ethiopia</option><option label="Falkland Islands (Islas Malvinas)" value="FK">Falkland Islands (Islas Malvinas)</option><option label="Faroe Islands (Føroyar)" value="FO">Faroe Islands (Føroyar)</option><option label="Fiji" value="FJ">Fiji</option><option label="Finland (Suomi)" value="FI">Finland (Suomi)</option><option label="France" value="FR">France</option><option label="French Guiana (Guyane française)" value="GF">French Guiana (Guyane française)</option><option label="French Polynesia (Polynésie française)" value="PF">French Polynesia (Polynésie française)</option><option label="Gabon" value="GA">Gabon</option><option label="Gambia" value="GM">Gambia</option><option label="Georgia (საქართველო)" value="GE">Georgia (საქართველო)</option><option label="Germany (Deutschland)" value="DE">Germany (Deutschland)</option><option label="Ghana (Gaana)" value="GH">Ghana (Gaana)</option><option label="Gibraltar" value="GI">Gibraltar</option><option label="Greece (Ελλάδα)" value="GR">Greece (Ελλάδα)</option><option label="Greenland (Kalaallit Nunaat)" value="GL">Greenland (Kalaallit Nunaat)</option><option label="Grenada" value="GD">Grenada</option><option label="Guadeloupe" value="GP">Guadeloupe</option><option label="Guam" value="GU">Guam</option><option label="Guatemala" value="GT">Guatemala</option><option label="Guinea (Guinée)" value="GN">Guinea (Guinée)</option><option label="Guinea-Bissau (Guiné Bissau)" value="GW">Guinea-Bissau (Guiné Bissau)</option><option label="Guyana" value="GY">Guyana</option><option label="Haiti" value="HT">Haiti</option><option label="Honduras" value="HN">Honduras</option><option label="Hong Kong (香港)" value="HK">Hong Kong (香港)</option><option label="Hungary (Magyarország)" value="HU">Hungary (Magyarország)</option><option label="Iceland (Ísland)" value="IS">Iceland (Ísland)</option><option label="India (भारत)" value="IN">India (भारत)</option><option label="Indonesia" value="ID">Indonesia</option><option label="Iran (‫ایران‬‎)" value="IR">Iran (‫ایران‬‎)</option><option label="Iraq (‫العراق‬‎)" value="IQ">Iraq (‫العراق‬‎)</option><option label="Ireland" value="IE">Ireland</option><option label="Israel (‫ישראל‬‎)" value="IL">Israel (‫ישראל‬‎)</option><option label="Italy (Italia)" value="IT">Italy (Italia)</option><option label="Jamaica" value="JM">Jamaica</option><option label="Japan (日本)" value="JP">Japan (日本)</option><option label="Jordan (‫الأردن‬‎)" value="JO">Jordan (‫الأردن‬‎)</option><option label="Kazakhstan (Казахстан)" value="KZ">Kazakhstan (Казахстан)</option><option label="Kenya" value="KE">Kenya</option><option label="Kiribati" value="KI">Kiribati</option><option label="Kosovo" value="XK">Kosovo</option><option label="Kuwait (‫الكويت‬‎)" value="KW">Kuwait (‫الكويت‬‎)</option><option label="Kyrgyzstan (Кыргызстан)" value="KG">Kyrgyzstan (Кыргызстан)</option><option label="Laos (ລາວ)" value="LA">Laos (ລາວ)</option><option label="Latvia (Latvija)" value="LV">Latvia (Latvija)</option><option label="Lebanon (‫لبنان‬‎)" value="LB">Lebanon (‫لبنان‬‎)</option><option label="Lesotho" value="LS">Lesotho</option><option label="Liberia" value="LR">Liberia</option><option label="Libya (‫ليبيا‬‎)" value="LY">Libya (‫ليبيا‬‎)</option><option label="Liechtenstein" value="LI">Liechtenstein</option><option label="Lithuania (Lietuva)" value="LT">Lithuania (Lietuva)</option><option label="Luxembourg" value="LU">Luxembourg</option><option label="Macau (澳門)" value="MO">Macau (澳門)</option><option label="Macedonia (FYROM) (Македонија)" value="MK">Macedonia (FYROM) (Македонија)</option><option label="Madagascar (Madagasikara)" value="MG">Madagascar (Madagasikara)</option><option label="Malawi" value="MW">Malawi</option><option label="Malaysia" value="MY">Malaysia</option><option label="Maldives" value="MV">Maldives</option><option label="Mali" value="ML">Mali</option><option label="Malta" value="MT">Malta</option><option label="Marshall Islands" value="MH">Marshall Islands</option><option label="Martinique" value="MQ">Martinique</option><option label="Mauritania (‫موريتانيا‬‎)" value="MR">Mauritania (‫موريتانيا‬‎)</option><option label="Mauritius (Moris)" value="MU">Mauritius (Moris)</option><option label="Mexico (México)" value="MX">Mexico (México)</option><option label="Micronesia" value="FM">Micronesia</option><option label="Moldova (Republica Moldova)" value="MD">Moldova (Republica Moldova)</option><option label="Monaco" value="MC">Monaco</option><option label="Mongolia (Монгол)" value="MN">Mongolia (Монгол)</option><option label="Montenegro (Crna Gora)" value="ME">Montenegro (Crna Gora)</option><option label="Montserrat" value="MS">Montserrat</option><option label="Morocco (‫المغرب‬‎)" value="MA">Morocco (‫المغرب‬‎)</option><option label="Mozambique (Moçambique)" value="MZ">Mozambique (Moçambique)</option><option label="Myanmar (Burma) (မြန်မာ)" value="MM">Myanmar (Burma) (မြန်မာ)</option><option label="Namibia (Namibië)" value="NA">Namibia (Namibië)</option><option label="Nauru" value="NR">Nauru</option><option label="Nepal (नेपाल)" value="NP">Nepal (नेपाल)</option><option label="Netherlands (Nederland)" value="NL">Netherlands (Nederland)</option><option label="New Caledonia (Nouvelle-Calédonie)" value="NC">New Caledonia (Nouvelle-Calédonie)</option><option label="New Zealand" value="NZ">New Zealand</option><option label="Nicaragua" value="NI">Nicaragua</option><option label="Niger (Nijar)" value="NE">Niger (Nijar)</option><option label="Nigeria" value="NG">Nigeria</option><option label="Niue" value="NU">Niue</option><option label="Norfolk Island" value="NF">Norfolk Island</option><option label="North Korea (조선 민주주의 인민 공화국)" value="KP">North Korea (조선 민주주의 인민 공화국)</option><option label="Northern Mariana Islands" value="MP">Northern Mariana Islands</option><option label="Norway (Norge)" value="NO">Norway (Norge)</option><option label="Oman (‫عُمان‬‎)" value="OM">Oman (‫عُمان‬‎)</option><option label="Pakistan (‫پاکستان‬‎)" value="PK">Pakistan (‫پاکستان‬‎)</option><option label="Palau" value="PW">Palau</option><option label="Palestine (‫فلسطين‬‎)" value="PS">Palestine (‫فلسطين‬‎)</option><option label="Panama (Panamá)" value="PA">Panama (Panamá)</option><option label="Papua New Guinea" value="PG">Papua New Guinea</option><option label="Paraguay" value="PY">Paraguay</option><option label="Peru (Perú)" value="PE">Peru (Perú)</option><option label="Philippines" value="PH">Philippines</option><option label="Poland (Polska)" value="PL">Poland (Polska)</option><option label="Portugal" value="PT">Portugal</option><option label="Puerto Rico" value="PR">Puerto Rico</option><option label="Qatar (‫قطر‬‎)" value="QA">Qatar (‫قطر‬‎)</option><option label="Réunion (La Réunion)" value="RE">Réunion (La Réunion)</option><option label="Romania (România)" value="RO">Romania (România)</option><option label="Russia (Россия)" value="RU">Russia (Россия)</option><option label="Rwanda" value="RW">Rwanda</option><option label="Saint Barthélemy (Saint-Barthélemy)" value="BL">Saint Barthélemy (Saint-Barthélemy)</option><option label="Saint Helena" value="SH">Saint Helena</option><option label="Saint Kitts and Nevis" value="KN">Saint Kitts and Nevis</option><option label="Saint Lucia" value="LC">Saint Lucia</option><option label="Saint Martin (Saint-Martin (partie française))" value="MF">Saint Martin (Saint-Martin (partie française))</option><option label="Saint Pierre and Miquelon (Saint-Pierre-et-Miquelon)" value="PM">Saint Pierre and Miquelon (Saint-Pierre-et-Miquelon)</option><option label="Saint Vincent and the Grenadines" value="VC">Saint Vincent and the Grenadines</option><option label="Samoa" value="WS">Samoa</option><option label="San Marino" value="SM">San Marino</option><option label="São Tomé and Príncipe (São Tomé e Príncipe)" value="ST">São Tomé and Príncipe (São Tomé e Príncipe)</option><option label="Saudi Arabia (‫المملكة العربية السعودية‬‎)" value="SA">Saudi Arabia (‫المملكة العربية السعودية‬‎)</option><option label="Senegal (Sénégal)" value="SN">Senegal (Sénégal)</option><option label="Serbia (Србија)" value="RS">Serbia (Србија)</option><option label="Seychelles" value="SC">Seychelles</option><option label="Sierra Leone" value="SL">Sierra Leone</option><option label="Singapore" value="SG">Singapore</option><option label="Sint Maarten" value="SX">Sint Maarten</option><option label="Slovakia (Slovensko)" value="SK">Slovakia (Slovensko)</option><option label="Slovenia (Slovenija)" value="SI">Slovenia (Slovenija)</option><option label="Solomon Islands" value="SB">Solomon Islands</option><option label="Somalia (Soomaaliya)" value="SO">Somalia (Soomaaliya)</option><option label="South Africa" value="ZA">South Africa</option><option label="South Korea (대한민국)" value="KR">South Korea (대한민국)</option><option label="South Sudan (‫جنوب السودان‬‎)" value="SS">South Sudan (‫جنوب السودان‬‎)</option><option label="Spain (España)" value="ES">Spain (España)</option><option label="Sri Lanka (ශ්‍රී ලංකාව)" value="LK">Sri Lanka (ශ්‍රී ලංකාව)</option><option label="Sudan (‫السودان‬‎)" value="SD">Sudan (‫السودان‬‎)</option><option label="Suriname" value="SR">Suriname</option><option label="Swaziland" value="SZ">Swaziland</option><option label="Sweden (Sverige)" value="SE">Sweden (Sverige)</option><option label="Switzerland (Schweiz)" value="CH">Switzerland (Schweiz)</option><option label="Syria (‫سوريا‬‎)" value="SY">Syria (‫سوريا‬‎)</option><option label="Taiwan (台灣)" value="TW">Taiwan (台灣)</option><option label="Tajikistan" value="TJ">Tajikistan</option><option label="Tanzania" value="TZ">Tanzania</option><option label="Thailand (ไทย)" value="TH">Thailand (ไทย)</option><option label="Timor-Leste" value="TL">Timor-Leste</option><option label="Togo" value="TG">Togo</option><option label="Tokelau" value="TK">Tokelau</option><option label="Tonga" value="TO">Tonga</option><option label="Trinidad and Tobago" value="TT">Trinidad and Tobago</option><option label="Tunisia (‫تونس‬‎)" value="TN">Tunisia (‫تونس‬‎)</option><option label="Turkey (Türkiye)" value="TR">Turkey (Türkiye)</option><option label="Turkmenistan" value="TM">Turkmenistan</option><option label="Turks and Caicos Islands" value="TC">Turks and Caicos Islands</option><option label="Tuvalu" value="TV">Tuvalu</option><option label="U.S. Virgin Islands" value="VI">U.S. Virgin Islands</option><option label="Uganda" value="UG">Uganda</option><option label="Ukraine (Україна)" value="UA">Ukraine (Україна)</option><option label="United Arab Emirates (‫الإمارات العربية المتحدة‬‎)" value="AE">United Arab Emirates (‫الإمارات العربية المتحدة‬‎)</option><option label="United Kingdom" value="GB">United Kingdom</option><option label="United States" value="US">United States</option><option label="Uruguay" value="UY">Uruguay</option><option label="Uzbekistan (Oʻzbekiston)" value="UZ">Uzbekistan (Oʻzbekiston)</option><option label="Vanuatu" value="VU">Vanuatu</option><option label="Vatican City (Città del Vaticano)" value="VA">Vatican City (Città del Vaticano)</option><option label="Venezuela" value="VE">Venezuela</option><option label="Vietnam (Việt Nam)" value="VN">Vietnam (Việt Nam)</option><option label="Wallis and Futuna" value="WF">Wallis and Futuna</option><option label="Yemen (‫اليمن‬‎)" value="YE">Yemen (‫اليمن‬‎)</option><option label="Zambia" value="ZM">Zambia</option><option label="Zimbabwe" value="ZW">Zimbabwe</option></select>';
 
 $("#phone").before(selectorInput);
 
