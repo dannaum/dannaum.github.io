@@ -54,15 +54,18 @@ function animationsRender() {
       });
   }
 }
-animationsRender(),
-  $(".women-pe_video-slider-slide").each(function (e) {
-    $(this)
-      .find(".women-pe_episode-tag-number")
-      .text(e + 1);
-  });
+animationsRender();
+var episdoeNumber = $(".women-pe_video-slider-slide");
+$(episdoeNumber).each(function (index, element) {
+  var reversedIndex = episdoeNumber.length - episdoeNumber.index(this);
+  $(this).find(".women-pe_episode-tag-number").text(reversedIndex);
+});
+
+$(".women-pe_video-slider-slide").each(function (e) {});
 let videoPlayerPos = $("#video-player").offset().top,
-navbarHeight = $(".navbar_section").outerHeight();
+  navbarHeight = $(".navbar_section").outerHeight();
 const video = $("#video-player").get(0);
+
 $("#video-player").click(() => {
   if (video.paused) {
     let e = $("#video-player").attr("source");
@@ -71,6 +74,10 @@ $("#video-player").click(() => {
         ($(this)
           .closest(".women-pe_single-video")
           .find(".women-pe_video-play-icon")
+          .css("display", "none"),
+        $(this)
+          .closest(".women-pe_single-video")
+          .find(".women-pe_video-play-icon-playing")
           .css("display", "none"),
         $(this)
           .closest(".women-pe_single-video")
@@ -84,6 +91,10 @@ $("#video-player").click(() => {
         ($(this)
           .closest(".women-pe_single-video")
           .find(".women-pe_video-play-icon")
+          .css("display", "none"),
+        $(this)
+          .closest(".women-pe_single-video")
+          .find(".women-pe_video-play-icon-playing")
           .css("display", "flex"),
         $(this)
           .closest(".women-pe_single-video")
@@ -91,71 +102,38 @@ $("#video-player").click(() => {
           .css("display", "none"));
     });
   }
+});
+
+$(".women-pe_single-video").click(function () {
+  $(".women-pe_play-icon-wrapper").removeClass("active-video"),
+      $(this).find(".women-pe_play-icon-wrapper").addClass("active-video");
+  let e = $(this)
+    .closest(".women-pe_video-slider-slide")
+    .index(".women-pe_video-slider-slide");
+  var i = e;
+  $(".women-pe_video-slide-nav").find(".w-slider-dot").eq(e).click(),
+    $(".women-pe_video-pause-icon").css("display", "none"),
+    $(".women-pe_video-play-icon").css("display", "flex"),
+    $(".women-pe_video-play-icon-playing").css("display", "none");
+  let o = $(this).css("background-image");
+  o = o.replace("url(", "").replace(")", "").replace(/\"/gi, "");
+  let s = $(this).find(".video-link").text();
+  return (
+	$(video).attr("src", ""),
+    $(video).attr("src", s),
+    $(video).attr("source", s),
+    $(video).attr("poster", o),
+    ($(video).get(0).currentTime = 0),
+    $("#video-player").get(0).load(),
+    $("body, html").animate({ scrollTop: videoPlayerPos - navbarHeight }, 1e3),
+    (i *= 1 / womenpeSlideNN),
+    dd.setValue(i, 0, (snap = !1)),
+    !1
+  );
 }),
-  $("#play-video-first").click(function () {
-    let e = $(this);
-    if (video.paused) {
-      var i = $("#video-player").attr("source");
-      $(".video-link").each(function () {
-        $(this).text() === i &&
-          ($(this)
-            .closest(".women-pe_single-video")
-            .find(".women-pe_video-play-icon")
-            .css("display", "none"),
-          $(this)
-            .closest(".women-pe_single-video")
-            .find(".women-pe_video-pause-icon")
-            .css("display", "flex"));
-      }),
-        video.play(),
-        e.hide();
-    } else {
-      let o = $("#video-player").attr("source");
-      $(".video-link").each(function () {
-        $(this).text() === o &&
-          ($(this)
-            .closest(".women-pe_single-video")
-            .find(".women-pe_video-play-icon")
-            .css("display", "flex"),
-          $(this)
-            .closest(".women-pe_single-video")
-            .find(".women-pe_video-pause-icon")
-            .css("display", "none"));
-      }),
-        video.pause();
-    }
-    return !1;
-  }),
-  $(".women-pe_single-video").click(function () {
-    $(".women-pe_single-video").removeClass("active-video"),
-      $(this).addClass("active-video");
-    let e = $(this)
-      .closest(".women-pe_video-slider-slide")
-      .index(".women-pe_video-slider-slide");
-    var i = e;
-    $(".women-pe_video-slide-nav").find(".w-slider-dot").eq(e).click(),
-      $(".women-pe_video-pause-icon").css("display", "none"),
-      $(".women-pe_video-play-icon").css("display", "flex"),
-      $(this).find(".women-pe_video-play-icon").css("display", "flex");
-    let o = $(this).css("background-image");
-    o = o.replace("url(", "").replace(")", "").replace(/\"/gi, "");
-    let s = $(this).find(".video-link").text();
-    return (
-      $(video).attr("src", s),
-      $(video).attr("source", s),
-      $(video).attr("poster", o),
-      $("body, html").animate(
-        { scrollTop: videoPlayerPos - navbarHeight },
-        1e3
-      ),
-      (i *= 1 / womenpeSlideNN),
-      dd.setValue(i, 0, (snap = !1)),
-      !1
-    );
-  }),
   $(".women-pe_video-play-icon").click(function () {
-    $(".women-pe_single-video").removeClass("active-video"),
-      $(this).closest(".women-pe_single-video").addClass("active-video");
+    $(".women-pe_play-icon-wrapper").removeClass("active-video"),
+      $(this).closest(".women-pe_play-icon-wrapper").addClass("active-video");
     let e = $(this)
       .closest(".women-pe_video-slider-slide")
       .index(".women-pe_video-slider-slide");
@@ -163,6 +141,7 @@ $("#video-player").click(() => {
     $(".women-pe_video-slide-nav").find(".w-slider-dot").eq(e).click(),
       $(".women-pe_video-pause-icon").css("display", "none"),
       $(".women-pe_video-play-icon").css("display", "flex"),
+      $(".women-pe_video-play-icon-playing").css("display", "none"),
       $(this).siblings(".women-pe_video-pause-icon").css("display", "flex"),
       $(this).css("display", "none");
     let o = $(this).closest(".women-pe_single-video").css("background-image");
@@ -175,6 +154,8 @@ $("#video-player").click(() => {
       $(video).attr("src", s),
       $(video).attr("source", s),
       $(video).attr("poster", o),
+      ($(video).get(0).currentTime = 0),
+      $("#video-player").get(0).load(),
       video.play(),
       $("body, html").animate(
         { scrollTop: videoPlayerPos - navbarHeight },
@@ -189,12 +170,25 @@ $("#video-player").click(() => {
     return (
       $(".women-pe_video-pause-icon").css("display", "none"),
       $(".women-pe_video-play-icon").css("display", "flex"),
-      $(this).siblings(".women-pe_video-play-icon").css("display", "block"),
+      $(this).siblings(".women-pe_video-play-icon").css("display", "none"),
+      $(this)
+        .siblings(".women-pe_video-play-icon-playing")
+        .css("display", "flex"),
       $(this).css("display", "none"),
       video.pause(),
       !1
     );
   });
+$(".women-pe_video-play-icon-playing").click(function () {
+  $(".women-pe_video-pause-icon").css("display", "none"),
+    $(".women-pe_video-play-icon").css("display", "flex"),
+    $(".women-pe_video-play-icon-playing").css("display", "none"),
+    $(this).siblings(".women-pe_video-pause-icon").css("display", "flex"),
+    $(this).siblings(".women-pe_video-play-icon").css("display", "none");
+  video.play(),
+    $("body, html").animate({ scrollTop: videoPlayerPos - navbarHeight }, 1e3);
+  return false;
+});
 const womenpeSingleSlide = Math.round(
     $(".women-pe_video-slider-slide").outerWidth()
   ),
