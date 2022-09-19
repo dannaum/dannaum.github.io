@@ -107,6 +107,7 @@ function animationsRender() {
                     document.querySelector("#second-chart").addEventListener("click", toggleDataSecond);
                     document.querySelector("#third-chart").addEventListener("click", toggleDataThird);
                     document.querySelector("#all-chart").addEventListener("click", toggleDataAll);
+					dragDetector();
                     viewedCareersGraph = true;
                 }
 
@@ -141,6 +142,7 @@ function animationsRender() {
         document.querySelector("#second-chart").addEventListener("click", toggleDataSecond);
         document.querySelector("#third-chart").addEventListener("click", toggleDataThird);
         document.querySelector("#all-chart").addEventListener("click", toggleDataAll);
+		dragDetector();
     }
 
 }
