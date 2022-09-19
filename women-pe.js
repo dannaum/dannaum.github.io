@@ -204,6 +204,7 @@ var dd = new Dragdealer("women-pe_drag-tool", {
   vertical: !1,
   animationCallback(e, i) {
     $(".womne-pe_cms-list").css("margin-left", -e * (WomenpeTotalWidth + 32));
+	$(".women-pe_drag-line-active").css("width",Math.round(e * 100) + "%");
   },
 });
 function dragDetector() {
@@ -222,6 +223,7 @@ function dragDetector() {
     vertical: !1,
     animationCallback(e, i) {
       $(".womne-pe_cms-list").css("margin-left", -e * (t + 32));
+	  $(".women-pe_drag-line-active").css("width",Math.round(e * 100) + "%");
     },
   }),
     e < o * i
