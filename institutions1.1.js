@@ -541,3 +541,11 @@ $("#phone").on("keydown", function (e) {
     this.selectionEnd = phoneValueLength;
   }
 });
+
+$('.contact-card_link-wrap.w-inline-block').hover(function () {
+	$(this).find('.contact-card_dot').css('color', '#0025e8');
+});
+
+$('.contact-card_link-wrap.w-inline-block').mouseleave(function () {
+	$(this).find('.contact-card_dot').css('color', '#d4d3d1');
+});
