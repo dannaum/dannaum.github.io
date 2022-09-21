@@ -1,11 +1,9 @@
 let navOpen;
-if ($(window).width() > 991) {
-	let navBar = $('.navbar_section');
-	let navBarHeight = navBar.outerHeight();
-	let navBarNext = navBar.next();
-	var myMargnavBarNextinTop = parseInt($(navBarNext).css("paddingTop"));
-	navBarNext.css('paddingTop', navBarHeight + myMargnavBarNextinTop);
-}
+let navBar = $('.navbar_section');
+let navBarHeightA = navBar.outerHeight();
+let navBarNext = navBar.next();
+var myMargnavBarNextinTop = parseInt($(navBarNext).css("paddingTop"));
+navBarNext.css('paddingTop', navBarHeightA + myMargnavBarNextinTop);
 
 $(".nav_dd").click(function () {
 	if ($(window).width() > 991) {
@@ -41,27 +39,32 @@ $(".nav_dd").click(function () {
 
 
 $(".nav_dt").click(function () {
-	if ($(this).hasClass("w--open")) {
-		if ($(window).width() > 991) {
-			$('.nav_dd-icon').animate({ rotate: '0deg' }, 350);
-		}
-		$('.nav_line').css({ 'width': 0 + 'px' });
+	if (!$(this).parent().hasClass("nav_dd")) {
+		return;
 	}
 	else {
-		if ($(window).width() > 991) {
-			$('.nav_dd-icon').animate({ rotate: '0deg' }, 350);
-			var navDDIcon = $(this).children(".nav_dd-icon");
-			$(navDDIcon).animate({ rotate: '180deg' }, 350);
-		}
-		var myDistance = $(this).offset().left - $('.navbar_menu-links').offset().left;
-		var myWidth;
-		if ($(this).parent().hasClass("nav_dd")) {
-			myWidth = $(this).parent().width();
+		if ($(this).hasClass("w--open")) {
+			if ($(window).width() > 991) {
+				$('.nav_dd-icon').animate({ rotate: '0deg' }, 350);
+			}
+			$('.nav_line').css({ 'width': 0 + 'px' });
 		}
 		else {
-			myWidth = $(this).width();
+			if ($(window).width() > 991) {
+				$('.nav_dd-icon').animate({ rotate: '0deg' }, 350);
+				var navDDIcon = $(this).children(".nav_dd-icon");
+				$(navDDIcon).animate({ rotate: '180deg' }, 350);
+			}
+			var myDistance = $(this).offset().left - $('.navbar_menu-links').offset().left;
+			var myWidth;
+			if ($(this).parent().hasClass("nav_dd")) {
+				myWidth = $(this).parent().width();
+			}
+			else {
+				myWidth = $(this).width();
+			}
+			$('.nav_line').css({ 'width': myWidth + 'px', 'transform': 'translateX(' + myDistance + 'px)' });
 		}
-		$('.nav_line').css({ 'width': myWidth + 'px', 'transform': 'translateX(' + myDistance + 'px)' });
 	}
 });
 

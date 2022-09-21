@@ -123,15 +123,10 @@ animationsRender();
 
 var screenWidth = $(window).width();
 var closedFundsWrapper = Math.round($(".past-future_content").outerWidth());
-var closedFundSlidesN = $(".past-future_slider-mask").find(
-	".past-future_slider-slide"
-).length;
-var closedFundSlidesOW = Math.round(
-	$(".past-future_slider-mask").find(".past-future_slider-slide").outerWidth()
-);
-var closedFundsTotalWidth = Math.round(
-	$(".past-future_slider-mask").outerWidth()
-);
+var closedFundSlidesN = $(".past-future_slider-mask").find(".past-future_slider-slide").length;
+var closedFundSlidesOW = Math.round($(".past-future_slider-mask").find(".past-future_slider-slide").outerWidth());
+var closedFundsTotalWidth = Math.round($(".past-future_slider-mask").outerWidth());
+
 var dd = new Dragdealer("content-scroller", {
 	steps: closedFundSlidesN,
 	speed: 0.1,
@@ -139,14 +134,8 @@ var dd = new Dragdealer("content-scroller", {
 	horizontal: true,
 	vertical: false,
 	animationCallback: function (x, y) {
-		$(".past-future-slider-active_line").css(
-			"width",
-			Math.round(x * 100) + "%"
-		);
-		$(".past-future_slider").css(
-			"margin-left",
-			-x * (closedFundsTotalWidth - closedFundsWrapper + 32)
-		);
+		$(".past-future-slider-active_line").css("width",Math.round(x * 100) + "%");
+		$(".past-future_slider").css("margin-left",-x * (closedFundsTotalWidth - closedFundsWrapper + 32));
 	},
 });
 
@@ -184,14 +173,8 @@ var sp500slider = new Dragdealer("home-benefits-drag-tool", {
 	xPrecision: sp500Width,
 	reflow: true,
 	animationCallback: function (x, y) {
-		$(".home-benefits_drag-line-active").css(
-			"width",
-			Math.round(x * 100) + "%"
-		);
-		$(".home-benefits_image-wrap").css(
-			"margin-left",
-			-x * (sp500Width - homeBenefitsImageWrap + 128)
-		);
+		$(".home-benefits_drag-line-active").css("width",Math.round(x * 100) + "%");
+		$(".home-benefits_image-wrap").css("margin-left",-x * (sp500Width - homeBenefitsImageWrap + 128));
 	},
 });
 
@@ -311,9 +294,8 @@ if ($(window).width() > 991) {
 
 function dragDetector() {
 	var closedFundsWrapper = Math.round($(".past-future_content").outerWidth());
-	var closedFundsTotalWidth = Math.round(
-		$(".past-future_slider-mask").outerWidth()
-	);
+	var closedFundsTotalWidth = Math.round($(".past-future_slider-mask").outerWidth());
+
 	dd = new Dragdealer("content-scroller", {
 		steps: closedFundSlidesN,
 		speed: 0.1,
@@ -321,14 +303,8 @@ function dragDetector() {
 		horizontal: true,
 		vertical: false,
 		animationCallback: function (x, y) {
-			$(".past-future-slider-active_line").css(
-				"width",
-				Math.round(x * 100) + "%"
-			);
-			$(".past-future_slider").css(
-				"margin-left",
-				-x * (closedFundsTotalWidth - closedFundsWrapper + 32)
-			);
+			$(".past-future-slider-active_line").css("width",Math.round(x * 100) + "%");
+			$(".past-future_slider").css("margin-left",-x * (closedFundsTotalWidth - closedFundsWrapper + 32));
 		},
 	});
 
@@ -348,14 +324,8 @@ function dragDetector() {
 		xPrecision: sp500Width,
 		reflow: true,
 		animationCallback: function (x, y) {
-			$(".home-benefits_drag-line-active").css(
-				"width",
-				Math.round(x * 100) + "%"
-			);
-			$(".home-benefits_image-wrap").css(
-				"margin-left",
-				-x * (sp500Width - homeBenefitsImageWrap + 128)
-			);
+			$(".home-benefits_drag-line-active").css("width",Math.round(x * 100) + "%");
+			$(".home-benefits_image-wrap").css("margin-left",-x * (sp500Width - homeBenefitsImageWrap + 128));
 		},
 	});
 
