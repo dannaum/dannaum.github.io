@@ -63,7 +63,7 @@ $(episdoeNumber).each(function (index, element) {
 
 $(".women-pe_video-slider-slide").each(function (e) { });
 let videoPlayerPos = $("#video-player").offset().top,
-navbarHeight = $(".navbar_section").outerHeight();
+	navbarHeight = $(".navbar_section").outerHeight();
 const video = $("#video-player").get(0);
 
 $("#video-player").on("play", function () {
