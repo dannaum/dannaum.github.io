@@ -399,12 +399,12 @@ $("#start-email-form").submit(function (e) {
   return false;
 });
 $("#start-email-input").focus(function () {
-  $("#start-disclaimer").animate({ opacity: 1 }, 200);
+	$("#start-disclaimer").css('display', 'block');
   $(this).addClass("start-input");
 });
 
 $("#start-email-input").blur(function () {
-  $("#start-disclaimer").animate({ opacity: 0 }, 200);
+  $("#start-disclaimer").css('display', 'none');
   $(this).removeClass("start-input");
 });
 
