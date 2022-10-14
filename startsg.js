@@ -417,7 +417,6 @@ $("h2, h3, p").each(function () {
 $("#start-email-form").submit(function (e) {
 	window.location.href = "https://app.moonfare.com/registration";
 	return false;
-	preventDefault(e);
 });
 $("#start-email-input").focus(function () {
 	$("#start-disclaimer").css('display', 'block');
