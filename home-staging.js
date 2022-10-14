@@ -654,13 +654,11 @@ $(window).on('scroll', function () {
 	if (!viewedABTest) {
 		if ($('.invest-your-way_section').isInViewport()) {
 			var abTestCookie = getCookie("ab-test");
-			console.log('2');
 			if (abTestCookie === 'true') {
 				viewedABTest = true;
 				return;
 			}
 			else {
-				console.log('3');
 				viewedABTest = true;
 				var userDate = new Date();
 				var userYear = userDate.getFullYear();
