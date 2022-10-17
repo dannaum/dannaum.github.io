@@ -87,7 +87,7 @@ $.getJSON(
                 $('<div class="positions_grid-title-wrapper"><h3 class="h4 bottom-margin-i-xl" data-depname="' + newDeptName + '">' + item.name + '</h3></div>').appendTo(teamWrap);
                 let teamJobGrid = $('<div class="positions_grid-job-list"></div>').appendTo(teamWrap);
                 $.each(item.jobs, function (i, jobs) {
-                    $('<div class="positions_grid-single-job-dark" data-jobid="' + jobs.id + '" data-jobloc="' + jobs.location.name + '" data-depname="' + newDeptName + '"><div><p class="paragraph-medium">' + jobs.title + '</p><p class="paragraph-medium">' + jobs.location.name + '</p></div><img class="careers-arrow-icon" src="https://uploads-ssl.webflow.com/62552717df37959f6bb9ae63/627147c90e683729d9417309_careers-list-icon.svg" alt=""></div>').appendTo(teamJobGrid);
+                    $('<div class="positions_grid-single-job-dark" data-jobid="' + jobs.id + '" data-jobloc="' + jobs.location.name + '" data-depname="' + newDeptName + '"><div><p class="paragraph-medium">' + jobs.title + '</p><p class="paragraph-medium">' + jobs.location.name + '</p></div><img class="careers-arrow-icon" src="https://uploads-ssl.webflow.com/5fd0f5501ea5ad3d2b7f9c33/634cf9b53b32692b34fd373f_careers-list-icon.svg" alt=""></div>').appendTo(teamJobGrid);
                     //jobs.location.name to var myloc
                     var myloc = jobs.location.name;
                     //if positions_filter-tags-locations children text dont have myloc append myloc to positions_filter-tags-locations
