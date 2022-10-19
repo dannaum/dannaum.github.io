@@ -74,8 +74,7 @@ $('.tool-tip_wrapper').mouseleave(function () {
 $('.tool-tips').remove();
 //on page load
 
-$.getJSON(
-    "https://boards-api.greenhouse.io/v1/boards/moonfare/departments?render_as=list",
+$.getJSON("https://boards-api.greenhouse.io/v1/boards/moonfare/departments?render_as=list",
     function (data) {
         var data = data.departments;
         var departments = $('.careers-list_positions-grid');
@@ -90,16 +89,15 @@ $.getJSON(
                     $('<div class="positions_grid-single-job-dark" data-jobid="' + jobs.id + '" data-jobloc="' + jobs.location.name + '" data-depname="' + newDeptName + '"><div><p class="paragraph-medium">' + jobs.title + '</p><p class="paragraph-medium">' + jobs.location.name + '</p></div><img class="careers-arrow-icon" src="https://uploads-ssl.webflow.com/5fd0f5501ea5ad3d2b7f9c33/634cf9b53b32692b34fd373f_careers-list-icon.svg" alt=""></div>').appendTo(teamJobGrid);
                     //jobs.location.name to var myloc
                     var myloc = jobs.location.name;
-					//if positions_filter-tags-locations children text !=== myloc
-					if ($('.positions_filter-tags-locations').children().text() !== myloc) {
+					//if positiotns_filter-tags-locations, find a tag with data-locname = myloc, if not exist, append new a tag
+					if ($('.positions_filter-tags-locations').find('a[data-jobloc="' + myloc + '"]').length == 0) {
                         $(".positions_filter-tags-locations").append('<a href="#" class="positions_single-tag-dark w-inline-block" data-jobloc="' + myloc + '"><div class="loc-name">' + myloc + '</div></a>');
                     }
                     departments.append(teamWrap);
                 });
             }
         });
-    }
-);
+    });
 //on click of positions_single-tag-all
 $('.positions_single-tag-all-dark').click(function () {
     //this siblings 'positions_single-tag active' trigger click
