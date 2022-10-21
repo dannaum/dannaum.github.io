@@ -1,9 +1,4 @@
 let navOpen;
-let navBar = $('.navbar_section');
-let navBarHeightA = navBar.outerHeight();
-let navBarNext = navBar.next();
-var myMargnavBarNextinTop = parseInt($(navBarNext).css("paddingTop"));
-navBarNext.css('paddingTop', navBarHeightA + myMargnavBarNextinTop);
 
 $(".nav_dd").click(function () {
 	if ($(window).width() > 991) {
