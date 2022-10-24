@@ -210,6 +210,11 @@ $(".alt-single-press_wrap").each(function () {
 	$(this).attr("data-testid", "alt-single-press-wrap-" + parent_index);
 });
 
+$(".closed-funds_ab-item").each(function () {
+	var this_index = $(this).index();
+	$(this).attr("data-testid", "closed-funds-card-ab" + this_index);
+});
+
 $(".past-future_single-card").each(function () {
 	var parent_index = $(this).parent().index();
 	$(this).attr("data-testid", "closed-funds-card-" + parent_index);
@@ -772,24 +777,11 @@ $("#phone").on("keydown", function (e) {
 	return c > b && a < d;
 });
 
-$('#ab-one_no').click(function () {
-	$('#ab-main').fadeOut(500);
-	setTimeout(function () {
-		$('#ab-no').fadeIn(500);
-	}, 500);
-});
-
 $('.ab-test_button-option-two').mouseover(function () {
 	$('.ab-test_button-option-two').removeClass('active-hover');
 	$(this).addClass('active-hover');
 });
 
-$('#ab-one_yes').click(function () {
-	$('#ab-main').fadeOut(500);
-	setTimeout(function () {
-		$('#ab-yes').fadeIn(500);
-	}, 500);
-});
 
 $('.ab-test_button-option-three').mouseover(function () {
 	$('.ab-test_button-option-three').removeClass('active-hover');
