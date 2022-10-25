@@ -246,6 +246,9 @@ $(".testimonials_slider-slide")
 			.find(".hs5")
 			.addClass("current-testimonial-quote");
 	});
+var htmlCards = $(".home-pe-101_wrappers").eq(0);
+var htmlCards1 = $(".home-pe-101_wrappers").eq(1);
+var htmlCards2 = $(".home-pe-101_wrappers").eq(2);
 
 function pe101Cards() {
 	if ($(window).width() > 991) {
@@ -363,7 +366,7 @@ function doneResizing() {
 	}
 	dragDetector();
 	pe101Cards();
-	
+
 }
 function pageLoaded() {
 	screenWidth = $(window).width();

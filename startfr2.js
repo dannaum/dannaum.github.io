@@ -245,6 +245,10 @@ $(".testimonials_slider-slide")
 			.addClass("current-testimonial-quote");
 	});
 
+var htmlCards = $(".home-pe-101_wrappers").eq(0);
+var htmlCards1 = $(".home-pe-101_wrappers").eq(1);
+var htmlCards2 = $(".home-pe-101_wrappers").eq(2);
+
 function pe101Cards() {
 	if ($(window).width() > 991) {
 		if ($("#mainpewrap").children(".home-pe-101_wrappers").length == 0) {
