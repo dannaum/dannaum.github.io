@@ -6,6 +6,8 @@ $.fn.isInViewport = function () {
 	return c > b && a < d;
 };
 
+//import 
+
 for (
 	var b = document.getElementsByClassName("animated-word"), a = 0;
 	a < b.length;
@@ -215,9 +217,9 @@ $(".closed-funds_ab-item").each(function () {
 	$(this).attr("data-testid", "closed-funds-card-ab" + this_index);
 });
 
-$(".past-future_single-card").each(function () {
-	var parent_index = $(this).parent().index();
-	$(this).attr("data-testid", "closed-funds-card-" + parent_index);
+$(".past-future_slider-slide").each(function () {
+	var parent_index = $(this).index();
+	$(this).find('.past-future_single-card').attr("data-testid", "closed-funds-card-" + parent_index);
 });
 
 $(".testimonials_slider-slide")
