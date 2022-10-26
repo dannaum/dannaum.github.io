@@ -139,10 +139,8 @@ $(".popup_close-button").on("click", function () {
   $("body").css("overflow", "auto");
 });
 
-//on click of ".popup_main" but not children
 $(".popup_main").on("click", (e) => {
   if (e.target !== e.currentTarget) return;
-  // popup_main animate opacity from 100 to 0
   $(".popup_main").animate({ opacity: 0 }, 500);
   setTimeout(() => {
     $(".popup_main").toggle();
@@ -150,36 +148,6 @@ $(".popup_main").on("click", (e) => {
   $("body").css("overflow", "auto");
 });
 
-$("input[type=submit]").click(function () {
-  var req = $(".required-form-field");
-  $(".form-field").removeClass("invalid-form-field");
-  $.each(req, function (e) {
-    var curr_val = $(this).val();
-    if (!curr_val) {
-      $(this).addClass("invalid-form-field");
-      $("html, body").animate(
-        {
-          // added for scrolling purposes
-          scrollTop: $(this).offset().top - 100,
-        },
-        -200
-      );
-      return false;
-    }
-  });
-});
-
-$("#hubspot-form").submit(function () {
-  $("html,body").animate(
-    {
-      scrollTop: $("#snd-msg-form").offset().top - $(window).height() / 2,
-    },
-    1000
-  );
-  setTimeout(function () {
-    $(".form-field").delay(2000).val("");
-  }, 1000);
-});
 var instSolutionsWrap = $(".institutional-solutions_grid-wrap").outerWidth();
 var instSolutions = $(".institutional-solutions_grid").outerWidth();
 var screenWidth = $(window).width();
