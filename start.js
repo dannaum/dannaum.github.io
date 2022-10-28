@@ -250,7 +250,7 @@ var htmlCards1 = $(".home-pe-101_wrappers").eq(1);
 var htmlCards2 = $(".home-pe-101_wrappers").eq(2);
 
 function pe101Cards() {
-	if ($(window).width() > 991) {
+	if (cachedWidth > 991) {
 		if ($("#mainpewrap").children(".home-pe-101_wrappers").length == 0) {
 			$("#mainpewrap").append(htmlCards);
 			$("#mainpewrap").append(htmlCards1);
@@ -269,7 +269,6 @@ function pe101Cards() {
 	}
 
 }
-pe101Cards();
 
 $(".home-pe-101_selector").mouseover(function () {
 	$(".home-pe-101_selector").removeClass("active");
@@ -375,6 +374,7 @@ function pageLoaded() {
 	}
 }
 pageLoaded();
+pe101Cards();
 
 function checkCurrencies() {
 	var paragraphCurrency = document.getElementsByTagName("p");
