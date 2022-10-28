@@ -260,5 +260,6 @@ $(".leadership-tab-link").click(function () {
 	var myDistance = $(this).offset().left - $('.leadership-tabs').offset().left;
 	$('.leadership-line-active').css({ 'transform': 'translateX(' + myDistance + 'px' });
 	var myIndex = $(this).index();
-	$('#leadership-slide-nav').children('.w-slider-dot').eq(myIndex).click();
+	$('.who-we-are_members-content').css('display', 'none');
+	$('.who-we-are_slider-wrap').find('.who-we-are_members-content').eq(myIndex).css('display', 'flex');
 });

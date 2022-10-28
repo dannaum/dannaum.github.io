@@ -409,6 +409,7 @@ function dragDetector() {
 		$(".home-benefits_drag-element").css("opacity", "0");
 	}
 }
+
 $(".ab-test_button-option").mouseover(function () {
 	$(this).find(".hs6, .paragraph-small").addClass("color-text-white");
 }),
