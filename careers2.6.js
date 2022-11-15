@@ -132,7 +132,7 @@ function animationsRender() {
           }, 100 * i);
         });
         if (!viewedCareersGraph) {
-          const myChart = new Chart(document.getElementById("myChart"), config);
+          var myChart = new Chart(document.getElementById("myChart"), config);
           function toggleDataFirst() {
             myChart.isDatasetVisible(0),
               myChart.isDatasetVisible(1),
@@ -204,7 +204,7 @@ function animationsRender() {
       }
     });
   } else {
-    const myChart = new Chart(document.getElementById("myChart"), config);
+    var myChart = new Chart(document.getElementById("myChart"), config);
 
     function toggleDataFirst() {
       myChart.isDatasetVisible(0),
